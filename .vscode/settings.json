@@ -1,0 +1,16 @@
+{
+    "editor.fontFamily": "Operator Mono Liq, Victor Mono, Fira Code iScript, JetBrains Mono",
+    "editor.fontSize": 18,
+    "workbench.editor.enablePreview": true,
+    "editor.definitionLinkOpensInPeek": true,
+    "editor.bracketPairColorization.enabled": true,
+    "back-n-forth.withLastEditLocation": true,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "bookmarks.useWorkaroundForFormatters": true,
+    "editor.defaultFormatter": null,
+    "[plaintext]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
