@@ -134,8 +134,7 @@ but other than that these variables should be available everywhere. */
   --global-focus-outline-color: var(--purple-30);
   --global-focus-outline-width: 2px;
   --global-focus-outline: var(--global-focus-outline-width) solid var(--global-focus-outline-color);
-  --global-focus-shadow: 0 0 0 2px var(--global-focus-shadow-color),
-    0 0 0 2px var(--global-focus-outline-color);
+  --global-focus-shadow: 0 0 0 2px var(--global-focus-shadow-color);
   --global-focus-outline-offset: -2px;
 
   --transparent-img-background: center/16px repeat hsla(0, 0%, 80%)
@@ -270,7 +269,7 @@ but other than that these variables should be available everywhere. */
   --search-box-color: hsl(229, 32%, 23%);
   --search-box-focus: hsl(229, 27%, 27%);
   --search-box-null: hsl(230, 30%, 20%);
-  --search-box-focus-outline-color: var(--purple-30);
+  --search-box-focus-outline-color: var(--global-focus-outline-color);
   --textbox-button-hidden: hsla(240, 100%, 89%, 0);
   --confirmation-hint-color: var(--ui-text-100);
   --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
@@ -326,6 +325,7 @@ but other than that these variables should be available everywhere. */
   /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
   --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
   --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-big.svg);
+  --uc-firefox-view-icon: url(chrome://userchrome/content/engines/searchfox.svg);
   --uc-smooth-timing-function: cubic-bezier(0.07, 0.78, 0.21, 0.95);
 
   --download-button-focus-within-bg: var(--button-bgcolor);
@@ -395,9 +395,10 @@ but other than that these variables should be available everywhere. */
   --uc-content-button-background-hover: hsla(240, 4%, 70%, 0.15);
   --uc-content-button-background-active: hsla(240, 5%, 70%, 0.19);
   --uc-content-button-background-solid: hsl(240, 3%, 18%);
-  --uc-content-border-hover: var(--uc-content-button-background-hover);
+  --uc-content-border-color: hsla(240, 7%, 98%, 0.1);
+  --uc-content-border-hover: hsla(240, 7%, 98%, 0.15);
 
-  --uc-checkbox-border-color: var(--dialog-box-border-color);
+  --uc-checkbox-border-color: hsla(232, 100%, 85%, 0.2);
   --uc-checkbox-checked-border-color: transparent;
   --uc-checkbox-unchecked-bgcolor: var(--uc-arrowpanel-faint);
   --uc-checkbox-unchecked-hover-bgcolor: var(--uc-arrowpanel-dimmed);
@@ -412,7 +413,7 @@ but other than that these variables should be available everywhere. */
   --uc-switch-off-active-background: hsl(233, 19%, 24.5%);
   --uc-switch-off-hover-border: hsl(233, 15%, 32%);
 
-  accent-color: var(--purple-40);
+  accent-color: var(--global-focus-outline-color);
 }
 
 :root[fxastatus="not_configured"] {

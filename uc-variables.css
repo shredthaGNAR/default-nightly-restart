@@ -40,6 +40,7 @@ menupopup {
   --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
   --lwt-toolbar-field-icon-fill-attention: var(--attention-color) !important;
   --lwt-tab-attention-icon-color: var(--attention-color) !important;
+  --tab-attention-icon-color: var(--lwt-tab-attention-icon-color) !important;
   --lwt-background-alignment: right top !important;
   --lwt-background-tiling: no-repeat !important;
   --lwt-brighttext-url-color: var(--pink-action) !important;
@@ -67,7 +68,7 @@ menupopup {
   --toolbarbutton-hover-background: var(--uc-toolbarbutton-hover-background) !important;
   --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;
   --toolbarbutton-checked-active-background: var(--uc-toolbarbutton-checked-active-background);
-  --default-focusring: var(--global-focus-outline) !important;
+  --default-focusring: auto !important;
   --button-bgcolor: var(--uc-arrowpanel-faint) !important;
   --button-hover-bgcolor: var(--uc-arrowpanel-dimmed) !important;
   --button-active-bgcolor: var(--uc-arrowpanel-dimmed-further) !important;
@@ -124,6 +125,7 @@ menupopup {
   --in-content-primary-button-background-hover: var(--purple-35) !important;
   --in-content-primary-button-background-active: var(--purple-30) !important;
   --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+  --in-content-primary-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
 
   --menu-background-color: var(--arrowpanel-background) !important;
   --menu-color: var(--ui-text-80) !important;

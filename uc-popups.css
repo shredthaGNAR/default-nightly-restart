@@ -18,6 +18,7 @@ tabmodalprompt {
   --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
   --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
   --in-content-item-selected: var(--purple-40) !important;
+  --in-content-border-color: var(--dialog-box-border-color) !important;
   --in-content-border-hover: var(--dialog-box-border-hover) !important;
   --in-content-link-color: var(--purple-35) !important;
   --in-content-link-color-hover: var(--purple-30) !important;
@@ -333,8 +334,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 /* push notification popup (lower right corner) */
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
+@-moz-document url("chrome://global/content/alerts/alert.xhtml") {
   #alertBox {
     box-shadow: var(--tooltip-box-shadow) !important;
     color: var(--ui-text-100) !important;
@@ -423,18 +423,18 @@ panel[type="autocomplete-richlistbox"]
   }
 }
 
-@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
-{
+@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
   :root {
-    --panel-bgcolor: var(--in-content-button-highlight-dark) !important;
-  }
-
-  .box {
-    background-color: var(--panel-bgcolor) !important;
-  }
-
-  .arrow {
-    border-top-color: var(--panel-bgcolor) !important;
+    --panel-bgcolor: var(--in-content-box-bg-dark) !important;
+    --checkbox-border-color: var(--in-content-box-border-color) !important;
+    --checkbox-checked-border-color: transparent !important;
+    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
+    --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
   }
 
   .control-item {
@@ -443,7 +443,7 @@ panel[type="autocomplete-richlistbox"]
     background-color: var(--btn-bg-color) !important;
     background-image: var(--acrylic-texture), var(--pip-icon) !important; */
     background-image: var(--pip-icon) !important;
-    background-color: var(--in-content-button-highlight-dark) !important;
+    background-color: hsla(0, 0%, 12%, 0.8) !important;
     fill: currentColor !important;
     stroke: currentColor !important;
     -moz-context-properties: fill, stroke !important;
@@ -457,7 +457,12 @@ panel[type="autocomplete-richlistbox"]
 
   #controls[keying] button:focus-visible {
     outline-style: auto !important;
-    box-shadow: 1px 2px 5px #000;
+    box-shadow: 0 0 5px #111 !important;
+  }
+
+  .control-item:hover,
+  #controls[keying] button:focus-visible {
+    background-color: hsla(0, 0%, 18%, 0.95) !important;
   }
 
   #close {
@@ -475,6 +480,11 @@ panel[type="autocomplete-richlistbox"]
     --pip-icon: url(chrome://userchrome/content/glyph-play-12.svg);
   }
 
+  #seekBackward,
+  #seekForward {
+    --pip-icon: url(chrome://userchrome/content/skin/reload.svg);
+  }
+
   #controls.muted #audio {
     --pip-icon: url(chrome://userchrome/content/audioMutedButton.svg);
   }
@@ -490,6 +500,88 @@ panel[type="autocomplete-richlistbox"]
   #closed-caption {
     --pip-icon: url(chrome://userchrome/content/material/closed-caption-settings.svg);
   }
+
+  body:fullscreen #fullscreen {
+    --pip-icon: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
+  }
+
+  body:not(:fullscreen) #fullscreen {
+    --pip-icon: url(chrome://userchrome/content/skin/fullscreen.svg);
+  }
+
+  #seekForward:-moz-locale-dir(rtl),
+  #seekBackward:-moz-locale-dir(ltr),
+  #unpip:-moz-locale-dir(rtl),
+  #closed-caption:dir(rtl) {
+    transform: scaleX(-1);
+  }
+
+  .box {
+    background-color: var(--panel-bgcolor) !important;
+  }
+
+  .arrow {
+    border-top-color: var(--panel-bgcolor) !important;
+  }
+
+  .slider {
+    background-color: var(--in-content-button-background) !important;
+  }
+
+  .slider::before {
+    background-color: var(--in-content-primary-button-text-color) !important;
+  }
+
+  .slider:hover {
+    background-color: var(--in-content-button-background-hover) !important;
+  }
+
+  .slider:hover:active {
+    background-color: var(--in-content-button-background-active) !important;
+  }
+
+  input:checked + .slider {
+    background-color: var(--purple-40) !important;
+  }
+
+  input:checked + .slider:hover {
+    background-color: var(--purple-35) !important;
+  }
+
+  input:checked + .slider:hover:active {
+    background-color: var(--purple-30) !important;
+  }
+
+  .box label:not(.switch) {
+    display: flex !important;
+    align-items: center !important;
+    align-content: center !important;
+    flex-flow: row nowrap !important;
+    gap: 8px !important;
+  }
+
+  .font-size-selection > label > input[type="radio"] {
+    appearance: radio !important;
+    margin: 0 !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    .box {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+      font-weight: var(--uc-font-weight-semibold, 400) !important;
+      font-size: 14px !important;
+      line-height: 14px !important;
+    }
+
+    .box label:not(.switch) {
+      font-family: inherit !important;
+    }
+
+    .bold {
+      font-weight: var(--uc-font-weight-bold, 500) !important;
+    }
+  }
 }
 
 #DateTimePickerPanel {
@@ -499,8 +591,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 @-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
-    url-prefix("chrome://global/content/datepicker.xhtml")
-{
+    url-prefix("chrome://global/content/datepicker.xhtml") {
   body {
     background-color: var(--arrowpanel-background) !important;
     color: var(--font-color) !important;
@@ -642,7 +733,7 @@ panel[type="autocomplete-richlistbox"]
   z-index: 0 !important;
 }
 
-:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox {
+:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox:not(.fullScreen) {
   /* tab-prompt-dialogs are anchored to the top of the browser content area.
   this makes them look like they emerge from under the navbar. */
   margin-top: 0px !important;
@@ -682,28 +773,15 @@ rtl languages. adjust the border radius accordingly */
   border-bottom-right-radius: 5px !important;
 }
 
-/* blur backdrop filter */
-.content-prompt-dialog > .dialogOverlay[style] .dialogFrame {
-  /* temporarily disabled due to backdrop-filter being disabled.
-  see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
-
-  /* background-color: var(--dialog-bgcolor) !important;
-  background-image: var(--acrylic-texture) !important;
-  backdrop-filter: var(--acrylic-blur) !important;
-  border: 1px solid var(--blurred-dialog-border-color); */
-
-  background-color: var(--ui-quaternary-bg) !important;
-  border: 1px solid var(--arrowpanel-border-color);
-}
-
-/* hide the background overlay */
+/* modal dialog background overlay */
 .dialogOverlay[topmost="true"],
 #window-modal-dialog::backdrop {
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
+  background-color: hsla(240, 4%, 12%, 0.45) !important;
 }
 
 /* make the box shadow even, i hate offset drop shadows */
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox {
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox:not(.fullScreen) {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1), 0 0 8px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -713,10 +791,6 @@ rtl languages. adjust the border radius accordingly */
     0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
   ) !important;
   clip-path: inset(0 -100% -100% -100%);
-}
-
-:is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
-  background-color: var(--ui-quaternary-bg) !important;
 }
 
 /* center text in any dialog box */
@@ -729,8 +803,7 @@ rtl languages. adjust the border radius accordingly */
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
     url("chrome://global/content/appPicker.xhtml"),
     url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url-prefix("chrome://browser/content/sanitize.xhtml")
-{
+    url-prefix("chrome://browser/content/sanitize.xhtml") {
   /* use this selector to exclude null-window prompts, which open in their own
   windows and don't inherit styles from the chrome window. we don't want to
   apply theme styles to these prompts because no matter what we do, we can't
@@ -749,7 +822,7 @@ rtl languages. adjust the border radius accordingly */
   #commonDialogWindow[dialogroot],
   #commonDialogWindow[dialogroot] *,
   .dialog-button-box {
-    --in-content-page-background: transparent !important;
+    --in-content-page-background: var(--ui-quaternary-bg) !important;
     --in-content-page-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
@@ -758,6 +831,8 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-item-selected: var(--purple-40) !important;
+    --in-content-deemphasized-text: var(--uc-panel-description-color) !important;
+    --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --in-content-link-color: var(--purple-35) !important;
     --in-content-link-color-hover: var(--purple-30) !important;
@@ -782,6 +857,10 @@ rtl languages. adjust the border radius accordingly */
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
+  }
+
+  :root:not(.system-font-size) {
+    font-size: 12px !important;
   }
 
   dialog[subdialog] .dialogRow {
@@ -827,7 +906,7 @@ rtl languages. adjust the border radius accordingly */
   }
 
   .dialog-button-box > button:not([disabled="true"]):focus-visible {
-    outline: var(--default-focusring) !important;
+    outline: var(--global-focus-outline, var(--default-focusring, auto)) !important;
   }
 
   .dialog-button-box > button:not([disabled="true"]):hover:active,
@@ -863,7 +942,6 @@ rtl languages. adjust the border radius accordingly */
   dialog input:-moz-focusring,
   button:-moz-focusring {
     box-shadow: none !important;
-    outline: var(--default-focusring);
   }
 
   #checkboxContainer checkbox {
@@ -1035,8 +1113,7 @@ rtl languages. adjust the border radius accordingly */
 }
 
 @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url("chrome://global/content/appPicker.xhtml")
-{
+    url("chrome://global/content/appPicker.xhtml") {
   :root,
   :root dialog,
   .dialog-button-box {
@@ -1051,6 +1128,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-active: var(--uc-content-button-background-active) !important;
     --in-content-button-background-solid: var(--uc-content-button-background-solid);
     --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-color: var(--uc-content-border-color) !important;
     --in-content-border-hover: var(--uc-content-border-hover) !important;
     --in-content-link-color: var(--purple-30) !important;
     --in-content-link-color-hover: var(--purple-25) !important;
@@ -1126,12 +1204,13 @@ rtl languages. adjust the border radius accordingly */
     url("chrome://browser/content/places/bookmarkProperties.xhtml"),
     url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
     url-prefix("chrome://browser/content/sanitize.xhtml"),
-    url("chrome://browser/content/spotlight.html")
-{
+    url("chrome://browser/content/spotlight.html") {
   :root[dialogroot],
   :root[dialogroot] dialog,
-  :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected] {
-    --in-content-page-background: transparent !important;
+  :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected],
+  :root[dialogroot] .onboardingContainer,
+  :root[dialogroot] .onboardingContainer .screen {
+    --in-content-page-background: var(--ui-quaternary-bg) !important;
     --in-content-page-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
@@ -1141,6 +1220,8 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-item-hover: var(--arrowpanel-dimmed) !important;
+    --in-content-deemphasized-text: var(--uc-panel-description-color) !important;
+    --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --in-content-link-color: var(--purple-35) !important;
     --in-content-link-color-hover: var(--purple-30) !important;
@@ -1164,6 +1245,27 @@ rtl languages. adjust the border radius accordingly */
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
+    --mr-welcome-background-color: var(--in-content-page-background) !important;
+  }
+
+  .onboardingContainer .screen.light-text {
+    --in-content-page-color: var(--ui-text-100) !important;
+    --in-content-primary-button-text-color: var(--ui-text-100) !important;
+    --in-content-primary-button-text-color-hover: var(--ui-text-100) !important;
+  }
+
+  :root:not(.system-font-size) {
+    font-size: 12px !important;
+  }
+
+  /* remove spotlight backdrop overlay */
+  .onboardingContainer .screen[pos="center"] {
+    background-color: transparent !important;
+  }
+
+  .onboardingContainer .main-content {
+    border: 1px solid var(--arrowpanel-border-color);
+    background-color: var(--in-content-page-background) !important;
   }
 
   :root[dialogroot] input[type="checkbox"]:checked {
@@ -1217,6 +1319,7 @@ rtl languages. adjust the border radius accordingly */
   :root[dialogroot] textarea:where(:focus, :focus-visible),
   :root[dialogroot] search-textbox[focused] {
     border-color: transparent !important;
+    outline: var(--in-content-focus-outline) !important;
     outline-offset: 0 !important;
   }
 
@@ -1452,8 +1555,7 @@ rtl languages. adjust the border radius accordingly */
     text-decoration-color: var(--ui-selection-color) !important;
   }
 
-  @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
-  {
+  @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
     :root[dialogroot] dialog > #description,
     :root[dialogroot] dialog > #description-box > #description {
       font-size: 1.15em !important;
@@ -1466,6 +1568,24 @@ rtl languages. adjust the border radius accordingly */
 
     :root[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
       margin-top: -10px !important;
+    }
+  }
+
+  @-moz-document url("chrome://browser/content/spotlight.html") {
+    .onboardingContainer :is(.primary, .secondary) {
+      line-height: revert !important;
+      min-height: revert !important;
+    }
+
+    .onboardingContainer
+      .screen[pos="split"]
+      .section-main
+      .main-content
+      .action-buttons
+      .secondary-cta
+      .arrow-icon {
+      padding-inline-end: 28px !important;
+      background-position-x: right 10px !important;
     }
   }
 
@@ -1483,8 +1603,7 @@ rtl languages. adjust the border radius accordingly */
   }
 }
 
-@-moz-document url-prefix("chrome://global/content/print.html")
-{
+@-moz-document url-prefix("chrome://global/content/print.html") {
   :root {
     --in-content-page-background: var(--uc-content-page-background) !important;
     --dropdown-bgcolor: var(--in-content-page-background) !important;
@@ -1544,8 +1663,7 @@ link[href="chrome://global/content/printPagination.css"]
   border-end-end-radius: 4px !important;
 }
 
-@-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml")
-{
+@-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml") {
   button {
     min-width: 28px !important;
   }
@@ -1559,15 +1677,13 @@ link[href="chrome://global/content/printPagination.css"]
   }
 }
 
-@-moz-document url("chrome://browser/content/webrtcIndicator.xul")
-{
+@-moz-document url("chrome://browser/content/webrtcIndicator.xul") {
   :root {
     display: none !important;
   }
 }
 
-@-moz-document url("chrome://browser/content/webrtcIndicator.xhtml")
-{
+@-moz-document url("chrome://browser/content/webrtcIndicator.xhtml") {
   :root {
     --indicator-height: 40px !important;
   }
@@ -1652,8 +1768,7 @@ link[href="chrome://global/content/printPagination.css"]
 }
 
 /* about firefox dialog */
-@-moz-document url("chrome://browser/content/aboutDialog.xhtml")
-{
+@-moz-document url("chrome://browser/content/aboutDialog.xhtml") {
   #leftBox {
     background-image: url(chrome://branding/content/about-logo.svg) !important;
   }
@@ -1756,9 +1871,8 @@ link[href="chrome://global/content/printPagination.css"]
   }
 }
 
-/* page info popup. kinda lame */
-@-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml)
-{
+/* page info popup */
+@-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml) {
   :root {
     --focus-outline-color: var(--global-focus-outline-color) !important;
   }
@@ -1772,8 +1886,8 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   #main-window {
-    background-color: var(--arrowpanel-background) !important;
-    color: var(--arrowpanel-color) !important;
+    background-color: var(--uc-arrowpanel-background) !important;
+    color: var(--uc-arrowpanel-color) !important;
   }
 
   #topBar {
@@ -1789,7 +1903,7 @@ link[href="chrome://global/content/printPagination.css"]
   #viewGroup > radio {
     margin: 4px 0 !important;
     padding: 2px !important;
-    color: var(--arrowanel-color) !important;
+    color: var(--uc-arrowanel-color) !important;
     background: none !important;
     fill: currentColor;
     -moz-image-region: initial !important;
@@ -1810,6 +1924,10 @@ link[href="chrome://global/content/printPagination.css"]
   #viewGroup > radio[selected="true"] .radio-label-box,
   #viewGroup > radio:hover:active .radio-label-box {
     background-color: var(--uc-places-cell-hover-bgcolor) !important;
+  }
+
+  #viewGroup > radio[focused="true"] .radio-label-box {
+    outline: var(--global-focus-outline, auto) !important;
   }
 
   #viewGroup > radio .radio-icon {
@@ -1849,8 +1967,8 @@ link[href="chrome://global/content/printPagination.css"]
   treecolpicker,
   button {
     appearance: none !important;
-    background-color: var(--arrowpanel-dimmed) !important;
-    color: var(--arrowpanel-color) !important;
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+    color: var(--uc-arrowpanel-color) !important;
     border-color: var(--button-solid-active-background) !important;
   }
 
@@ -1859,10 +1977,14 @@ link[href="chrome://global/content/printPagination.css"]
   #permList {
     appearance: none !important;
     background: var(--ui-secondary-bg) !important;
-    color: var(--arrowpanel-color) !important;
+    color: var(--uc-arrowpanel-color) !important;
     border-radius: var(--general-button-border-radius) !important;
     overflow: clip !important;
     border: 1px solid var(--button-solid-active-background) !important;
+  }
+
+  :is(tree, richlistbox, #permList):focus-visible {
+    outline: var(--global-focus-outline, auto) !important;
   }
 
   .permission {
@@ -1883,7 +2005,7 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   :is(treecol, treecolpicker):where(:hover) {
-    background-color: var(--arrowpanel-dimmed-further) !important;
+    background-color: var(--uc-arrowpanel-dimmed-further) !important;
   }
 
   treechildren {
@@ -1901,7 +2023,7 @@ link[href="chrome://global/content/printPagination.css"]
 
   treechildren::-moz-tree-row(selected) {
     background-color: var(--uc-places-cell-hover-bgcolor) !important;
-    color: var(--arrowpanel-color) !important;
+    color: var(--uc-arrowpanel-color) !important;
   }
 
   treechildren::-moz-tree-row(selected),
@@ -1911,7 +2033,7 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   treechildren::-moz-tree-cell-text {
-    color: var(--arrowpanel-color) !important;
+    color: var(--uc-arrowpanel-color) !important;
   }
 
   button {
@@ -2001,8 +2123,8 @@ link[href="chrome://global/content/printPagination.css"]
 
   #imagecontainerbox {
     background: var(--transparent-img-background-context) !important;
-    background-color: var(--arrowpanel-faint) !important;
-    fill: var(--arrowpanel-dimmed);
+    background-color: var(--uc-arrowpanel-faint) !important;
+    fill: var(--uc-arrowpanel-dimmed);
     fill-opacity: 0.5;
     border: 1px solid var(--button-solid-active-background) !important;
     border-radius: var(--general-button-border-radius);
