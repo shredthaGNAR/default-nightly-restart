@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.2.9
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
@@ -93,9 +93,7 @@
     ChromeUtils.defineESModuleGetters(lazy, {
       BrowserToolboxLauncher:
         "resource://devtools/client/framework/browser-toolbox/Launcher.sys.mjs",
-    });
-    XPCOMUtils.defineLazyModuleGetters(lazy, {
-      require: "resource://devtools/shared/loader/Loader.jsm",
+      require: "resource://devtools/shared/loader/Loader.sys.mjs",
     });
     XPCOMUtils.defineLazyGetter(
       lazy,
@@ -113,7 +111,7 @@
       tooltiptext: l10n.defaultTooltip,
       onBuild(aDoc) {
         let CustomHint = {
-          _timerID: null,
+          ...aDoc.ownerGlobal.ConfirmationHint,
 
           /**
            * Shows a transient, non-interactive confirmation hint anchored to an
@@ -156,9 +154,11 @@
           show(anchor, message, options = {}) {
             this._reset();
 
+            this._message.removeAttribute("data-l10n-id");
             this._message.textContent = message;
 
             if (options.description) {
+              this._description.removeAttribute("data-l10n-id");
               this._description.textContent = options.description;
               this._description.hidden = false;
               this._panel.classList.add("with-description");
@@ -191,10 +191,15 @@
               { once: true }
             );
 
-            this._panel.addEventListener("popuphidden", () => this._reset(), { once: true });
+            this._panel.addEventListener("popuphidden", () => this._reset(), {
+              once: true,
+            });
 
             let { position, x, y } = options;
-            this._panel.openPopup(null, { position, triggerEvent: options.event });
+            this._panel.openPopup(null, {
+              position,
+              triggerEvent: options.event,
+            });
             this._panel.moveToAnchor(anchor, position, x, y);
           },
 
@@ -212,38 +217,16 @@
             }
           },
 
-          get _panel() {
-            this._ensurePanel();
-            return this.__panel;
-          },
-
-          get _animationBox() {
-            this._ensurePanel();
-            delete this._animationBox;
-            return (this._animationBox = aDoc.getElementById(
-              "confirmation-hint-checkmark-animation-container"
-            ));
-          },
-
-          get _message() {
-            this._ensurePanel();
-            delete this._message;
-            return (this._message = aDoc.getElementById("confirmation-hint-message"));
-          },
-
-          get _description() {
-            this._ensurePanel();
-            delete this._description;
-            return (this._description = aDoc.getElementById("confirmation-hint-description"));
-          },
-
           _ensurePanel() {
             if (!this.__panel) {
               // hook into the built-in confirmation hint element
-              let wrapper = aDoc.getElementById("confirmation-hint-wrapper");
+              let wrapper = document.getElementById(
+                "confirmation-hint-wrapper"
+              );
               wrapper?.replaceWith(wrapper.content);
-              this.__panel = aDoc.getElementById("confirmation-hint");
-              ConfirmationHint.__panel = aDoc.getElementById("confirmation-hint");
+              this.__panel = ConfirmationHint.__panel = document.getElementById(
+                "confirmation-hint"
+              );
             }
           },
         };
@@ -287,7 +270,8 @@
         let obSvc = Services.obs;
         let toolboxBranch = "userChrome.toolboxButton";
         let autoHide = "ui.popup.disable_autohide";
-        let autoTogglePopups = "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch";
+        let autoTogglePopups =
+          "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch";
         let mouseConfig = "userChrome.toolboxButton.mouseConfig";
 
         let onClick = function(e) {
@@ -299,7 +283,7 @@
           switch (button) {
             case this.mouseConfig.contentToolbox:
               // toggle the content toolbox
-              aDoc.defaultView.key_toggleToolbox.click();
+              aDoc.ownerGlobal.key_toggleToolbox.click();
               break;
             case this.mouseConfig.browserToolbox:
               lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
@@ -307,7 +291,7 @@
                     event: e,
                     hideCheck: true,
                   }) // if so, just show a hint that it's already open
-                : aDoc.defaultView.key_browserToolbox.click(); // if not, launch a new one
+                : aDoc.ownerGlobal.key_browserToolbox.click(); // if not, launch a new one
               break;
             case this.mouseConfig.popupHide:
               CustomHint.show(
@@ -337,9 +321,13 @@
         }
 
         toolbarbutton.triggerAnimation = function() {
-          this.addEventListener("animationend", () => this.removeAttribute("animate"), {
-            once: true,
-          });
+          this.addEventListener(
+            "animationend",
+            () => this.removeAttribute("animate"),
+            {
+              once: true,
+            }
+          );
           this.setAttribute("animate", "true");
         };
 
@@ -416,9 +404,13 @@
               break;
           }
           if (!toolbarbutton.autoTogglePopups) return;
-          if (state && !toolbarbutton.popupAutoHide) prefSvc.setBoolPref(autoHide, true);
+          if (state && !toolbarbutton.popupAutoHide) {
+            prefSvc.setBoolPref(autoHide, true);
+          }
           // if toolbox just closed and autohide is not already disabled, disable it
-          else if (!state && toolbarbutton.popupAutoHide) prefSvc.setBoolPref(autoHide, false);
+          else if (!state && toolbarbutton.popupAutoHide) {
+            prefSvc.setBoolPref(autoHide, false);
+          }
         }
 
         function destroyThreadActor() {
@@ -431,11 +423,15 @@
           this._updateNetworkObserver();
 
           this._activeEventBreakpoints = new Set();
-          this._debuggerNotificationObserver.removeListener(this._eventBreakpointListener);
+          this._debuggerNotificationObserver.removeListener(
+            this._eventBreakpointListener
+          );
 
           for (const global of this.dbg.getDebuggees()) {
             try {
-              this._debuggerNotificationObserver.disconnect(global.unsafeDereference());
+              this._debuggerNotificationObserver.disconnect(
+                global.unsafeDereference()
+              );
             } catch (e) {}
           }
 
@@ -452,7 +448,11 @@
 
           lazy.Actor.prototype.destroy.call(this);
           // this leads back to toolboxObserver in 200ms
-          setTimeout(() => Services.obs.notifyObservers(null, "devtools-thread-destroyed"), 200);
+          setTimeout(
+            () =>
+              Services.obs.notifyObservers(null, "devtools-thread-destroyed"),
+            200
+          );
         }
 
         toolbarbutton.setStrings = function() {
@@ -461,20 +461,31 @@
             if (val === 0) {
               switch (key) {
                 case "contentToolbox":
-                  labelString = l10n.getString("browserContentToolboxMenu.label", "menu");
-                  hotkey = aDoc.defaultView.key_toggleToolbox;
+                  labelString = l10n.getString(
+                    "browserContentToolboxMenu.label",
+                    "menu"
+                  );
+                  hotkey = aDoc.ownerGlobal.key_toggleToolbox;
                   break;
                 case "browserToolbox":
-                  labelString = l10n.getString("browserToolboxMenu.label", "menu");
-                  hotkey = aDoc.defaultView.key_browserToolbox;
+                  labelString = l10n.getString(
+                    "browserToolboxMenu.label",
+                    "menu"
+                  );
+                  hotkey = aDoc.ownerGlobal.key_browserToolbox;
                   break;
                 case "popupHide":
-                  labelString = l10n.getString("toolbox.meatballMenu.noautohide.label", "toolbox");
+                  labelString = l10n.getString(
+                    "toolbox.meatballMenu.noautohide.label",
+                    "toolbox"
+                  );
                   break;
               }
             }
           }
-          let shortcut = hotkey ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})` : "";
+          let shortcut = hotkey
+            ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})`
+            : "";
           toolbarbutton.label = labelString;
           label.value = labelString;
           toolbarbutton.tooltipText = labelString + shortcut;
@@ -524,12 +535,18 @@
           toolboxInit();
         } else {
           let delayedListener2 = (subject, topic) => {
-            if (topic == "browser-delayed-startup-finished" && subject == window) {
+            if (
+              topic == "browser-delayed-startup-finished" &&
+              subject == window
+            ) {
               obSvc.removeObserver(delayedListener2, topic);
               toolboxInit();
             }
           };
-          obSvc.addObserver(delayedListener2, "browser-delayed-startup-finished");
+          obSvc.addObserver(
+            delayedListener2,
+            "browser-delayed-startup-finished"
+          );
         }
         return toolbarbutton;
       },
@@ -539,8 +556,15 @@
   let styleSvc = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
     Ci.nsIStyleSheetService
   );
-  let toolboxCSS = /* css */ `.toolbarbutton-1#toolbox-button {
+  let toolboxCSS = /* css */ `
+  .toolbarbutton-1#toolbox-button {
+    --uc-toolbox-button: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="context-fill" fill-opacity="context-fill-opacity" width="16" height="16" viewBox="0 0 16 16"><path d="M16,8V6c0-1.105-.895-2-2-2H2C0.895,4,0,4.895,0,6v2h4v1.333H0v5.333c0,.368,.298,.667,.667,.667h14.667 c0.368,0,.667-.298,.667-.667V9.333h-4V8H16z M11.333,10.667H10.6c-.058,.233-.148,.457-.267,.667l0.533,.533L9.933,12.8 L9.4,12.267l-.667,.267v0.8h-1.4V12.6l-.667-.267l-.533,.533l-.933-1l0.533-.533c-.119-.209-.208-.433-.267-.667h-.8 V9.333H5.4C5.458,9.1,5.548,8.876,5.667,8.667L5.133,8.133L6.067,7.2L6.6,7.733l0.667-.267v-.8H8.6V7.4l0.667,.267L9.8,7.133 l0.933,.933L10.2,8.6c0.119,.209,.208,.433,.267,.667h0.867L11.333,10.667L11.333,10.667z"/><circle cx="8" cy="10" r="1.333"/><path d="M6,2h4v1.333h1.333v-2c0-.368-.298-.667-.667-.667H5.333c-.368,0-.667,.298-.667,.667v2H6V2z"/></svg>');
+    --uc-autohide-button: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" fill-opacity="context-fill-opacity" viewBox="0 0 16 16"><path d="M5.293.293a1 1 0 011.414 0L8.414 2H13a3 3 0 013 3v8a3 3 0 01-3 3H3a3 3 0 01-3-3V5a3 3 0 013-3h.586L5.293.293zM6 2.414L4.707 3.707A1 1 0 014 4H3c-.545 0-1 .455-1 1v8c0 .545.455 1 1 1h10c.545 0 1-.455 1-1V5c0-.545-.455-1-1-1H8a1 1 0 01-.707-.293L6 2.414z"/></svg>');
+    list-style-image: var(--uc-toolbox-button);
     -moz-box-align: center;
+  }
+  .toolbarbutton-1#toolbox-button[icon="autohide"] {
+    list-style-image: var(--uc-autohide-button);
   }
   .toolbarbutton-1#toolbox-button .toolbarbutton-badge-stack {
     -moz-box-pack: center;
@@ -549,12 +573,8 @@
     height: 16px;
     width: 16px;
     transition: fill 50ms ease-in-out 0s;
-  }
-  .toolbarbutton-1#toolbox-button {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="context-fill" fill-opacity="context-fill-opacity" width="16" height="16" viewBox="0 0 16 16"><path d="M16,8V6c0-1.105-.895-2-2-2H2C0.895,4,0,4.895,0,6v2h4v1.333H0v5.333c0,.368,.298,.667,.667,.667h14.667 c0.368,0,.667-.298,.667-.667V9.333h-4V8H16z M11.333,10.667H10.6c-.058,.233-.148,.457-.267,.667l0.533,.533L9.933,12.8 L9.4,12.267l-.667,.267v0.8h-1.4V12.6l-.667-.267l-.533,.533l-.933-1l0.533-.533c-.119-.209-.208-.433-.267-.667h-.8 V9.333H5.4C5.458,9.1,5.548,8.876,5.667,8.667L5.133,8.133L6.067,7.2L6.6,7.733l0.667-.267v-.8H8.6V7.4l0.667,.267L9.8,7.133 l0.933,.933L10.2,8.6c0.119,.209,.208,.433,.267,.667h0.867L11.333,10.667L11.333,10.667z"/><circle cx="8" cy="10" r="1.333"/><path d="M6,2h4v1.333h1.333v-2c0-.368-.298-.667-.667-.667H5.333c-.368,0-.667,.298-.667,.667v2H6V2z"/></svg>');
-  }
-  .toolbarbutton-1#toolbox-button[icon="autohide"] {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" fill-opacity="context-fill-opacity" viewBox="0 0 16 16"><path d="M5.293.293a1 1 0 011.414 0L8.414 2H13a3 3 0 013 3v8a3 3 0 01-3 3H3a3 3 0 01-3-3V5a3 3 0 013-3h.586L5.293.293zM6 2.414L4.707 3.707A1 1 0 014 4H3c-.545 0-1 .455-1 1v8c0 .545.455 1 1 1h10c.545 0 1-.455 1-1V5c0-.545-.455-1-1-1H8a1 1 0 01-.707-.293L6 2.414z"/></svg>');
+    background-image: var(--uc-toolbox-button), var(--uc-autohide-button);
+    background-size: 0, 0;
   }
   @media (prefers-reduced-motion: no-preference) {
     .toolbarbutton-1#toolbox-button[animate] .toolbarbutton-icon {
@@ -578,7 +598,9 @@
   #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {
     margin-inline: 0;
   }`;
-  let styleURI = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(toolboxCSS));
+  let styleURI = makeURI(
+    `data:text/css;charset=UTF=8,${encodeURIComponent(toolboxCSS)}`
+  );
   if (!styleSvc.sheetRegistered(styleURI, styleSvc.AUTHOR_SHEET)) {
     styleSvc.loadAndRegisterSheet(styleURI, styleSvc.AUTHOR_SHEET);
   }

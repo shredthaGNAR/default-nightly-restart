@@ -34,6 +34,8 @@ user_pref("layout.css.moz-outline-radius.enabled", true);
 user_pref("browser.display.windows.non_native_menus", 1);
 user_pref("widget.content.allow-gtk-dark-theme", true);
 ////
+// avoid custom menulist/select styling
+user_pref("dom.forms.select.customstyling", false);
 // keep "all tabs" menu available at all times, useful for all tabs menu expansion pack
 user_pref("browser.tabs.tabmanager.enabled", true);
 // disable urlbar result group labels since we don't use them
@@ -65,6 +67,7 @@ user_pref("extensions.autoDisableScopes", 0);
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("browser.startup.homepage_override.mstone", "ignore");
 user_pref("browser.display.use_system_colors", false);
+user_pref("browser.privatebrowsing.enable-new-indicator", false);
 user_pref("accessibility.mouse_focuses_formcontrol", 0);
 user_pref("browser.tabs.tabMinWidth", 90);
 user_pref("browser.urlbar.accessibility.tabToSearch.announceResults", false);
@@ -140,6 +143,8 @@ user_pref("gfx.font_rendering.directwrite.use_gdi_table_loading", false);
 //// at https://github.com/aminomancer/uc.css.js
 user_pref("userChrome.tabs.pinned-tabs.close-buttons.disabled", true);
 user_pref("userChrome.urlbar-results.hide-help-button", true);
+// add a drop shadow on menupopup and panel elements (context menus, addons' popup panels, etc.)
+user_pref("userChrome.css.menupopup-shadows", true);
 //// these are more subjective prefs, but they're important ones
 //// display the all tabs menu in reverse order (newer tabs on top, like history)
 // user_pref("userChrome.tabs.all-tabs-menu.reverse-order", true);
@@ -149,9 +154,5 @@ user_pref("userChrome.urlbar-results.hide-help-button", true);
 // recommended for all operating systems, but not required.
 // must have the fonts installed. check the repo's readme for more details.
 // user_pref("userChrome.css.mac-ui-fonts", true);
-// add a drop shadow on menupopup and panel elements (context menus, addons' popup panels, etc.)
-// the 8px drop shadow area around the menupopup can't be clicked through.
-// this might bother some people so it's disabled by default.
-// user_pref("userChrome.css.menupopup-shadows", true);
 // custom wikipedia dark mode theme
 // user_pref("userChrome.css.wikipedia.dark-theme-enabled", true);

@@ -12,5 +12,9 @@
     "editor.defaultFormatter": null,
     "[plaintext]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.colorCustomizations": {
+        "iLoveWorkSpaceColors": true,
+        "iLoveWorkSpaceRandom": false
     }
 }

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.3.5
+// @version        2.3.8
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular
@@ -48,9 +48,13 @@
   #places-tooltip-insecure-icon[hidden] {
     display: none;
   }`;
-  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+    Ci.nsIStyleSheetService
+  );
   let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
-  if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+  if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) {
+    sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+  }
   /* necessary DOM:
     <tooltip id="tabbrowser-tab-tooltip"
             class="places-tooltip"
@@ -82,9 +86,10 @@
       ? linkedBrowser?.currentURI
       : linkedBrowser?.documentURI || linkedBrowser?.currentURI;
     if (docURI) {
-      let homePage = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
-        docURI.spec
-      );
+      let homePage = new RegExp(
+        `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
+        "i"
+      ).test(docURI.spec);
       // if the page is the user's homepage or new tab page, reflect that in the icon.
       if (homePage) {
         icon.setAttribute("type", "home-page");
@@ -102,7 +107,10 @@
         // about: pages
         case "about":
           let pathQueryRef = docURI?.pathQueryRef;
-          if (pathQueryRef && /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)) {
+          if (
+            pathQueryRef &&
+            /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)
+          ) {
             icon.setAttribute("type", "error-page");
             icon.hidden = false;
             return;
@@ -178,71 +186,68 @@
       e.preventDefault();
       return;
     }
-    let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
-      let keyElem = document.getElementById(keyElemId);
-      let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
-      return PluralForm.get(pluralCount, gTabBrowserBundle.GetStringFromName(stringId))
-        .replace("%S", shortcut)
-        .replace("#1", pluralCount);
-    };
     let tabRect = windowUtils.getBoundsWithoutFlushing(tab);
+    let id, args;
     let align = true;
-    let label;
+    let { linkedBrowser } = tab;
     const selectedTabs = this.selectedTabs;
     const contextTabInSelection = selectedTabs.includes(tab);
-    const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
+    const tabCount = contextTabInSelection ? selectedTabs.length : 1;
     if (tab.mOverCloseButton) {
       let rect = windowUtils.getBoundsWithoutFlushing(tab.closeButton);
-      let shortcut = ShortcutUtils.prettifyShortcut(document.getelementById("key_close"));
-      label = PluralForm.get(
-        affectedTabsLength,
-        gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
-      ).replace("#1", affectedTabsLength);
-      if (contextTabInSelection && shortcut) {
-        if (label.includes("%S")) label = label.replace("%S", shortcut);
-        else label = label + " (" + shortcut + ")";
-      }
+      id = "tabbrowser-close-tabs-tooltip";
+      args = { tabCount };
       align = rect.right - tabRect.left < 250;
     } else if (tab._overPlayingIcon) {
       let icon = tab.soundPlayingIcon || tab.overlayIcon;
       let rect = windowUtils.getBoundsWithoutFlushing(icon);
-      let stringID;
+      args = { tabCount };
       if (contextTabInSelection) {
-        stringID = tab.linkedBrowser.audioMuted
-          ? "tabs.unmuteAudio2.tooltip"
-          : "tabs.muteAudio2.tooltip";
-        label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
+        id = linkedBrowser.audioMuted
+          ? "tabbrowser-unmute-tab-audio-tooltip"
+          : "tabbrowser-mute-tab-audio-tooltip";
+        const keyElem = document.getElementById("key_toggleMute");
+        args.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+      } else if (tab.hasAttribute("activemedia-blocked")) {
+        id = "tabbrowser-unblock-tab-audio-tooltip";
       } else {
-        if (tab.hasAttribute("activemedia-blocked")) {
-          stringID = "tabs.unblockAudio2.tooltip";
-        } else {
-          stringID = tab.linkedBrowser.audioMuted
-            ? "tabs.unmuteAudio2.background.tooltip"
-            : "tabs.muteAudio2.background.tooltip";
-        }
-
-        label = PluralForm.get(
-          affectedTabsLength,
-          gTabBrowserBundle.GetStringFromName(stringID)
-        ).replace("#1", affectedTabsLength);
+        id = linkedBrowser.audioMuted
+          ? "tabbrowser-unmute-tab-audio-background-tooltip"
+          : "tabbrowser-mute-tab-audio-background-tooltip";
       }
       align = rect.right - tabRect.left < 250;
     } else {
-      label = this.getTabTooltip(tab);
+      id = "tabbrowser-tab-tooltip";
+      args = { title: this.getTabTooltip(tab, true) };
     }
     if (align) {
       e.target.setAttribute("position", "after_start");
       e.target.moveToAnchor(tab, "after_start");
     }
     let title = e.target.querySelector(".places-tooltip-title");
-    title.textContent = label;
-    if (tab.getAttribute("customizemode") === "true") {
-      e.target.querySelector(".places-tooltip-box").setAttribute("desc-hidden", "true");
-    } else {
-      let url = e.target.querySelector(".places-tooltip-uri");
-      url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-      setIdentityIcon(e.target.querySelector("#places-tooltip-insecure-icon"), tab);
-      e.target.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
+    let localized = {};
+    if (id) {
+      let [msg] = this.tabLocalization.formatMessagesSync([{ id, args }]);
+      localized.value = msg.value;
+      if (msg.attributes) {
+        for (let attr of msg.attributes) localized[attr.name] = attr.value;
+      }
     }
+    title.textContent = localized.label ?? "";
+    if (tab.getAttribute("customizemode") === "true") {
+      e.target
+        .querySelector(".places-tooltip-box")
+        .setAttribute("desc-hidden", "true");
+      return;
+    }
+    let url = e.target.querySelector(".places-tooltip-uri");
+    url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
+    setIdentityIcon(
+      e.target.querySelector("#places-tooltip-insecure-icon"),
+      tab
+    );
+    e.target
+      .querySelector(".places-tooltip-box")
+      .removeAttribute("desc-hidden");
   };
 })();
