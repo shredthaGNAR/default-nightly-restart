@@ -1,22 +1,35 @@
 // ==UserScript==
 // @name           Tab Thumbnail Tooltip
-// @version        1.0.5
+// @version        1.0.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Show a large thumbnail image to preview tab content when hovering a tab.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabThumbnailTooltip.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabThumbnailTooltip.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class TabThumbnail {
+  // user preferences. add these in about:config if you want them to persist
+  // between script updates without having to reapply them.
   static config = {
     // Thumbnail width, in pixels (can override with CSS too)
-    "Preview width": 320,
+    "Preview width": Services.prefs.getIntPref(
+      "tabThumbnailTooltip.previewWidth",
+      320
+    ),
 
     // Thumbnail height
-    "Preview height": 180,
+    "Preview height": Services.prefs.getIntPref(
+      "tabThumbnailTooltip.previewHeight",
+      180
+    ),
 
     // How often to refresh the thumbnail, in milliseconds
-    "Update interval": 30,
+    "Update interval": Services.prefs.getIntPref(
+      "tabThumbnailTooltip.updateInterval",
+      30
+    ),
 
     // Set an upper limit on the number of characters shown in the tooltip's label
     // when a thumbnail is showing. If a tab has an extremely long title (say you
@@ -27,12 +40,18 @@ class TabThumbnail {
     // limit of 30 will yield: "Lorem ipsum dol…id est laborum". When a preview
     // thumbnail is not showing (e.g. for unloaded tabs), this setting will be
     // ignored. If you set this to 0 or -1, there will be no limit at all.
-    "Max label character limit": 100,
+    "Max label character limit": Services.prefs.getIntPref(
+      "tabThumbnailTooltip.maxLabelCharacterLimit",
+      100
+    ),
 
     // The character(s) to be shown in the middle of the label if it overflows
     // the limit set above. If the character limit above is set to 0 or -1, this
     // setting will have no effect. Wrap in backticks `
-    "Overflow terminal character": `…`,
+    "Overflow terminal character": Services.prefs.getStringPref(
+      "tabThumbnailTooltip.overflowTerminalCharacter",
+      `…`
+    ),
   };
   get tooltip() {
     return (
@@ -66,7 +85,9 @@ class TabThumbnail {
   hide-thumbnail="true"
   style="visibility: collapse">
   <vbox id="tabThumbBox">
-    <description id="tabThumbLabel" class="tooltip-label"/>
+    <vbox id="tabThumbLabelBox">
+      <description id="tabThumbLabel" class="tooltip-label"/>
+    </vbox>
     <toolbarseparator/>
     <html:div id="tabThumbCanvas"></html:div>
   </vbox>
@@ -113,13 +134,10 @@ class TabThumbnail {
       let limit = config["Max label character limit"];
       if (limit > 0 && label.length > limit) {
         let terminal = config["Overflow terminal character"] || "…";
-        label =
-          label.substring(0, limit / 2) + // 50
-          terminal + // 1
-          label.substring(
-            label.length + terminal.length - limit / 2,
-            label.length
-          ); // 49
+        label = `${label.substring(0, limit / 2)}${terminal}${label.substring(
+          label.length + terminal.length - limit / 2,
+          label.length
+        )}`;
       }
       this.tabLabel.textContent = label;
       await PageThumbs.captureToCanvas(
@@ -165,6 +183,7 @@ class TabThumbnail {
   background: transparent;
   border: none;
   padding: var(--tab-thumb-shadow-size);
+  -moz-box-layout: initial;
 }
 #tabThumbTooltip[position] {
   margin-inline-start: calc(-1 * var(--tab-thumb-shadow-size));
@@ -180,6 +199,11 @@ class TabThumbnail {
 }
 #tabThumbTooltip[hide-thumbnail] #tabThumbBox {
   border-radius: max(3px, var(--thumb-border-radius));
+}
+#tabThumbLabelBox {
+  max-width: ${config["Preview width"]}px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 #tabThumbLabel {
   margin-inline: 5px;
@@ -202,6 +226,8 @@ class TabThumbnail {
   border: 1px solid var(--arrowpanel-border-color);
   width: ${config["Preview width"]}px;
   height: ${config["Preview height"]}px;
+  min-width: ${config["Preview width"]}px;
+  min-height: ${config["Preview height"]}px;
   max-width: ${config["Preview width"]}px;
   max-height: ${config["Preview height"]}px;
   background-image: -moz-element(#tabThumbImageCanvas);
@@ -215,7 +241,7 @@ class TabThumbnail {
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
