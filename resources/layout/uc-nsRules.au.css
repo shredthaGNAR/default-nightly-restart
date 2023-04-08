@@ -18,11 +18,6 @@ from the style editor in the browser toolbox. */
     -moz-window-shadow: none;
   }
 
-  :is(panel, menupopup)::part(content) {
-    display: -moz-box;
-    -moz-box-flex: 1;
-  }
-
   @-moz-document url(chrome://browser/content/browser.xhtml) {
     :is(panel, menupopup)::part(arrow) {
       display: -moz-inline-box;
@@ -223,7 +218,6 @@ from the style editor in the browser toolbox. */
     background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg);
     background-size: auto;
     list-style-image: none;
-    height: var(--toolbarbutton-height);
     min-height: 33px; /* Minimum height must be equal to the height of the SVG sprite */
     animation-name: bookmark-animation;
     animation-fill-mode: forwards;

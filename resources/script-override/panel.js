@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Arrowpanel Arrows
-// @version        1.0
+// @version        1.1.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -60,9 +60,10 @@
         }
         this.setAttribute(
           "position",
-          this.getAttribute("position")
-            ?.replace(/^bottom(right|left)/, "bottomcenter")
-            .replace(/^top(left|right)/, "$1center") || "bottomcenter topleft"
+          this.getAttribute("position")?.replace(
+            /^(bottom|top)(right|left)/,
+            "$1center"
+          ) || "bottomcenter topleft"
         );
         if (!this.hasAttribute("consumeoutsideclicks")) {
           this.setAttribute("consumeoutsideclicks", "false");
