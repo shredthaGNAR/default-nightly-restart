@@ -202,6 +202,11 @@ See the above repository for updates as well as full license text. */
    margin-inline-end: auto;
  }
 
+ #PlacesToolbarItems {
+   display: flex !important;
+   justify-content: safe center !important;
+ }
+
  .tabbrowser-tab:not([selected="true"]):not([multiselected="true"]) .tab-background {
    border-top: 1px solid rgba(130, 130, 130, 0.2) !important;
    border-left: 1px solid rgba(130, 130, 130, 0.2) !important;
@@ -335,16 +340,10 @@ See the above repository for updates as well as full license text. */
    display: none !important;
  }
 
- /* center Bookmarks toolbar items*/
- #PlacesToolbarItems {
-   display: flex !important;
-   justify-content: safe center !important;
- }
-
  /*
 .tabbrowser-tab>.tab-stack>.tab-content>.tab-close-button {
   visibility: hidden;
-}
+}*/
 
  .tabbrowser-tab:hover>.tab-stack>.tab-content>.tab-close-button {
    visibility: visible !important;
@@ -858,6 +857,34 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  .tab-background {
    border-radius: var(--user-tab-rounding) !important;
+ }
+
+ /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/centered_tab_label.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+ .tab-label-container {
+   display: grid;
+   justify-content: safe center;
+   /* Fx <112 compatibility */
+   align-items: safe center;
+   /* Fx <112 compatibility */
+   align-content: center;
+ }
+
+ .tab-secondary-label {
+   -moz-box-pack: center;
+   /* Fx <112 compatibility */
+   justify-content: center;
+ }
+
+ .tab-label,
+ .tab-secondary-label {
+   overflow: hidden
+ }
+
+ .tabbrowser-tab[selected]:not(:hover) .tab-label-container:not([labeldirection="rtl"]),
+ #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover, [pinned]) .tab-label-container:not([labeldirection="rtl"]) {
+   margin-inline-end: 7px;
  }
 
  /* private browsing indicator next to window controls */

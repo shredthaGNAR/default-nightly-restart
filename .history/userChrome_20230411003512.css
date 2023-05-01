@@ -25,39 +25,39 @@
 
  /*** Photon-like Menu Colors (14 Jan 2022) ***/
 
- /* Bookmarks Toolbar folders *
+ /* Bookmarks Toolbar folders */
  #PersonalToolbar menupopup,
- /* Right-click context menus *
+ /* Right-click context menus */
  #mainPopupSet menupopup,
- /* Top menu bar on Windows (not sure about others) *
+ /* Top menu bar on Windows (not sure about others) */
  #toolbar-menubar menupopup,
- /* Sidebar/Library bookmark/history context menus *
+ /* Sidebar/Library bookmark/history context menus */
  #placesContext,
- /* Address bar context menu (2021-10-25) *
+ /* Address bar context menu (2021-10-25) */
  #urlbar-input-container menupopup,
- /* Various toolbar drop-down panels (Fx96) *
+ /* Various toolbar drop-down panels (Fx96) */
  #back-button menupopup,
  #forward-button menupopup,
  #identity-popup,
  #appMenu-popup,
  #downloadsPanel,
  #BMB_bookmarksPopup {
-   /* Text color *
+   /* Text color */
    --menu-color: #000 !important;
    --arrowpanel-color: #000 !important;
    --panel-color: #000 !important;
-   /* Background color *
+   /* Background color */
    --menu-background-color: #f0f0f0 !important;
    --arrowpanel-background: #f0f0f0 !important;
    --panel-background: #f0f0f0 !important;
-   /* Border color (if any) *
+   /* Border color (if any) */
    --menu-border-color: threedshadow !important;
    --arrowpanel-border-color: threedshadow !important;
    --panel-border-color: threedshadow !important;
-   /* Hovered/expanded item background color *
+   /* Hovered/expanded item background color */
    --menuitem-hover-background-color: #e0e0e6 !important;
    --button-hover-bgcolor: #e0e0e6 !important;
-   /* Disabled items text color and hovered background *
+   /* Disabled items text color and hovered background */
    --menu-disabled-color: rgba(21, 20, 26, 0.4) !important;
    --menuitem-disabled-hover-background-color: rgba(224, 224, 230, 0.4) !important;
  }
@@ -190,16 +190,46 @@ See the above repository for updates as well as full license text. */
 See the above repository for updates as well as full license text. */
  .tabbrowser-tab[selected]:not(:hover):not([pinned]) .tab-label-container,
  #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover):not([pinned]) .tab-label-container {
-   padding-inline-end: 6px !important;
+   margin-inline-end: 7px
  }
 
- .tab-icon-stack {
-   margin-inline-start: auto
+ .tab-content:not([pinned])::before {
+   display: -moz-box;
+   content: "";
+   -moz-box-flex: 1;
  }
+
+ /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/centered_tab_label.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
 
  .tab-label-container {
-   max-width: min-content;
-   margin-inline-end: auto;
+   display: grid;
+   justify-content: safe center;
+   /* Fx <112 compatibility */
+   align-items: safe center;
+   /* Fx <112 compatibility */
+   align-content: center;
+ }
+
+ .tab-secondary-label {
+   -moz-box-pack: center;
+   /* Fx <112 compatibility */
+   justify-content: center;
+ }
+
+ .tab-label,
+ .tab-secondary-label {
+   overflow: hidden
+ }
+
+ .tabbrowser-tab[selected]:not(:hover) .tab-label-container:not([labeldirection="rtl"]),
+ #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover, [pinned]) .tab-label-container:not([labeldirection="rtl"]) {
+   margin-inline-end: 7px;
+ }
+
+ #PlacesToolbarItems {
+   display: flex !important;
+   justify-content: safe center !important;
  }
 
  .tabbrowser-tab:not([selected="true"]):not([multiselected="true"]) .tab-background {
@@ -216,7 +246,6 @@ See the above repository for updates as well as full license text. */
    color: rgba(255, 255, 255, 0.7) !important;
  }
 
- /*----------------------------------------------------------------
  .tabbrowser-tab[selected="true"] .tab-background:-moz-lwtheme-brighttext {
    box-shadow: inset 0em -4em 0em var(--toolbar-bgcolor) !important;
  }
@@ -252,8 +281,7 @@ See the above repository for updates as well as full license text. */
 
  .tab-content[selected="true"] {
    background-color: color-mix(in srgb, #4d4dfe 20%, transparent) !important;
-   text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
-     1px 1px 1px rgba(0, 0, 0, 0.5) !important;
+   text-shadow: 1px !important;
    margin-top: 0px !important;
    margin-bottom: 0px !important;
  }
@@ -335,16 +363,10 @@ See the above repository for updates as well as full license text. */
    display: none !important;
  }
 
- /* center Bookmarks toolbar items*/
- #PlacesToolbarItems {
-   display: flex !important;
-   justify-content: safe center !important;
- }
-
  /*
 .tabbrowser-tab>.tab-stack>.tab-content>.tab-close-button {
   visibility: hidden;
-}
+}*/
 
  .tabbrowser-tab:hover>.tab-stack>.tab-content>.tab-close-button {
    visibility: visible !important;
@@ -371,14 +393,14 @@ See the above repository for updates as well as full license text. */
  }
 
  .tabbrowser-tab:not([visuallyselected="true"]):not([multiselected]):not(:hover) .tab-icon-image {
-   opacity: 0.9 !important;
+   opacity: 0.7 !important;
    transition: opacity 250ms ease !important;
  }
 
  /* Selected tabs design */
  #tabbrowser-tabs .tabbrowser-tab .tab-background[selected] {
    /* border: 0 !important;*/
-   /* outline: 1px solid color-mix(in srgb, #dadada 20%, transparent) !important;*/
+   outline: 1px solid color-mix(in srgb, #dadada 20%, transparent) !important;
    box-shadow: none !important;
 
  }
@@ -388,11 +410,10 @@ See the above repository for updates as well as full license text. */
    border: 0 !important;
    background-image: none !important;
    /*outline: none !important;*/
-   background-color: var(--firefoxcss-other-color) !important;
+   background-color: var(--firefoxcss-tab-active-bg-color) !important;
    /* box-shadow: none !important;*/
  }
 
- /*----------------------------------------------------------------
  #tabbrowser-tabs .tabbrowser-tab .tab-background:is([selected]):is([multiselected]) {
    outline: 1px solid #9400ff !important;
    outline-offset: 0px !important;
@@ -847,7 +868,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
  }
 
  .tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
-   background-color: color-mix(in srgb, #0d0d0df7 25%, transparent) !important;
+   background-color: color-mix(in srgb, #0d0d0df7 20%, transparent) !important;
  }
 
  /* Adjust tab corner shape, optionally remove space below tabs */
@@ -858,6 +879,34 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  .tab-background {
    border-radius: var(--user-tab-rounding) !important;
+ }
+
+ /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/centered_tab_label.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+ .tab-label-container {
+   display: grid;
+   justify-content: safe center;
+   /* Fx <112 compatibility */
+   align-items: safe center;
+   /* Fx <112 compatibility */
+   align-content: center;
+ }
+
+ .tab-secondary-label {
+   -moz-box-pack: center;
+   /* Fx <112 compatibility */
+   justify-content: center;
+ }
+
+ .tab-label,
+ .tab-secondary-label {
+   overflow: hidden
+ }
+
+ .tabbrowser-tab[selected]:not(:hover) .tab-label-container:not([labeldirection="rtl"]),
+ #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover, [pinned]) .tab-label-container:not([labeldirection="rtl"]) {
+   margin-inline-end: 7px;
  }
 
  /* private browsing indicator next to window controls */
@@ -929,7 +978,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
  }
 
  :root {
-   --toolbarbutton-border-radius: 6px !important;
+   --toolbarbutton-border-radius: 5px !important;
  }
 
  .sidebar-splitter {
@@ -1035,11 +1084,55 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --lwt-accent-color-inactive: rgba(40, 40, 40, 0.662) !important;
  }
 
- /*improve border visiblity for selected tabs */
+ /* improve border visiblity for selected tabs *
  :root:not(:-moz-window-inactive)[lwthemetextcolor="bright"] .tabbrowser-tab[selected="true"] .tab-background {
-   box-shadow: none !important;
-   outline: none !important;
-   border: none !important;
+   box-shadow: 0 0 2px hsla(280, 50%, 0%, 0.5),
+     0 0 0 1px hsla(280, 50%, 90%, 0.1) inset, 5px 3px 6px rgb(1 1 1 / 16%),
+     4px 4px 2px rgb(0 0 0 / 23%) !important;
+ }*/
+
+ :root {
+   --lwt-accent-color: #161742 !important;
+   --lwt-text-color: #c3c3c3 !important;
+   --arrowpanel-background: #1d1d3bfa !important;
+   --arrowpanel-color: #fff !important;
+   --arrowpanel-border-color: #4d4dfe50 !important;
+   --lwt-popup-brighttext-url-color: #4da6ff !important;
+   --panel-disabled-color: #99999990 !important;
+   --panel-description-color: #919191 !important;
+   --lwt-toolbar-field-background-color: #2f2a3cc2 !important;
+   --lwt-toolbar-field-color: #e5e5e6 !important;
+   --lwt-toolbar-field-border-color: #4d4dfe40 !important;
+   --lwt-toolbar-field-focus: #242343fc !important;
+   --lwt-toolbar-field-focus-color: #fff !important;
+   --toolbar-field-focus-border-color: #4d4dfe !important;
+   --lwt-toolbar-field-highlight: #3b439b !important;
+   --lwt-toolbar-field-highlight-text: #eaeaea !important;
+   --lwt-tab-text: #fff !important;
+   --lwt-background-tab-separator-color: #0a090c !important;
+   --toolbar-bgcolor: #1e2045bc !important;
+   --toolbar-color: #1e2045bc !important;
+   --toolbarseparator-color: #4d4dfe70 !important;
+   --chrome-content-separator-color: transparent !important;
+   --toolbarbutton-hover-background: #4e6bfd !important;
+   --toolbarbutton-active-background: #4e6bfd !important;
+   --autocomplete-popup-highlight-background: #3e3b9d !important;
+   --arrowpanel-menuitem-padding: 8px !important;
+   --panel-font-size: 1em !important;
+   --arrowpanel-padding: 0.4em !important;
+   --button-bgcolor: color-mix(in srgb, #4e6bfd 35%, transparent) !important;
+   --button-hover-bgcolor: color-mix(in srgb,
+       #4e6bfd 50%,
+       transparent) !important;
+   --button-active-bgcolor: color-mix(in srgb,
+       #4e6bfd 65%,
+       transparent) !important;
+   --panel-separator-color: #3d3772 !important;
+   --toolbarbutton-outer-padding: 3px !important;
+   --autocomplete-popup-hover-background: #3e4cff95 !important;
+   --autocomplete-popup-separator-color: color-mix(in srgb,
+       #4d4dfeff 30%,
+       transparent) !important;
  }
 
  /* --lwt-additional-images: url("images/derecha-copy.png"),
@@ -1102,86 +1195,8 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --urlbar-box-focus-bgcolor: var(--uc-highlight-colour) !important;
 
  }
+
  /*
  .tab-background[multiselected="true"]:not([selected="true"])>.tab-background-inner {
    background: none !important;
  }*/
- /* 1/16/2022 Tone down the Fx96 tab border with add-on themes in certain fallback situations */
- .tab-background:is([selected], [multiselected]):-moz-lwtheme {
-   --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
-   border-bottom-color: transparent !important;
-   background-image: radial-gradient(circle at bottom center,
-       #551dfc,
-       #1b0034d3) !important;
- }
-
- [brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
-   --lwt-tabs-border-color: rgba(255, 255, 255, 0.5) !important;
-   border-bottom-color: transparent !important;
- }
-
- /* Container color bar visibility */
- .tabbrowser-tab[usercontextid]>.tab-stack>.tab-background>.tab-context-line {
-   margin: 0px max(calc(var(--user-tab-rounding) - 3px), 0px) !important;
- }
-
- /* Make sure tab attention dot isn't too high - 10 Dec 2022 */
- .tabbrowser-tab:is([image], [pinned])>.tab-stack>.tab-content[attention]:not([selected="true"]),
- .tabbrowser-tab>.tab-stack>.tab-content[pinned][titlechanged]:not([selected="true"]),
- #firefox-view-button[attention],
- .webextension-browser-action[attention="true"] {
-   background-position-y: bottom 5px !important;
- }
-
- /* Move container color bar to bottom of tab - updated 1/16/2022 */
-
- .tab-background {
-   --context-line-margin-adjust: 3px;
-   /* 1/16/2022 */
-   --context-line-active-adjust: 1px;
-   /* 1/16/2022 */
- }
-
- .tabbrowser-tab[usercontextid]:is([selected=true], [visuallyselected="true"], [multiselected]) .tab-background {
-   border-top: 1px solid transparent;
-   /* 1/16/2022 Default border for consistency */
- }
-
- .tabbrowser-tab[usercontextid]>.tab-stack>.tab-background>.tab-context-line {
-   margin-top: calc(var(--tab-min-height) - var(--context-line-margin-adjust)) !important;
- }
-
- .tabbrowser-tab[usercontextid]:is([selected=true], [visuallyselected="true"], [multiselected])>.tab-stack>.tab-background>.tab-context-line {
-   margin-top: calc(var(--tab-min-height) - var(--context-line-margin-adjust) - var(--context-line-active-adjust)) !important;
- }
-
- /*
- .tab-background {
-   border: none !important;
-   outline: none !important;
-   border-radius: 0 !important;
-   box-shadow: none !important;
-   opacity: 1 !important;
-   z-index: 1;
- }
-
- /***inactive*/
-
- .tabbrowser-tab:not([visuallyselected="true"]):not([multiselected]):not(:hover) .tab-icon-image {
-   opacity: 0.6 !important;
-   filter: grayscale(0.8), brightness(0.4), contrast(20%) !important;
- }
-
- #nav-bar {
-   box-shadow: inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
- }
-
- /* Selected Tab - Box Shadow *
-
- #TabsToolbar[brighttext] #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([visuallyselected="true"], [multiselected])>.tab-stack>.tab-background:-moz-lwtheme {
-   box-shadow: 0 0 1px rgba(91, 91, 122, 0.486),
-     5px 3px 6px rgba(91, 91, 122, 0.486), 4px 4px 2px rgba(91, 91, 122, 0.486) !important;
- }*/
- #urlbar .urlbar-input-box {
-   text-align: center !important;
- }

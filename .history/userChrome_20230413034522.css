@@ -190,16 +190,46 @@ See the above repository for updates as well as full license text. */
 See the above repository for updates as well as full license text. */
  .tabbrowser-tab[selected]:not(:hover):not([pinned]) .tab-label-container,
  #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover):not([pinned]) .tab-label-container {
-   padding-inline-end: 6px !important;
+   margin-inline-end: 7px
  }
 
- .tab-icon-stack {
-   margin-inline-start: auto
+ .tab-content:not([pinned])::before {
+   display: -moz-box;
+   content: "";
+   -moz-box-flex: 1;
  }
+
+ /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/centered_tab_label.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
 
  .tab-label-container {
-   max-width: min-content;
-   margin-inline-end: auto;
+   display: grid;
+   justify-content: safe center;
+   /* Fx <112 compatibility */
+   align-items: safe center;
+   /* Fx <112 compatibility */
+   align-content: center;
+ }
+
+ .tab-secondary-label {
+   -moz-box-pack: center;
+   /* Fx <112 compatibility */
+   justify-content: center;
+ }
+
+ .tab-label,
+ .tab-secondary-label {
+   overflow: hidden
+ }
+
+ .tabbrowser-tab[selected]:not(:hover) .tab-label-container:not([labeldirection="rtl"]),
+ #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover, [pinned]) .tab-label-container:not([labeldirection="rtl"]) {
+   margin-inline-end: 7px;
+ }
+
+ #PlacesToolbarItems {
+   display: flex !important;
+   justify-content: safe center !important;
  }
 
  .tabbrowser-tab:not([selected="true"]):not([multiselected="true"]) .tab-background {
@@ -252,8 +282,7 @@ See the above repository for updates as well as full license text. */
 
  .tab-content[selected="true"] {
    background-color: color-mix(in srgb, #4d4dfe 20%, transparent) !important;
-   text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
-     1px 1px 1px rgba(0, 0, 0, 0.5) !important;
+   text-shadow: 1px !important;
    margin-top: 0px !important;
    margin-bottom: 0px !important;
  }
@@ -335,16 +364,10 @@ See the above repository for updates as well as full license text. */
    display: none !important;
  }
 
- /* center Bookmarks toolbar items*/
- #PlacesToolbarItems {
-   display: flex !important;
-   justify-content: safe center !important;
- }
-
  /*
 .tabbrowser-tab>.tab-stack>.tab-content>.tab-close-button {
   visibility: hidden;
-}
+}*/
 
  .tabbrowser-tab:hover>.tab-stack>.tab-content>.tab-close-button {
    visibility: visible !important;
@@ -378,7 +401,7 @@ See the above repository for updates as well as full license text. */
  /* Selected tabs design */
  #tabbrowser-tabs .tabbrowser-tab .tab-background[selected] {
    /* border: 0 !important;*/
-   /* outline: 1px solid color-mix(in srgb, #dadada 20%, transparent) !important;*/
+   outline: 1px solid color-mix(in srgb, #dadada 20%, transparent) !important;
    box-shadow: none !important;
 
  }
@@ -847,7 +870,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
  }
 
  .tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
-   background-color: color-mix(in srgb, #0d0d0df7 25%, transparent) !important;
+   background-color: color-mix(in srgb, #0d0d0df7 20%, transparent) !important;
  }
 
  /* Adjust tab corner shape, optionally remove space below tabs */
@@ -858,6 +881,34 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  .tab-background {
    border-radius: var(--user-tab-rounding) !important;
+ }
+
+ /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/centered_tab_label.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+ .tab-label-container {
+   display: grid;
+   justify-content: safe center;
+   /* Fx <112 compatibility */
+   align-items: safe center;
+   /* Fx <112 compatibility */
+   align-content: center;
+ }
+
+ .tab-secondary-label {
+   -moz-box-pack: center;
+   /* Fx <112 compatibility */
+   justify-content: center;
+ }
+
+ .tab-label,
+ .tab-secondary-label {
+   overflow: hidden
+ }
+
+ .tabbrowser-tab[selected]:not(:hover) .tab-label-container:not([labeldirection="rtl"]),
+ #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover, [pinned]) .tab-label-container:not([labeldirection="rtl"]) {
+   margin-inline-end: 7px;
  }
 
  /* private browsing indicator next to window controls */
@@ -1035,13 +1086,14 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --lwt-accent-color-inactive: rgba(40, 40, 40, 0.662) !important;
  }
 
- /*improve border visiblity for selected tabs */
+ /* improve border visiblity for selected tabs */
  :root:not(:-moz-window-inactive)[lwthemetextcolor="bright"] .tabbrowser-tab[selected="true"] .tab-background {
-   box-shadow: none !important;
-   outline: none !important;
-   border: none !important;
+   box-shadow: 0 0 2px hsla(280, 50%, 0%, 0.5),
+     0 0 0 1px hsla(280, 50%, 90%, 0.1) inset, 5px 3px 6px rgb(1 1 1 / 16%),
+     4px 4px 2px rgb(0 0 0 / 23%) !important;
  }
 
+ */
  /* --lwt-additional-images: url("images/derecha-copy.png"),
      url("images/izquierda-copy.png"), url("images/6.svg") !important;
    --lwt-background-alignment: right top, left top, right top !important;
@@ -1106,13 +1158,10 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
  .tab-background[multiselected="true"]:not([selected="true"])>.tab-background-inner {
    background: none !important;
  }*/
- /* 1/16/2022 Tone down the Fx96 tab border with add-on themes in certain fallback situations */
+ /* 1/16/2022 Tone down the Fx96 tab border with add-on themes in certain fallback situations *
  .tab-background:is([selected], [multiselected]):-moz-lwtheme {
    --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
    border-bottom-color: transparent !important;
-   background-image: radial-gradient(circle at bottom center,
-       #551dfc,
-       #1b0034d3) !important;
  }
 
  [brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
@@ -1153,35 +1202,4 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  .tabbrowser-tab[usercontextid]:is([selected=true], [visuallyselected="true"], [multiselected])>.tab-stack>.tab-background>.tab-context-line {
    margin-top: calc(var(--tab-min-height) - var(--context-line-margin-adjust) - var(--context-line-active-adjust)) !important;
- }
-
- /*
- .tab-background {
-   border: none !important;
-   outline: none !important;
-   border-radius: 0 !important;
-   box-shadow: none !important;
-   opacity: 1 !important;
-   z-index: 1;
- }
-
- /***inactive*/
-
- .tabbrowser-tab:not([visuallyselected="true"]):not([multiselected]):not(:hover) .tab-icon-image {
-   opacity: 0.6 !important;
-   filter: grayscale(0.8), brightness(0.4), contrast(20%) !important;
- }
-
- #nav-bar {
-   box-shadow: inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
- }
-
- /* Selected Tab - Box Shadow *
-
- #TabsToolbar[brighttext] #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([visuallyselected="true"], [multiselected])>.tab-stack>.tab-background:-moz-lwtheme {
-   box-shadow: 0 0 1px rgba(91, 91, 122, 0.486),
-     5px 3px 6px rgba(91, 91, 122, 0.486), 4px 4px 2px rgba(91, 91, 122, 0.486) !important;
- }*/
- #urlbar .urlbar-input-box {
-   text-align: center !important;
  }
