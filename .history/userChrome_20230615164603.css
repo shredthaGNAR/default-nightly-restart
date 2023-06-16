@@ -1035,7 +1035,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --lwt-accent-color-inactive: rgba(40, 40, 40, 0.662) !important;
  }
 
- /*improve border visiblity for selected tabs */
+ /*improve border visiblity for selected tabs *
  :root:not(:-moz-window-inactive)[lwthemetextcolor="bright"] .tabbrowser-tab[selected="true"] .tab-background {
    box-shadow: none !important;
    outline: none !important;

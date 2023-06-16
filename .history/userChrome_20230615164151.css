@@ -237,7 +237,7 @@ See the above repository for updates as well as full license text. */
      radial-gradient(circle at bottom center,
        #7047ed 15px,
        #29004bd3) !important;
-   /*box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;*/
+   box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
  }
 
  /*container tab label color when selected */
@@ -1111,7 +1111,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
    border-bottom-color: transparent !important;
    background-image: radial-gradient(circle at bottom center,
-       #b98ff3,
+       #6a00ff89,
        #19002f) !important;
  }
 

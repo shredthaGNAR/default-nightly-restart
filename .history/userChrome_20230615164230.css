@@ -237,7 +237,7 @@ See the above repository for updates as well as full license text. */
      radial-gradient(circle at bottom center,
        #7047ed 15px,
        #29004bd3) !important;
-   /*box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;*/
+   box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
  }
 
  /*container tab label color when selected */

@@ -237,7 +237,7 @@ See the above repository for updates as well as full license text. */
      radial-gradient(circle at bottom center,
        #7047ed 15px,
        #29004bd3) !important;
-   /*box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;*/
+   box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
  }
 
  /*container tab label color when selected */
@@ -1111,8 +1111,8 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
    border-bottom-color: transparent !important;
    background-image: radial-gradient(circle at bottom center,
-       #b98ff3,
-       #19002f) !important;
+       #9e7ffb,
+       #250f39d3) !important;
  }
 
  [brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
@@ -1188,7 +1188,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  /* Fix white blink background on new tabs */
  #browser .browserStack {
-   background-color: rgb(45, 45, 45) !important;
+   background-color: black !important;
  }
 
  /* Remove selected tab shadow, darken the border to account for lighter background color */
@@ -1316,4 +1316,8 @@ Annoying since Firefox 111 */
  #unified-extensions-button>.toolbarbutton-icon {
    width: 0px !important;
    padding: 0px !important;
+ }
+
+ :root[privatebrowsingmode="temporary"] #PanelUI-menu-button {
+   list-style-image: url("chrome://global/skin/icons/indicator-private-browsing.svg") !important;
  }

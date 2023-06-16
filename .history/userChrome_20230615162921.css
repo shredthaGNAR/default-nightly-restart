@@ -235,9 +235,9 @@ See the above repository for updates as well as full license text. */
    background-image:
      /*var(--button-hover-bgcolor)*/
      radial-gradient(circle at bottom center,
-       #7047ed 15px,
-       #29004bd3) !important;
-   /*box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;*/
+       #551dfc 15px,
+       #000134d3) !important;
+   box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
  }
 
  /*container tab label color when selected */
@@ -245,13 +245,13 @@ See the above repository for updates as well as full license text. */
  .tabbrowser-tab[class*="identity-color-"] .tab-label {
    color: var(--identity-tab-color) !important;
    font-weight: bold !important;
-   /*font-style: underline !important;*/
+   font-style: underline !important;
  }
 
  /* Active tab brightness */
 
  .tab-content[selected="true"] {
-   background-color: color-mix(in srgb, #a84dfe 20%, transparent) !important;
+   background-color: color-mix(in srgb, #4d4dfe 20%, transparent) !important;
    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
      1px 1px 1px rgba(0, 0, 0, 0.5) !important;
    margin-top: 0px !important;
@@ -308,7 +308,7 @@ See the above repository for updates as well as full license text. */
  /* Mouse Hover Background by passing by non-selected tabs */
 
  .tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected="true"], [multiselected]) {
-   background: radial-gradient(circle at bottom center, #774cf98f 15px, #1d0145d1) !important;
+   background: radial-gradient(circle at bottom center, #551dfc8f 15px, #322a56d1) !important;
    box-shadow: 5px 3px 6px rgb(1 1 1 / 16%), 4px 4px 2px rgb(0 0 0 / 23%) !important;
  }
 
@@ -316,7 +316,7 @@ See the above repository for updates as well as full license text. */
 
  #historySwipeAnimationPreviousArrow,
  #historySwipeAnimationNextArrow {
-   --swipe-nav-icon-primary-color: #8c5ced !important;
+   --swipe-nav-icon-primary-color: #0060DF !important;
    --swipe-nav-icon-accent-color: #FFFFFF !important;
  }
 
@@ -1111,8 +1111,8 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
    border-bottom-color: transparent !important;
    background-image: radial-gradient(circle at bottom center,
-       #b98ff3,
-       #19002f) !important;
+       #9e7ffb,
+       #250f39d3) !important;
  }
 
  [brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
@@ -1188,7 +1188,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  /* Fix white blink background on new tabs */
  #browser .browserStack {
-   background-color: rgb(45, 45, 45) !important;
+   background-color: black !important;
  }
 
  /* Remove selected tab shadow, darken the border to account for lighter background color */
@@ -1258,7 +1258,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --arrowpanel-menuitem-padding-block: 4px !important;
  }
 
- /*	Make tabs easier to see against theme backgrounds
+ /*	Make tabs easier to see against theme backgrounds*/
 
  :root[lwtheme-image][lwtheme-brighttext] .tabbrowser-tab {
    --tab-contrast-bgcolor: rgba(0, 0, 0, 0.25);
@@ -1316,4 +1316,8 @@ Annoying since Firefox 111 */
  #unified-extensions-button>.toolbarbutton-icon {
    width: 0px !important;
    padding: 0px !important;
+ }
+
+ :root[privatebrowsingmode="temporary"] #PanelUI-menu-button {
+   list-style-image: url("chrome://global/skin/icons/indicator-private-browsing.svg") !important;
  }

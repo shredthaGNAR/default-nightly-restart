@@ -81,6 +81,7 @@
    --firefoxcss-other-color: hsla(0, 0%, 60%, 0.35);
    --firefoxcss-top-bar-border-bottom-size: 1px;
    --firefoxcss-border-radius: 10px;
+   --gnome-toolbar-border-color: #070707;
  }
 
  :root {
@@ -235,9 +236,9 @@ See the above repository for updates as well as full license text. */
    background-image:
      /*var(--button-hover-bgcolor)*/
      radial-gradient(circle at bottom center,
-       #7047ed 15px,
-       #29004bd3) !important;
-   /*box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;*/
+       #551dfc 15px,
+       #000134d3) !important;
+   box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
  }
 
  /*container tab label color when selected */
@@ -245,13 +246,13 @@ See the above repository for updates as well as full license text. */
  .tabbrowser-tab[class*="identity-color-"] .tab-label {
    color: var(--identity-tab-color) !important;
    font-weight: bold !important;
-   /*font-style: underline !important;*/
+   font-style: underline !important;
  }
 
  /* Active tab brightness */
 
  .tab-content[selected="true"] {
-   background-color: color-mix(in srgb, #a84dfe 20%, transparent) !important;
+   background-color: color-mix(in srgb, #4d4dfe 20%, transparent) !important;
    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
      1px 1px 1px rgba(0, 0, 0, 0.5) !important;
    margin-top: 0px !important;
@@ -308,7 +309,7 @@ See the above repository for updates as well as full license text. */
  /* Mouse Hover Background by passing by non-selected tabs */
 
  .tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected="true"], [multiselected]) {
-   background: radial-gradient(circle at bottom center, #774cf98f 15px, #1d0145d1) !important;
+   background: radial-gradient(circle at bottom center, #551dfc8f 15px, #322a56d1) !important;
    box-shadow: 5px 3px 6px rgb(1 1 1 / 16%), 4px 4px 2px rgb(0 0 0 / 23%) !important;
  }
 
@@ -316,7 +317,7 @@ See the above repository for updates as well as full license text. */
 
  #historySwipeAnimationPreviousArrow,
  #historySwipeAnimationNextArrow {
-   --swipe-nav-icon-primary-color: #8c5ced !important;
+   --swipe-nav-icon-primary-color: #0060DF !important;
    --swipe-nav-icon-accent-color: #FFFFFF !important;
  }
 
@@ -848,6 +849,9 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  .tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
    background-color: color-mix(in srgb, #0d0d0df7 25%, transparent) !important;
+   background-image: radial-gradient(circle at bottom center,
+       #551dfc,
+       #1b0034d3) !important;
  }
 
  /* Adjust tab corner shape, optionally remove space below tabs */
@@ -943,7 +947,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    font-weight: bold !important;
  }
 
- /* fancy line for container tabs */
+ /* fancy line for container tabs *
 
  #TabsToolbar #tabbrowser-tabs .tabbrowser-tab[class*="identity-color"] .tab-label {
    text-decoration: underline !important;
@@ -991,19 +995,19 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
  }
 
  /*** TAB TEXT & BACKBOARD STYLING UNREAD, UNLOADED, VISTITED */
- /* Loaded but unread (not selected) */
+ /* Loaded but unread (not selected) *
+
  .tabbrowser-tab:not([selected="true"])[unread] .tab-label {
    color: rgb(133, 133, 133) !important;
    font-style: italic !important;
    font-weight: thin !important;
  }
 
- /*
  .tabbrowser-tab:not([selected="true"])[unread] .tab-background {
    background-color: transparent !important;
  }
 
- /* Not loaded yet (also visited) */
+ /* Not loaded yet (also visited) *
 
  .tabbrowser-tab:not([selected="true"])[pending] .tab-label,
  .tabbrowser-tab:not([selected="true"])[visited] .tab-label {
@@ -1025,11 +1029,11 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 .tab-icon-image:not([selected="true"]) {
     filter: grayscale(1) brightness(1) blur(20px) opacity(0.7) !important;
 }
-/*/
- * Hides all the tabs if there is only one tab**/ #tabbrowser-tabs tab:only-of-type,
+/* Hides all the tabs if there is only one tab*
+ #tabbrowser-tabs tab:only-of-type,
  #tabbrowser-tabs tab:only-of-type+#tabs-newtab-button {
    display: none !important;
- }
+ }*/
 
  :root[lwthemetextcolor="bright"]:-moz-window-inactive {
    --lwt-accent-color-inactive: rgba(40, 40, 40, 0.662) !important;
@@ -1111,8 +1115,8 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
    --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
    border-bottom-color: transparent !important;
    background-image: radial-gradient(circle at bottom center,
-       #b98ff3,
-       #19002f) !important;
+       #551dfc,
+       #1b0034d3) !important;
  }
 
  [brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
@@ -1188,77 +1192,84 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 
  /* Fix white blink background on new tabs */
  #browser .browserStack {
-   background-color: rgb(45, 45, 45) !important;
+   background-color: black !important;
  }
 
  /* Remove selected tab shadow, darken the border to account for lighter background color */
  #TabsToolbar #firefox-view-button[open]>.toolbarbutton-icon,
  #tabbrowser-tabs .tab-background:is([selected], [multiselected]) {
    border-color: color-mix(in srgb, currentColor 35%, transparent) !important;
-   box-shadow: unset !important;
- }
+   box-shadow: 1px 0 var(--gnome-toolbar-border-color), 1px 0 3px rgba(0, 0, 0, 0.08,
+       -1px 0 var(--gnome-toolbar-border-color), -1px 0 3px rgba(0, 0, 0, 0.08,
+         inset 0 -1px var(--gnome-toolbar-border-color) !important;
+     }
 
- /* Remove firefox view separator spacing */
- :root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden]) :is(#firefox-view-button, #wrapper-firefox-view-button)+#tabbrowser-tabs {
-   border: unset !important;
-   padding-inline-start: var(--tab-overflow-pinned-tabs-width) !important;
-   margin-inline-start: 0px !important;
- }
+     /* Remove firefox view separator spacing */
+     :root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden]) :is(#firefox-view-button, #wrapper-firefox-view-button)+#tabbrowser-tabs {
+       border: unset !important;
+       padding-inline-start: var(--tab-overflow-pinned-tabs-width) !important;
+       margin-inline-start: 0px !important;
+     }
 
- /* Set min height on absolute pinned tabs to overlay bottom border *
+     /* Set min height on absolute pinned tabs to overlay bottom border *
  #tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab[selected] .tab-content {
    min-height: var(--tab-min-height) !important;
  }
 
  /* Make drag space after add tab when tabs are overflowing */
- #tabbrowser-tabs[hasadjacentnewtabbutton][overflow="true"]~#new-tab-button {
-   margin-inline-end: var(--window-drag-spacing) !important;
- }
+     #tabbrowser-tabs[hasadjacentnewtabbutton][overflow="true"]~#new-tab-button {
+       margin-inline-end: var(--window-drag-spacing) !important;
+     }
 
- /* Make drag space after add tab, when tabs are not overflowing */
- #tabbrowser-tabs:not([overflow="true"])>#tabbrowser-arrowscrollbox>#tabbrowser-arrowscrollbox-periphery>spacer.closing-tabs-spacer {
-   min-width: var(--window-drag-spacing) !important;
- }
+     /* Make drag space after add tab, when tabs are not overflowing */
+     #tabbrowser-tabs:not([overflow="true"])>#tabbrowser-arrowscrollbox>#tabbrowser-arrowscrollbox-periphery>spacer.closing-tabs-spacer {
+       min-width: var(--window-drag-spacing) !important;
+     }
 
- /* Offset pinned tabs to accommodate for the removed padding */
- #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned="true"] {
-   transform: translateX(6px) !important;
-   /* var(--tab-shadow-max-size) */
- }
+     /* Offset pinned tabs to accommodate for the removed padding */
+     #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned="true"] {
+       transform: translateX(6px) !important;
+       /* var(--tab-shadow-max-size) */
+     }
 
- #tabbrowser-tabs[positionpinnedtabs] .tab-content[pinned="true"] {
-   transform: translateY(1px) !important;
- }
+     #tabbrowser-tabs[positionpinnedtabs] .tab-content[pinned="true"] {
+       transform: translateY(1px) !important;
+     }
 
- /* Less spacing around tab bar buttons (new tab, list tabs) */
- #TabsToolbar toolbarbutton:not([role="tab"]) {
-   --toolbarbutton-inner-padding: 4px !important;
-   --tab-border-radius: var(--toolbarbutton-border-radius) !important;
-   border: 4px solid transparent !important;
- }
+     /* Less spacing around tab bar buttons (new tab, list tabs) */
+     #TabsToolbar toolbarbutton:not([role="tab"]) {
+       --toolbarbutton-inner-padding: 4px !important;
+       --tab-border-radius: var(--toolbarbutton-border-radius) !important;
+       border: 4px solid transparent !important;
+     }
 
- /* Move audio playing/muted indicator */
- .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
-   padding: 0 !important;
-   margin-left: 20px !important;
-   scale: 1.1;
- }
+     /* Move audio playing/muted indicator */
+     .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
+       padding: 0 !important;
+       margin-left: 20px !important;
+       scale: 1.1;
+     }
 
- /* Do not hide favicon if audio indicator is shown */
- .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked])> :not(.tab-icon-overlay) {
-   opacity: unset !important;
- }
+     /* Do not hide favicon if audio indicator is shown */
+     .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked])> :not(.tab-icon-overlay) {
+       opacity: unset !important;
+     }
 
- :root {
-   /* Compact toolbar icons */
-   --toolbar-start-end-padding: 4px !important;
-   --toolbarbutton-outer-padding: 0px !important;
 
-   /* Nicer menu spacing */
-   --arrowpanel-menuitem-padding-block: 4px !important;
- }
+     :root {
+       /* Compact toolbar icons */
+       --toolbar-start-end-padding: 4px !important;
+       --toolbarbutton-outer-padding: 0px !important;
 
- /*	Make tabs easier to see against theme backgrounds
+       /* Nicer menu spacing */
+       --arrowpanel-menuitem-padding-block: 4px !important;
+     }
+
+     /*
+	Make tabs easier to see against theme backgrounds
+
+	This file is released into the public domain.
+
 
  :root[lwtheme-image][lwtheme-brighttext] .tabbrowser-tab {
    --tab-contrast-bgcolor: rgba(0, 0, 0, 0.25);
@@ -1282,29 +1293,29 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
  }
 
  /* Hide "Print selection" on right button menu */
- #context-print-selection {
-   display: none !important;
- }
+     #context-print-selection {
+       display: none !important;
+     }
 
- #downloadsListBox>richlistitem>.downloadMainArea {
-   height: inherit !important;
- }
+     #downloadsListBox>richlistitem>.downloadMainArea {
+       height: inherit !important;
+     }
 
- /* Remove margins around download item button (Download progress popup) - prepare for Firefox 93 (experiments on nightly) */
+     /* Remove margins around download item button (Download progress popup) - prepare for Firefox 93 (experiments on nightly) */
 
- #downloadsListBox>richlistitem {
-   padding: 0 !important;
-   margin: 0 !important;
-   border-radius: 0 !important;
- }
+     #downloadsListBox>richlistitem {
+       padding: 0 !important;
+       margin: 0 !important;
+       border-radius: 0 !important;
+     }
 
- /* Make open containing folder great again - fill whole height of the tile (Download progress popup).
+     /* Make open containing folder great again - fill whole height of the tile (Download progress popup).
 Works with Firefox 90 */
- #downloadsListBox>richlistitem>.downloadButton {
-   height: inherit !important;
- }
+     #downloadsListBox>richlistitem>.downloadButton {
+       height: inherit !important;
+     }
 
- /* Make search panel white again (disable transparency).
+     /* Make search panel white again (disable transparency).
 Works with Firefox 93 *
  #PopupSearchAutoComplete {
    --panel-background: rgba(255, 255, 255, 1) !important;
@@ -1312,8 +1323,8 @@ Works with Firefox 93 *
 
  /* Disable unmovable extension button.
 Annoying since Firefox 111 */
- #unified-extensions-button,
- #unified-extensions-button>.toolbarbutton-icon {
-   width: 0px !important;
-   padding: 0px !important;
- }
+     #unified-extensions-button,
+     #unified-extensions-button>.toolbarbutton-icon {
+       width: 0px !important;
+       padding: 0px !important;
+     }
