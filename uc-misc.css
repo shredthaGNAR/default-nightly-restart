@@ -652,9 +652,14 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
     }
 
+    .urlbarView-button,
     .urlbarView-tip-button {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-weight: var(--uc-font-weight-semibold, 600) !important;
+    }
+
+    .urlbarView-dynamic-weather-temperature {
+      font-weight: var(--uc-font-weight-bold) !important;
     }
 
     .popup-notification-body input[type="password"] {
@@ -693,6 +698,11 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-weight: var(--uc-font-weight-bold, 600) !important;
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
       font-size: 1.1em !important;
+    }
+
+    #identity-popup[mixedcontent~="active-loaded"] .identity-popup-connection-not-secure,
+    #identity-popup:not([mixedcontent]) .identity-popup-connection-not-secure {
+      font-weight: var(--uc-font-weight-bold, 600) !important;
     }
 
     @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml") {

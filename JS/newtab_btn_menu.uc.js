@@ -1,25 +1,62 @@
 /* Firefox userChrome script
  * Open URL in clipboard by right-clicking new-tab-button then use context menu
- * Tested on Firefox 91
+ * Tested on Firefox 115
  * Author: garywill (https://garywill.github.io)
  */
+
+// ==UserScript==
+// @include         main
+// ==/UserScript==
 
 console.log("newtab_btn_menu.js");
 
 const new_tab_url_label = 'New tab open: ';
 var btn_newtab_w_url_clipboard_str = "";
 
+// https://searchfox.org/mozilla-central/source/browser/base/content/browser.js#3076
+// https://udn.realityripple.com/docs/Mozilla/Tech/XPCOM/Using_the_clipboard
+// https://udn.realityripple.com/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsITransferable
+function _readFromClipboard() {
+    var url = "";
+    
+    try {
+        var trans = Cc["@mozilla.org/widget/transferable;1"].createInstance(
+            Ci.nsITransferable
+        );
+        trans.init(getLoadContext());
+
+        trans.addDataFlavor("text/plain");
+
+        // If available, use selection clipboard, otherwise global one
+        // if (Services.clipboard.supportsSelectionClipboard()) {
+        if (false) {
+            Services.clipboard.getData(trans, Services.clipboard.kSelectionClipboard);
+        } else {
+            Services.clipboard.getData(trans, Services.clipboard.kGlobalClipboard);
+        }
+
+        var data = {};
+        trans.getTransferData("text/plain", data);
+
+        if (data) {
+            data = data.value.QueryInterface(Ci.nsISupportsString);
+            url = data.data;
+        }
+    }catch(err) { console.error("Error when trying to get clipboard content from system"); }
+    
+    return url;
+}
 function btn_newtab_w_url_click()
 {
-    gBrowser.loadOneTab(btn_newtab_w_url_clipboard_str, {
+    gBrowser.loadTabs([btn_newtab_w_url_clipboard_str] , {
         inBackground: false,
-        relatedToCurrent: true,
+        relatedToCurrent: false,
         triggeringPrincipal: Services.scriptSecurityManager.createNullPrincipal({}) //FF63
     });
 }
 function newtabbtnContextMenu_onpopupshowing(event)
 {
-    btn_newtab_w_url_clipboard_str = readFromClipboard();
+    btn_newtab_w_url_clipboard_str = _readFromClipboard();
     if (document.getElementById("btn_newtab_w_url"))
     {
         document.getElementById("btn_newtab_w_url").setAttribute("label", new_tab_url_label + btn_newtab_w_url_clipboard_str);

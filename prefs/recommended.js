@@ -20,8 +20,6 @@ user_pref("browser.startup.preXulSkeletonUI", false);
 user_pref("svg.context-properties.content.enabled", true);
 // required for acrylic gaussian blur
 user_pref("layout.css.backdrop-filter.enabled", true);
-// prevent bugs that would otherwise be caused by the custom scrollbars in the user-agent sheet
-user_pref("layout.css.cached-scrollbar-styles.enabled", false);
 // enable browser dark mode
 user_pref("ui.systemUsesDarkTheme", 1);
 // enable content dark mode
@@ -40,6 +38,8 @@ user_pref("dom.forms.select.customstyling", false);
 user_pref("browser.tabs.tabmanager.enabled", true);
 // disable urlbar result group labels since we don't use them
 user_pref("browser.urlbar.groupLabels.enabled", false);
+// allow urlbar result menu buttons without slowing down tabbing through results
+user_pref("browser.urlbar.resultMenu.keyboardAccessible", false);
 // corresponds to the system color Highlight
 user_pref("ui.highlight", "hsl(250, 100%, 60%)");
 // Background for selected <option> elements and others
@@ -71,8 +71,10 @@ user_pref("browser.privatebrowsing.enable-new-indicator", false);
 user_pref("accessibility.mouse_focuses_formcontrol", 0);
 user_pref("browser.tabs.tabMinWidth", 90);
 user_pref("browser.urlbar.accessibility.tabToSearch.announceResults", false);
+// disable urlbar suggestions that don't look good with the theme
 user_pref("browser.urlbar.richSuggestions.tail", false);
-user_pref("browser.urlbar.searchTips", false);
+user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
+user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 user_pref("browser.urlbar.trimURLs", false);
 // hide fullscreen enter/exit warning
 user_pref("full-screen-api.transition-duration.enter", "0 0");
@@ -127,6 +129,11 @@ user_pref("ui.IMESelectedRawTextBackground", "#7755FF");
 ////
 // about:reader dark mode
 user_pref("reader.color_scheme", "dark");
+
+//// font settings
+user_pref("layout.css.font-visibility.private", 3);
+user_pref("layout.css.font-visibility.resistFingerprinting", 3);
+////
 
 //// windows font settings - does nothing on macOS or linux
 user_pref("gfx.font_rendering.cleartype_params.cleartype_level", 100);
