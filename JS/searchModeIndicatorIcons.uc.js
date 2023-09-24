@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4.6
+// @version        1.4.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -72,10 +72,11 @@ This doesn't change anything about the layout so you may want to tweak some thin
     //     list-style-image: var(--default-search-identity-icon,
     //                           url("chrome://userchrome/content/search-glass.svg")) !important;
     // }
-    "Try to replace searchglass icon with engine icon in normal mode": Services.prefs.getBoolPref(
-      "searchModeIndicatorIcons.replaceSearchGlass",
-      true
-    ),
+    "Try to replace searchglass icon with engine icon in normal mode":
+      Services.prefs.getBoolPref(
+        "searchModeIndicatorIcons.replaceSearchGlass",
+        true
+      ),
 
     // by default, firefox ONLY shows your default search engine's name in the
     // urlbar placeholder text IF the engine is built into firefox, for example,
@@ -122,7 +123,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
     const urlbar = gURLBar.textbox;
     const identityIcon = gURLBar._identityBox.firstElementChild;
     const oneOffs = gURLBar.view.oneOffSearchButtons;
-    const buttons = oneOffs.buttons;
+    const { buttons } = oneOffs;
     // use an author sheet to set the identity icon equal to the search engine
     // icon when in search mode
     function registerSheet() {
@@ -136,47 +137,47 @@ This doesn't change anything about the layout so you may want to tweak some thin
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
-    window.findEngineIcon = function(name) {
-      let files = _ucUtils.getFSEntry("engines");
-      if (!files) return false;
-      let nameParts = name
-        .toLowerCase()
-        .split(" ")
-        .filter(word => word !== "search");
-      let joinedName = nameParts.join("");
-      if (!joinedName) return false;
-      let typeRegex = /(.*)(\.svg|\.png|\.jpg|\.jpeg)$/i;
-      let identical;
-      let included;
-      let partIncluded;
-      while (!identical && files.hasMoreElements()) {
-        let file = files.getNext().QueryInterface(Ci.nsIFile);
-        let { leafName } = file;
-        let fileParts = leafName.toLowerCase().match(typeRegex);
-        if (file.isFile() && fileParts && fileParts[1]) {
-          if (joinedName === fileParts[1]) {
-            identical = leafName;
-          } else if (
-            joinedName.includes(fileParts[1]) ||
-            fileParts[1].includes(joinedName)
-          ) {
-            if (!included) included = leafName;
-          } else if (fileParts[1].includes(nameParts[0])) {
-            if (!partIncluded) partIncluded = leafName;
-          }
-        }
-      }
-      let filename = identical || included || partIncluded;
-      return filename
-        ? `url(chrome://userchrome/content/engines/${filename})`
-        : false;
-    };
     function handleDefaultEngine() {
       if (
         config[
           "Try to replace searchglass icon with engine icon in normal mode"
         ]
       ) {
+        function findEngineIcon(name) {
+          const files = _ucUtils.fs.getEntry("engines");
+          if (!files?.isDirectory()) return false;
+          let nameParts = name
+            .toLowerCase()
+            .split(" ")
+            .filter(word => word !== "search");
+          let joinedName = nameParts.join("");
+          if (!joinedName) return false;
+          let typeRegex = /(.*)(\.svg|\.png|\.jpg|\.jpeg)$/i;
+          let identical;
+          let included;
+          let partIncluded;
+          for (let file of files) {
+            let { leafName } = file;
+            let fileParts = leafName.toLowerCase().match(typeRegex);
+            if (file.isFile() && fileParts?.[1]) {
+              if (joinedName === fileParts[1]) {
+                identical = leafName;
+                break;
+              } else if (
+                joinedName.includes(fileParts[1]) ||
+                fileParts[1].includes(joinedName)
+              ) {
+                if (!included) included = leafName;
+              } else if (fileParts[1].includes(nameParts[0])) {
+                if (!partIncluded) partIncluded = leafName;
+              }
+            }
+          }
+          let filename = identical || included || partIncluded;
+          return filename
+            ? `url(chrome://userchrome/content/engines/${filename})`
+            : false;
+        }
         eval(
           `BrowserSearch._setURLBarPlaceholder = function ${BrowserSearch._setURLBarPlaceholder
             .toSource()
@@ -251,12 +252,8 @@ This doesn't change anything about the layout so you may want to tweak some thin
           // integer sources. the icons are defined in browser.css so we'll use
           // those icons.
           else if (gURLBar.searchMode?.source) {
-            let {
-              BOOKMARKS,
-              HISTORY,
-              TABS,
-              ACTIONS,
-            } = UrlbarUtils.RESULT_SOURCE;
+            let { BOOKMARKS, HISTORY, TABS, ACTIONS } =
+              UrlbarUtils.RESULT_SOURCE;
             switch (gURLBar.searchMode.source) {
               case BOOKMARKS:
                 url = `chrome://browser/skin/bookmark.svg`;

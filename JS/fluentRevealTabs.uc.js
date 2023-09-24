@@ -9,31 +9,31 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   class FluentRevealEffect {
     // user configuration
     static options = {
       // whether to show the effect if the tab is selected. this doesn't look
       // good with my theme so I set it to false.
-      showOnSelectedTab: false,
+      showOnSelectedTab: true,
 
       // whether to show the effect on pinned tabs. likewise, doesn't look good
       // with my theme but may work with yours.
-      showOnPinnedTab: false,
+      showOnPinnedTab: true,
 
       // the color of the gradient. default is sort of a faint baby blue.
       // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
-      lightColor: "hsla(224, 100%, 80%, 0.05)",
+      lightColor: "hsla(224, 100%, 80%, 0.35)",
 
       // how wide the radial gradient is. 50px looks best with my theme, but
       // default proton tabs are larger so you may want to try 60 or even 70.
-      gradientSize: 50,
+      gradientSize: 30,
 
       // whether to show an additional light burst when clicking a tab. I don't
       // recommend this since it doesn't play nicely with dragging & dropping if
       // you release while your mouse is outside the tab box. I can probably fix
       // this issue but I don't think it's a great fit for tabs anyway.
-      clickEffect: false,
+      clickEffect: true,
     };
 
     /**
@@ -64,11 +64,8 @@
       // grab the colors and behavior from the event. this allows us to apply
       // different colors/behavior to different elements and makes the script
       // more adaptable for future expansion or user extension.
-      let {
-        gradientSize,
-        lightColor,
-        clickEffect,
-      } = e.currentTarget.fluentRevealState;
+      let { gradientSize, lightColor, clickEffect } =
+        e.currentTarget.fluentRevealState;
       // calculate gradient display coordinates based on mouse and element coords.
       let x = e.pageX - this.getOffset(e.currentTarget).left - window.scrollX;
       let y = e.pageY - this.getOffset(e.currentTarget).top - window.scrollY;

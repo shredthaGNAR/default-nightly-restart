@@ -1,11 +1,21 @@
 {
 	"files": [
 		{
-			"path": "userChrome.css",
+			"path": "custom-chrome.css",
 			"bookmarks": [
 				{
-					"line": 3947,
-					"column": 6,
+					"line": 179,
+					"column": 0,
+					"label": "make sure shadow seen"
+				},
+				{
+					"line": 205,
+					"column": 25,
+					"label": "change inset shadow"
+				},
+				{
+					"line": 1026,
+					"column": 0,
 					"label": ""
 				}
 			]
