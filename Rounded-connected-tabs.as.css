@@ -1,0 +1,96 @@
+/* You can find an updated version here: https://github.com/Izheil/Quantum-Nox-Firefox-Dark-Full-Theme */
+/* Made by Izheil */
+/* Last updated: 14/01/2022 */
+
+/* ROUNDED CONNECTED TABS */
+
+/* You can change the first 2 values of the border-radius to increase 
+* or decrease how round the tabs are */
+.tab-background {
+  border-radius: 8px 8px 0px 0px !important;
+  border-image: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important}
+
+/* This removes padding between tabs */
+.tabbrowser-tab {
+  padding: 0 !important;
+}
+
+/* This ensures that the side arrows when tabs become scrollable sideways don't create a gap below tabs */
+#scrollbutton-up, #scrollbutton-down {
+  padding: 0 !important;
+  max-height: var(--tab-min-height) !important;
+}
+
+/* Makes sure pinned tabs won't take more space than they should */
+.tabbrowser-tab[pinned] {
+  max-height: var(--tab-min-height) !important;
+}
+
+.tabbrowser-tab[visuallyselected]::before {
+  top: 0 !important;
+  bottom: 0 !important;
+}
+
+#alltabs-button, #tabs-newtab-button, #TabsToolbar-customization-target .webextension-browser-action,
+#wrapper-alltabs-button, #wrapper-new-tab-button, #new-tab-button {
+  margin-bottom: 0 !important
+}
+
+.tab-background[multiselected="true"], .tab-background[selected="true"] {
+  /* You can choose the color of the tab line here, just change the default color for any you want*/
+  /* Remove the ending "/*" of this comment line if you want a colored line on your tab -> */
+  border-top-color: var(--tab-line-color) !important; 
+
+  /* Leave these as is */
+  background-color: var(--toolbar-bgcolor) !important;
+  background-image: none !important;
+  border-top-style: solid !important;
+  border-top-width: 2px !important;
+}
+
+/* This moves the tab containers context line below */
+.tabbrowser-tab .tab-context-line {
+  margin-top: calc(var(--tab-min-height) - 4px) !important;
+  clip-path: polygon(6% 0, 94% 0, 94% 100%, 6% 100%);
+}
+
+.tabbrowser-tab[visuallyselected] .tab-context-line {
+  margin-top: calc(var(--tab-min-height) - 6px) !important;
+}
+
+/* This rule removes the tab-border from the default light and dark themes, remove it if you want to use the tab line
+above tabs */
+#main-window[lwtheme-mozlightdark] .tab-background[multiselected="true"], 
+#main-window[lwtheme-mozlightdark] .tab-background[selected="true"]{
+  border-top-color: transparent !important;
+}
+
+/* Changes the box shadow to fix themes that use it for tab borders. 
+It has the side effect of showing a "glow" effect on some dark themes, so set box-shadow to "none" if you don't want this. */
+#main-window:not([lwtheme-mozlightdark]):not([lwthemetextcolor="bright"]) .tab-background[multiselected="true"], 
+#main-window:not([lwtheme-mozlightdark]):not([lwthemetextcolor="bright"]) .tab-background[selected="true"]{
+  box-shadow: 0 0 1px var(--tab-line-color, rgba(128,128,142,0.9)), 0 0 4px rgba(128,128,142,0.5) !important;
+}
+
+/* Support for repository dark theme */
+.tabbrowser-tab::before {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* These rules adds separators between tabs. Remove them you don't want borders at the left of each tab. */
+.tabbrowser-tab::after {
+  content: "";
+  max-height: calc(var(--tab-min-height) - 8px) !important;
+  width: 1px;
+  display: flex;
+  margin-top: 4px !important;
+}
+
+#main-window[lwt-toolbar-field-brighttext] .tabbrowser-tab:not([visuallyselected]):not([beforeselected-visible])::after {
+  box-shadow: 1px 0 0 0 rgba(255,255,255,.15) !important}
+
+#main-window:not([lwt-toolbar-field-brighttext]) .tabbrowser-tab:not([visuallyselected]):not([beforeselected-visible])::after {
+  box-shadow: 1px 0 0 0 rgba(0,0,0,.2) !important}

@@ -339,6 +339,10 @@ toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
   padding-inline: var(--toolbarbutton-inner-padding) !important;
 }
 
+#PersonalToolbar #OtherBookmarks {
+  padding-inline: var(--arrowpanel-menuitem-padding) !important;
+}
+
 #PersonalToolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
 toolbarbutton.bookmark-item:not(.subviewbutton):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
 toolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
@@ -488,13 +492,13 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
   color: var(--uc-parent-link-color-active) !important;
 }
 
-@supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {
+@media (-moz-bool-pref: "userChrome.bookmarks-toolbar.icons-only") {
   #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
     margin-inline: 2px !important;
     padding: 0 !important;
   }
 
-  #PlacesToolbar toolbarbutton.bookmark-item[id] {
+  #PlacesToolbar toolbarbutton.bookmark-item[id]:not(#OtherBookmarks) {
     padding-inline: var(--toolbarbutton-inner-padding) !important;
   }
 
