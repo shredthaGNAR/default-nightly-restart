@@ -179,8 +179,8 @@ menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
 }
 
 menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
-  content: "";
-  display: inline-block;
+  content: "" !important;
+  display: flex;
   width: 14px;
   min-width: 14px;
   height: 14px;
@@ -287,6 +287,25 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   border: none !important;
   font: menu !important;
   text-shadow: none !important;
+}
+
+#PopupAutoComplete > richlistbox > richlistitem {
+  > .ac-title,
+  > .two-line-wrapper {
+    margin-inline-start: 0 !important;
+  }
+
+  > .two-line-wrapper {
+    align-items: center !important;
+    gap: var(--context-iconic-margin-end) !important;
+
+    .ac-site-icon {
+      &:not([src]),
+      &[src=""] {
+        display: none !important;
+      }
+    }
+  }
 }
 
 #ContentSelectDropdown menucaption {

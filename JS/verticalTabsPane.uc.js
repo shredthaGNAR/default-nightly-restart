@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.7
+// @version        1.7.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -151,7 +151,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         E10SUtils: "resource://gre/modules/E10SUtils.jsm",
       });
       // get some localized strings for the tooltip
-      XPCOMUtils.defineLazyGetter(this, "_l10n", function () {
+      ChromeUtils.defineLazyGetter(this, "_l10n", function () {
         return new Localization(["browser/browser.ftl"], true);
       });
       this._formatFluentStrings();
@@ -2523,6 +2523,8 @@ When you collapse the pane with the unpin button, it collapses to a small width 
     window.onunload = gBrowserInit.onUnload.bind(gBrowserInit);
     // looks unread but this is required for the following functions
     let gNextWindowID = 0;
+    const TOGGLE_HAS_USED_PREF =
+      "media.videocontrols.picture-in-picture.video-toggle.has-used";
     // make the PictureInPicture methods dispatch an event to the tab container
     // informing us that a tab's "pictureinpicture" attribute has changed. this
     // is how we capture all changes to the sound icon in real-time. obviously
