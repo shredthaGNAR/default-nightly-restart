@@ -2,7 +2,7 @@ import { AppConstants } from "resource://gre/modules/AppConstants.sys.mjs";
 import { FileSystem as FS } from "chrome://userchromejs/content/fs.sys.mjs";
 import { _ucUtils as utils, loaderModuleLink, Pref, SharedGlobal } from "chrome://userchromejs/content/utils.sys.mjs";
 
-const FX_AUTOCONFIG_VERSION = "0.8.6";
+const FX_AUTOCONFIG_VERSION = "0.9.0";
 console.warn( "Browser is executing custom scripts via autoconfig" );
 
 const APP_VARIANT = (() => {
@@ -65,26 +65,27 @@ class ScriptData {
       : null;
     this.useFileURI = /\/\/ @usefileuri\b/.test(headerText);
     this.noExec = isStyle || noExec;
-    // Construct regular expression to use to match target document
-    let match, rex = {
-      include: [],
-      exclude: []
-    };
-    let findNextRe = /^\/\/ @(include|exclude)\s+(.+)\s*$/gm;
-    while (match = findNextRe.exec(headerText)) {
-      rex[match[1]].push(
-        match[2].replace(/^main$/i, BROWSERCHROME).replace(/\*/g, '.*?')
-      );
-    }
-    if (!rex.include.length) {
-      rex.include.push(BROWSERCHROME);
-    }
-    let exclude = rex.exclude.length ? `(?!${rex.exclude.join('$|')}$)` : '';
-    this.regex = new RegExp(`^${exclude}(${rex.include.join('|') || '.*'})$`,'i');
     
-    if(this.inbackground){
+    if(this.inbackground || this.styleSheetMode === "agent" || (!isStyle && noExec)){
+      this.regex = null;
       this.loadOrder = -1;
     }else{
+      // Construct regular expression to use to match target document
+      let match, rex = {
+        include: [],
+        exclude: []
+      };
+      let findNextRe = /^\/\/ @(include|exclude)\s+(.+)\s*$/gm;
+      while (match = findNextRe.exec(headerText)) {
+        rex[match[1]].push(
+          match[2].replace(/^main$/i, BROWSERCHROME).replace(/\*/g, '.*?')
+        );
+      }
+      if (!rex.include.length) {
+        rex.include.push(BROWSERCHROME);
+      }
+      let exclude = rex.exclude.length ? `(?!${rex.exclude.join('$|')}$)` : '';
+      this.regex = new RegExp(`^${exclude}(${rex.include.join('|') || '.*'})$`,'i');
       let loadOrder = headerText.match(/\/\/ @loadOrder\s+(\d+)\s*$/im)?.[1];
       this.loadOrder = Number.parseInt(loadOrder) || 10;
     }
@@ -132,7 +133,7 @@ class ScriptData {
         aScript.#preCompiledESM = script;
         resolve(script);
       })
-      .catch( (ex) => resolve(ScriptData.onCompileRejection(ex,aScript.filename)) )
+      .catch( (ex) => resolve(ScriptData.onCompileRejection(ex,aScript)) )
       .finally(()=>{aScript.#preCompiling = null})
     });
     return aScript.#preCompiling
@@ -160,7 +161,7 @@ class ScriptData {
   }
   
   static tryLoadScriptIntoWindow(aScript,win){
-    if(!aScript.regex.test(win.location.href)){
+    if(aScript.regex === null || !aScript.regex.test(win.location.href)){
       return
     }
     if(aScript.type === "style" && aScript.styleSheetMode === "author"){
@@ -295,12 +296,16 @@ function showgBrowserNotification(){
 }
 
 // This is called if startup somehow takes over 5 seconds
-function showBrokenNotification(window){
+function maybeShowBrokenNotification(window){
+  if(window.isFullyOccluded && "gBrowser" in window){
+    console.log("Window was fully occluded, no need to panic")
+    return
+  }
   let aNotificationBox = window.gNotificationBox;
   aNotificationBox.appendNotification(
     "fx-autoconfig-broken-notification",
     {
-      label: "fx-autoconfig: Startup is broken",
+      label: "fx-autoconfig: Startup might be broken",
       image: "chrome://browser/skin/notification-icons/popup.svg",
       priority: "critical"
     },
@@ -468,9 +473,9 @@ class UserChrome_js{
     }else if(_gb && this.isInitialWindow){
       this.isInitialWindow = false;
       let timeout = window.setTimeout(() => {
-        showBrokenNotification(window);
+        maybeShowBrokenNotification(window);
       },5000);
-      utils.windowIsReady(window)
+      utils.windows.waitWindowLoading(window)
       .then(() => {
         // startup is fine, clear timeout
         window.clearTimeout(timeout);
@@ -569,7 +574,7 @@ class UserChrome_js{
     return
   }
   observe(aSubject, aTopic, aData) {
-    aSubject.addEventListener('DOMContentLoaded', this, true);
+    aSubject.addEventListener('DOMContentLoaded', this, {once: true, capture: true});
   }
   
   handleEvent(aEvent){

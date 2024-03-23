@@ -38,6 +38,16 @@
 		"ms-vscode.cmake-tools",
 		"twxs.cmake",
 		"thanhtrang.theme-flatland-monokai",
-		"meirbon.flatland-monokai-improved"
+		"meirbon.flatland-monokai-improved",
+		"taodongwu.ejs-snippets",
+		"parthr2031.colorful-comments",
+		"jerrygoyal.shortcut-menu-bar",
+		"closemarketing.wp-development-toolbox",
+		"codewp.codewp",
+		"ryanwelcher.modern-wordpress-development-snippets",
+		"qiu.graphviz-language-support-and-preivew",
+		"kevinghadyani.vscode-colormate",
+		"jabacchetta.vscode-essentials",
+		"be5invis.vscode-custom-css"
 	]
 }

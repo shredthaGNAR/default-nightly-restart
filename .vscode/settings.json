@@ -1,20 +1,28 @@
 {
-    "editor.fontFamily": "Operator Mono Liq, Victor Mono, Fira Code iScript, JetBrains Mono",
-    "editor.fontSize": 18,
-    "workbench.editor.enablePreview": true,
-    "editor.definitionLinkOpensInPeek": true,
-    "editor.bracketPairColorization.enabled": true,
-    "back-n-forth.withLastEditLocation": true,
-    "editor.formatOnType": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "bookmarks.useWorkaroundForFormatters": true,
-    "editor.defaultFormatter": null,
-    "[plaintext]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "workbench.colorCustomizations": {
-        "iLoveWorkSpaceColors": true,
-        "iLoveWorkSpaceRandom": false
-    }
+	"editor.fontFamily": "Operator Mono Liq, Victor Mono, Fira Code iScript, JetBrains Mono",
+	"editor.fontSize": 18,
+	"workbench.editor.enablePreview": true,
+	"editor.definitionLinkOpensInPeek": true,
+	"editor.bracketPairColorization.enabled": true,
+	"back-n-forth.withLastEditLocation": true,
+	"editor.formatOnType": true,
+	"editor.formatOnSave": false,
+	"editor.formatOnPaste": true,
+	"bookmarks.useWorkaroundForFormatters": true,
+	"[plaintext]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"workbench.colorCustomizations": {
+		"editorBracketHighlight.foreground1": "#92c5ef",
+		"editorBracketHighlight.foreground2": "#f59c02",
+		"editorBracketHighlight.foreground3": "#85309f",
+		"editorBracketHighlight.foreground4": "#00a3b6",
+		"editorBracketHighlight.foreground5": "#88ff10",
+		"editorBracketHighlight.foreground6": "#9a9a9a",
+		"editorBracketHighlight.unexpectedBracket.foreground": "#e3363c",
+		"iLoveWorkSpaceColors": true,
+		"iLoveWorkSpaceRandom": false
+	},
+	"CodeGPT.apiKey": "CodeGPT Plus Beta",
+	"checkpoints.showActiveFileOnly": false
 }

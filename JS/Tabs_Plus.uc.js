@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           TabPlus.uc.js
+// @name           TabPlusOld.uc.js
 // @description    Enhance the Tabs.
 // @charset        UTF-8
 // @history        2020-12-30  Added support for Firefox 84.
