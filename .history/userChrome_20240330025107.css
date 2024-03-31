@@ -1,5 +1,4 @@
-@import url(uc-tabs.css);
-/*
+ @import url(uc-globals.css);
  /*@import url(uc-variables.css);*/
  @import url(uc-panels.css);
  @import url(uc-app-menu.css);
@@ -15,6 +14,7 @@
  @import url(uc-sidebar.css);
  @import url(uc-misc.css);
  @import url(uc-search-one-offs.css);
+ @import url(uc-context-menu-icons.css);
  @import url(uc-context-menus.css);
  @import url(components/integrated_searchbar_popup.css);
  @import url(compact-bookmarks.css);
@@ -34,7 +34,9 @@
  /*@import url(components/shrinking_pinned_tabs.css);*/
  @import url(components/centered_tab_content.css);
  /*@import url(components/tab_line_loading_indicator.css);*/
+ @import url(components/dark_checkboxes_and_radios.css);
  @import url(components/autohide_bookmarks_toolbar.css);
+ @import url(components/tab_close_button_always_on_hover.css);
  @import url(components/compact_extensions_panel.css);
  @import url(custom-chrome.css);
 
@@ -124,10 +126,10 @@
    display: flex !important;
  }
 
- /*Makes black favicons more visible on dark background, contrast will be lowered though*
+ /*Makes black favicons more visible on dark background, contrast will be lowered though*/
  .tab-icon-image {
    filter: invert(40%) contrast(250%) saturate(250%) !important;
- }88*/
+ }
 
 
  .tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected=true], [multiselected]) {
@@ -201,7 +203,7 @@
      --uc-tab-corner-bg: transparent;
  }
 
- /* rounded bottom corners*/
+ /* rounded bottom corners*
  .tab-background::before,
  .tab-background::after {
    content: "" !important;
@@ -460,7 +462,7 @@
    filter: none !important;
  }
 
- /* Change tab icon color when hovered *
+ /* Change tab icon color when hovered */
  .tabbrowser-tab:hover .tab-icon-image {
    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(100deg) !important;
  }
@@ -690,7 +692,7 @@
    outline: 1px solid color-mix(in srgb, #f9845b 35%, transparent) !important;
  }
 
- /***inactive*
+ /***inactive*/
 
  .tabbrowser-tab:not([visuallyselected="true"]):not([multiselected]):not(:hover) .tab-icon-image {
    opacity: 0.9 !important;
@@ -701,7 +703,7 @@
    box-shadow: inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
  }
 
- /**  inactive Favicons /
+ /**  inactive Favicons */
  .tabbrowser-tab:not([visuallyselected="true"], [multiselected]) .tab-icon-image {
    filter: brightness(80%) grayscale(20%) contrast(120%) blur(0.5px) opacity(100%) !important;
  }
@@ -785,140 +787,200 @@
     --uc-tab-separator-height: 20px;
     --uc-toolbarbutton-block-margin: 2px;
   }
-/* Firefox userChrome.css tweaks ********************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ************************************/
-/****************************************************************************************/
+  #TabsToolbar
+{
+    background-color: AccentColor !important;
+    color: AccentColorText !important;
+    --toolbarbutton-icon-fill: currentColor !important;
+}
+/* Show sidebar only when the cursor is over it  */
+/* The border controlling sidebar width will be removed so you'll need to modify these values to change width */
 
-
-/* Has to be used along with 'classic_squared_tabs.css' */
-
-#TabsToolbar:is([brighttext],:-moz-lwtheme-brighttext):-moz-lwtheme .tabbrowser-tab:is([selected],[multiselected]) .tab-content {
-  border-top: 1px solid rgba(255,255,255,.6) !important;
-  border-left: 1px solid rgba(255,255,255,.2) !important;
-  border-right: 1px solid rgba(255,255,255,.2) !important;
+#sidebar {
+  margin-bottom: var(--uc-tweak-rounded-corners-padding) !important;
+  border-bottom-right-radius: var(--uc-tweak-rounded-corners-radius) !important;
+  border-bottom-left-radius: var(--uc-tweak-rounded-corners-radius) !important;
 }
 
-#TabsToolbar:is([brighttext],:-moz-lwtheme-brighttext):-moz-lwtheme :is(.tabs-newtab-button,#tabs-newtab-button),
-#TabsToolbar:is([brighttext],:-moz-lwtheme-brighttext):-moz-lwtheme .tabbrowser-tab .tab-content {
-  border-top: 1px solid rgba(255,255,255,.6) !important;
-  border-left: 1px solid rgba(255,255,255,.2) !important;
-  border-right: 1px solid rgba(255,255,255,.2) !important;
+#sidebar-title {
+  padding-inline: 0 !important;
+  padding-top: 2px !important;
+  opacity: 40% !important;
 }
-
-@media (-moz-content-prefers-color-scheme: dark) {
-	.tabbrowser-tab:is([selected],[multiselected]):-moz-lwtheme .tab-content {
-	  border-top: 1px solid rgba(255,255,255,.6) !important;
-	  border-left: 1px solid rgba(255,255,255,.2) !important;
-	  border-right: 1px solid rgba(255,255,255,.2) !important;
-	}
-	#TabsToolbar:-moz-lwtheme :is(.tabs-newtab-button,#tabs-newtab-button):-moz-lwtheme,
-	.tabbrowser-tab .tab-content:-moz-lwtheme {
-	  border-top: 1px solid rgba(255,255,255,.6) !important;
-	  border-left: 1px solid rgba(255,255,255,.2) !important;
-	  border-right: 1px solid rgba(255,255,255,.2) !important;
-	}
-}
-/* Firefox userChrome.css tweaks ****************************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ********************************************/
-/************************************************************************************************
-
-
-.tabbrowser-tab:not(:hover) > .tab-stack > .tab-background:not([selected], [multiselected]) {
-  background-color: color-mix(in srgb, currentColor 11%, transparent);
-}
-
-.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected], [multiselected]) {
-  background-color: color-mix(in srgb, currentColor 17%, transparent) !important;
-}
-.tab-background:is([selected],[multiselected]):-moz-lwtheme,
-.tab-background:is([selected],[multiselected]):-moz-lwtheme {
-  box-shadow: inset -1px 0 0 0 rgba(255,255,255,.01),
-			  inset 1px 0 0 0 rgba(255,255,255,.01) !important;
-}
-/* selected / multiselected colors *
-.tabbrowser-tab:is([selected],[multiselected]) > .tab-stack > .tab-background:not(:-moz-lwtheme) {
-  box-shadow: 0 0 1px rgba(0,0,0,.5) !important;
-}
-/* Firefox userChrome.css tweaks ********************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ************************************/
-/****************************************************************************************
-
-
-:root{
-  --sidebar-hover-width: 8px;
-  --sidebar-visible-width: 300px;
+#sidebar-switcher-target {
+  padding: 0px 0px 2px 0px !important;
 }
 
 #sidebar-box {
-  min-width: var(--sidebar-hover-width) !important;
-  width: var(--sidebar-hover-width) !important;
-  max-width: var(--sidebar-hover-width) !important;
+  --uc-sidebar-width: 6px;
+  --uc-sidebar-hover-width: 200px;
+  --uc-autohide-sidebar-delay: 100ms; /* Wait 0.1s before hiding sidebar */
+  --uc-autohide-transition-duration: 115ms;
+  --uc-autohide-transition-type: linear;
+  position: relative;
+  min-width: var(--uc-sidebar-width) !important;
+  width: var(--uc-sidebar-width) !important;
+  max-width: var(--uc-sidebar-width) !important;
+  background-color: var(--lwt-accent-color) !important;
+  z-index: 1;
+  transition: opacity var(--uc-autohide-transition-duration)
+    var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) !important;
+  opacity: 1%;
 }
 
-#sidebar-box #sidebar {
-  opacity: 0 !important;
-  position: absolute !important;
-  display: block !important;
+/* if this preference is activated in about:config, sidebar width will be increased */
+@media (-moz-bool-pref: "uc.tweak.longer-sidebar") {
+  :root #sidebar-box {
+    --uc-sidebar-hover-width: 250px !important;
+  }
 }
 
-#sidebar-box:hover {
-  min-width: var(--sidebar-visible-width) !important;
-  width: var(--sidebar-visible-width) !important;
-  max-width: var(--sidebar-visible-width) !important;
+#sidebar-box[positionend] {
+  direction: rtl;
+}
+#sidebar-box[positionend] > * {
+  direction: ltr;
 }
 
-#sidebar-box:hover #sidebar {
-  opacity: 1.0 !important;
+#sidebar-box[positionend]:-moz-locale-dir(rtl) {
+  direction: ltr;
+}
+#sidebar-box[positionend]:-moz-locale-dir(rtl) > * {
+  direction: rtl;
 }
 
-#sidebar-box #sidebar-header {
+#main-window[sizemode="maximized"] #sidebar-box {
+  --uc-sidebar-width: 0.3rem;
+}
+#main-window[sizemode="fullscreen"] #sidebar-box {
+  --uc-sidebar-width: 0.3rem;
+}
+
+#sidebar-header {
+  overflow: hidden;
+  color: var(--chrome-color, inherit) !important;
+  padding: 2px 0 2px 0 !important;
+  font-size: 1em !important;
+  font-weight: bold !important;
+  margin-inline-start: calc(
+    var(--uc-tweak-rounded-corners-padding) - 10px
+  ) !important;
+  border-bottom: 0 !important;
+  border-top-right-radius: var(--uc-tweak-rounded-corners-radius) !important;
+}
+
+#sidebar-header #sidebar-switcher-target #sidebar-icon,
+#sidebar-switcher-arrow,
+#sidebar-close.close-icon,
+#sidebar-splitter {
   visibility: collapse !important;
 }
 
-#sidebar-box:hover #sidebar-header {
-  visibility: visible !important;
+@media (-moz-bool-pref: "uc.tweak.hide-sidebar-header") {
+  #sidebar-header {
+    visibility: collapse !important;
+  }
 }
 
-#sidebar-box {
-  z-index: 1000 !important;
-  position: relative !important;
-  opacity: 0 !important;
+#sidebar-header::before,
+#sidebar-header::after {
+  content: "";
+  display: flex;
+  padding-left: 8px;
 }
 
+#sidebar-header,
+#sidebar {
+  transition: min-width var(--uc-autohide-transition-duration)
+    var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) !important;
+  min-width: var(--uc-sidebar-width) !important;
+  will-change: min-width;
+  background-color: var(--lwt-accent-color) !important;
+}
+
+#sidebar-box:hover > #sidebar-header,
+#sidebar-box:hover > #sidebar {
+  margin-inline-start: calc(
+    var(--uc-tweak-rounded-corners-padding) - 10px
+  ) !important;
+  min-width: var(--uc-sidebar-hover-width) !important;
+  transition-delay: 0ms !important;
+  opacity: 100% !important;
+}
 #sidebar-box:hover {
-  opacity: 1.0 !important;
+  opacity: 100% !important;
 }
 
-#sidebar-box:not([positionend="true"]) {
-  margin-inline-end: calc(-1 * var(--sidebar-hover-width)) !important;
+.sidebar-panel {
+  background-color: var(--lwt-accent-color) !important;
+  color: var(--newtab-text-primary-color) !important;
 }
 
-#sidebar-box:not([positionend="true"]):hover {
-  margin-inline-end: unset !important;
+.sidebar-panel #search-box {
+  -moz-appearance: none !important;
+  background-color: var(--lwt-accent-color) !important;
+  color: inherit !important;
 }
 
-#sidebar-box:not([positionend="true"]) ~ #appcontent {
-  margin-inline-start: 0 !important;
+/* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
+
+#sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel {
+  inset-inline: auto 0px !important;
+}
+#sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel-label {
+  margin-inline: 0px !important;
+  border-left-style: solid !important;
 }
 
-#sidebar-box:not([positionend="true"]):hover ~ #appcontent {
-  margin-inline-start: calc(-1 * var(--sidebar-visible-width)) !important;
-}
+#main-window[titlepreface*="|| "] {
+  --ovrl-wdt: var(--ovrl-max-wdt);
 
-#sidebar-box[positionend="true"] {
-  margin-inline-start: calc(-1 * var(--sidebar-hover-width)) !important;
-}
+  & :is(#sidebar-box) {
+    --uc-sidebar-width: var(--uc-sidebar-hover-width);
+    opacity: 100%;
+    background-color: transparent !important;
+    margin-inline-end: var(--uc-tweak-rounded-corners-padding) !important;
+    margin-block-end: 0 !important;
+    overflow: visible !important;
+    &[positionend] {
+      margin-inline-start: var(--uc-tweak-rounded-corners-padding) !important;
+      margin-inline-end: var(--uc-tweak-rounded-corners-padding) !important;
+    }
 
-#sidebar-box[positionend="true"]:hover {
-  margin-inline-start: unset !important;
-}
+    /* & > * { opacity: 100%; } */
+  }
 
-#sidebar-box[positionend="true"] ~ #appcontent {
-  margin-inline-end: 0 !important;
-}
+  & .browserContainer::after {
+    margin-left: calc(var(--sdbr-real-wdt) * -1);
+  }
 
-#sidebar-box[positionend="true"]:hover ~ #appcontent {
-  margin-inline-end: calc(-1 * var(--sidebar-visible-width)) !important;
-}/* Firefox userChrome.css tweaks ********************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ************************************/
-/****************************************************************************************/
+  & #browser > #appcontent {
+    margin-left: var(--sdbr-real-wdt);
+  }
+  & #appcontent browser {
+    margin-left: 0px;
+  }
+  & #statuspanel {
+    margin-left: 2px;
+  }
+
+  & #sidebar {
+    margin-inline-start: calc(
+      var(--uc-tweak-rounded-corners-padding) - 3px
+    ) !important;
+  }
+
+  & #sidebar-header {
+    margin-inline-start: calc(
+      var(--uc-tweak-rounded-corners-padding) - 3px
+    ) !important;
+  }
+
+  & #sidebar-box:hover > #sidebar {
+    margin-inline-start: calc(
+      var(--uc-tweak-rounded-corners-padding) - 3px
+    ) !important;
+    min-width: var(--uc-sidebar-hover-width) !important;
+    transition-delay: 0ms !important;
+  }
+}

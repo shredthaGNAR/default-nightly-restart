@@ -1,5 +1,4 @@
-@import url(uc-tabs.css);
-/*
+ @import url(uc-globals.css);
  /*@import url(uc-variables.css);*/
  @import url(uc-panels.css);
  @import url(uc-app-menu.css);
@@ -15,6 +14,7 @@
  @import url(uc-sidebar.css);
  @import url(uc-misc.css);
  @import url(uc-search-one-offs.css);
+ @import url(uc-context-menu-icons.css);
  @import url(uc-context-menus.css);
  @import url(components/integrated_searchbar_popup.css);
  @import url(compact-bookmarks.css);
@@ -34,7 +34,9 @@
  /*@import url(components/shrinking_pinned_tabs.css);*/
  @import url(components/centered_tab_content.css);
  /*@import url(components/tab_line_loading_indicator.css);*/
+ @import url(components/dark_checkboxes_and_radios.css);
  @import url(components/autohide_bookmarks_toolbar.css);
+ @import url(components/tab_close_button_always_on_hover.css);
  @import url(components/compact_extensions_panel.css);
  @import url(custom-chrome.css);
 
@@ -124,12 +126,12 @@
    display: flex !important;
  }
 
- /*Makes black favicons more visible on dark background, contrast will be lowered though*
+ /*Makes black favicons more visible on dark background, contrast will be lowered though*/
  .tab-icon-image {
    filter: invert(40%) contrast(250%) saturate(250%) !important;
- }88*/
+ }
 
-
+ /*
  .tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected=true], [multiselected]) {
      background-color: color-mix(in srgb, currentColor 17%, transparent) !important;
  }
@@ -447,20 +449,20 @@
   background-color: var(--firefoxcss-tab-active-bg-color) !important;
   box-shadow: none !important;
 }
-
+*/
 #tabbrowser-tabs
   .tabbrowser-tab
   .tab-background:is([selected]):is([multiselected]) {
   outline: 1px solid var(--firefoxcss-tab-multiselect-outline) !important;
   outline-offset: 0px !important;
   outline-width: 1px !important;
-}*/
+}
  /* Set tab icon color to gray when selected */
  .tab-icon:active {
    filter: none !important;
  }
 
- /* Change tab icon color when hovered *
+ /* Change tab icon color when hovered */
  .tabbrowser-tab:hover .tab-icon-image {
    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(100deg) !important;
  }
@@ -490,10 +492,10 @@
    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5) !important;
  }
 
- /* Bookmarks toolbar */
+ /* Bookmarks toolbar *
  #PersonalToolbar {
    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)) !important;
-   border-top: 1px solid rgba(255, 255, 255, 0.5);
+  /* border-top: 1px solid rgba(255, 255, 255, 0.5);*
    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) !important;
    -webkit-backdrop-filter: blur(24px) !important;
    backdrop-filter: blur(24px) !important;
@@ -501,7 +503,7 @@
 
  #PersonalToolbar .toolbarbutton-icon {
    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4)) !important;
- }
+ }*/
 
  #TabsToolbar .toolbarbutton-icon,
  .tab-close-button:not([selected]) {
@@ -582,7 +584,7 @@
          rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
  }
 
- /* ----- My Custom Colors ----- *
+ /* ----- My Custom Colors ----- */
  :root {
    --firefoxcss-bookmarks-bg-color: hsl(240, 2%, 20%) !important;
  }
@@ -690,7 +692,7 @@
    outline: 1px solid color-mix(in srgb, #f9845b 35%, transparent) !important;
  }
 
- /***inactive*
+ /***inactive*/
 
  .tabbrowser-tab:not([visuallyselected="true"]):not([multiselected]):not(:hover) .tab-icon-image {
    opacity: 0.9 !important;
@@ -701,7 +703,7 @@
    box-shadow: inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
  }
 
- /**  inactive Favicons /
+ /**  inactive Favicons */
  .tabbrowser-tab:not([visuallyselected="true"], [multiselected]) .tab-icon-image {
    filter: brightness(80%) grayscale(20%) contrast(120%) blur(0.5px) opacity(100%) !important;
  }
@@ -759,7 +761,7 @@
  }
     :root[tabsintitlebar]:not([lwtheme], :-moz-window-inactive)
     {
-        appearance: menupopup !important;}
+        appearance: menupopup !important;
 
         #navigator-toolbox
         {
@@ -771,154 +773,4 @@
             --toolbarbutton-hover-background: color-mix(in srgb, currentColor 17%, transparent) !important;
             --toolbarbutton-active-background: color-mix(in srgb, currentColor 30%, transparent) !important;
         }
-
-#TabsToolbar {
-    --tab-min-height: 32px !important;
-    --inline-tab-padding: 11px !important;
-    --uc-inline-pinned-tab-padding: 12px !important;
-    --tab-border-radius: 4px !important;
-    --toolbarbutton-inner-padding: 6px !important;
-    --uc-toolbarbutton-inner-inline-padding: 8px !important;
-    --toolbarbutton-border-radius: 4px !important;
-    --tabs-navbar-shadow-size: 0px !important;
-    --tab-shadow-max-size: 0 !important;
-    --uc-tab-separator-height: 20px;
-    --uc-toolbarbutton-block-margin: 2px;
-  }
-/* Firefox userChrome.css tweaks ********************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ************************************/
-/****************************************************************************************/
-
-
-/* Has to be used along with 'classic_squared_tabs.css' */
-
-#TabsToolbar:is([brighttext],:-moz-lwtheme-brighttext):-moz-lwtheme .tabbrowser-tab:is([selected],[multiselected]) .tab-content {
-  border-top: 1px solid rgba(255,255,255,.6) !important;
-  border-left: 1px solid rgba(255,255,255,.2) !important;
-  border-right: 1px solid rgba(255,255,255,.2) !important;
-}
-
-#TabsToolbar:is([brighttext],:-moz-lwtheme-brighttext):-moz-lwtheme :is(.tabs-newtab-button,#tabs-newtab-button),
-#TabsToolbar:is([brighttext],:-moz-lwtheme-brighttext):-moz-lwtheme .tabbrowser-tab .tab-content {
-  border-top: 1px solid rgba(255,255,255,.6) !important;
-  border-left: 1px solid rgba(255,255,255,.2) !important;
-  border-right: 1px solid rgba(255,255,255,.2) !important;
-}
-
-@media (-moz-content-prefers-color-scheme: dark) {
-	.tabbrowser-tab:is([selected],[multiselected]):-moz-lwtheme .tab-content {
-	  border-top: 1px solid rgba(255,255,255,.6) !important;
-	  border-left: 1px solid rgba(255,255,255,.2) !important;
-	  border-right: 1px solid rgba(255,255,255,.2) !important;
-	}
-	#TabsToolbar:-moz-lwtheme :is(.tabs-newtab-button,#tabs-newtab-button):-moz-lwtheme,
-	.tabbrowser-tab .tab-content:-moz-lwtheme {
-	  border-top: 1px solid rgba(255,255,255,.6) !important;
-	  border-left: 1px solid rgba(255,255,255,.2) !important;
-	  border-right: 1px solid rgba(255,255,255,.2) !important;
-	}
-}
-/* Firefox userChrome.css tweaks ****************************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ********************************************/
-/************************************************************************************************
-
-
-.tabbrowser-tab:not(:hover) > .tab-stack > .tab-background:not([selected], [multiselected]) {
-  background-color: color-mix(in srgb, currentColor 11%, transparent);
-}
-
-.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected], [multiselected]) {
-  background-color: color-mix(in srgb, currentColor 17%, transparent) !important;
-}
-.tab-background:is([selected],[multiselected]):-moz-lwtheme,
-.tab-background:is([selected],[multiselected]):-moz-lwtheme {
-  box-shadow: inset -1px 0 0 0 rgba(255,255,255,.01),
-			  inset 1px 0 0 0 rgba(255,255,255,.01) !important;
-}
-/* selected / multiselected colors *
-.tabbrowser-tab:is([selected],[multiselected]) > .tab-stack > .tab-background:not(:-moz-lwtheme) {
-  box-shadow: 0 0 1px rgba(0,0,0,.5) !important;
-}
-/* Firefox userChrome.css tweaks ********************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ************************************/
-/****************************************************************************************
-
-
-:root{
-  --sidebar-hover-width: 8px;
-  --sidebar-visible-width: 300px;
-}
-
-#sidebar-box {
-  min-width: var(--sidebar-hover-width) !important;
-  width: var(--sidebar-hover-width) !important;
-  max-width: var(--sidebar-hover-width) !important;
-}
-
-#sidebar-box #sidebar {
-  opacity: 0 !important;
-  position: absolute !important;
-  display: block !important;
-}
-
-#sidebar-box:hover {
-  min-width: var(--sidebar-visible-width) !important;
-  width: var(--sidebar-visible-width) !important;
-  max-width: var(--sidebar-visible-width) !important;
-}
-
-#sidebar-box:hover #sidebar {
-  opacity: 1.0 !important;
-}
-
-#sidebar-box #sidebar-header {
-  visibility: collapse !important;
-}
-
-#sidebar-box:hover #sidebar-header {
-  visibility: visible !important;
-}
-
-#sidebar-box {
-  z-index: 1000 !important;
-  position: relative !important;
-  opacity: 0 !important;
-}
-
-#sidebar-box:hover {
-  opacity: 1.0 !important;
-}
-
-#sidebar-box:not([positionend="true"]) {
-  margin-inline-end: calc(-1 * var(--sidebar-hover-width)) !important;
-}
-
-#sidebar-box:not([positionend="true"]):hover {
-  margin-inline-end: unset !important;
-}
-
-#sidebar-box:not([positionend="true"]) ~ #appcontent {
-  margin-inline-start: 0 !important;
-}
-
-#sidebar-box:not([positionend="true"]):hover ~ #appcontent {
-  margin-inline-start: calc(-1 * var(--sidebar-visible-width)) !important;
-}
-
-#sidebar-box[positionend="true"] {
-  margin-inline-start: calc(-1 * var(--sidebar-hover-width)) !important;
-}
-
-#sidebar-box[positionend="true"]:hover {
-  margin-inline-start: unset !important;
-}
-
-#sidebar-box[positionend="true"] ~ #appcontent {
-  margin-inline-end: 0 !important;
-}
-
-#sidebar-box[positionend="true"]:hover ~ #appcontent {
-  margin-inline-end: calc(-1 * var(--sidebar-visible-width)) !important;
-}/* Firefox userChrome.css tweaks ********************************************************/
-/* Github: https://github.com/aris-t2/customcssforfx ************************************/
-/****************************************************************************************/
+    }

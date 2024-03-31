@@ -1,0 +1,7 @@
+#PersonalToolbar {
+    background-color: transparent !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    backdrop-filter: blur(24px) !important;
+    -moz-appearance: -moz-mac-source-list !important;
+    appearance: -moz-mac-source-list !important;
+}

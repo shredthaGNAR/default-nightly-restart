@@ -1,42 +1,37 @@
+/*@import url(uc-globals.css);*/
+@import url(uc-variables.css);
+@import url(uc-tabs-bar.css);
+@import url(uc-panels.css);
+@import url(uc-app-menu.css);
 @import url(uc-tabs.css);
-/*
- /*@import url(uc-variables.css);*/
- @import url(uc-panels.css);
- @import url(uc-app-menu.css);
- @import url(uc-findbar.css);
- @import url(uc-ctrl-tab.css);
- @import url(uc-bookmarks.css);
- @import url(resources/in-content/library.css);
- @import url(resources/in-content/downloads.css);
- @import url(uc-popups.css);
- @import url(uc-search-mode-icons.css);
- @import url(uc-extensions.css);
- @import url(uc-unified-extensions.css);
- @import url(uc-sidebar.css);
- @import url(uc-misc.css);
- @import url(uc-search-one-offs.css);
- @import url(uc-context-menus.css);
- @import url(components/integrated_searchbar_popup.css);
- @import url(compact-bookmarks.css);
- @import url(components/clean_extensions_menu.css);
- @import url(addons.css);
- @import url(components/colored_soundplaying_tab.css);
- @import url(components/search_bar_transparent_background.css);
- @import url(components/url_bar_no_border.css);
- @import url(components/autohide_sidebar.css);
- @import url(components/dark_additional_windows.css);
- @import url(components/overlay_tab_audio_icons.css);
- @import url(components/urlbar_container_color_border.css);
- @import url(components/tab_closing_animation.css);
- /* @import url(components/buttonlike_toolbarbuttons.css);*/
- @import url(components/integrated_searchbar_popup.css);
- @import url(components/tab_closing_animation.css);
- /*@import url(components/shrinking_pinned_tabs.css);*/
- @import url(components/centered_tab_content.css);
- /*@import url(components/tab_line_loading_indicator.css);*/
- @import url(components/autohide_bookmarks_toolbar.css);
- @import url(components/compact_extensions_panel.css);
- @import url(custom-chrome.css);
+@import url(uc-findbar.css);
+@import url(uc-urlbar-results.css);
+@import url(uc-search-one-offs.css);
+@import url(uc-ctrl-tab.css);
+@import url(uc-sidebar.css);
+@import url(uc-bookmarks.css);
+@import url(uc-context-menus.css);
+@import url(uc-fullscreen.css);
+@import url(resources/in-content/library.css);
+@import url(resources/in-content/downloads.css);
+@import url(uc-popups.css);
+@import url(uc-search-mode-icons.css);
+@import url(uc-extensions.css);
+@import url(uc-unified-extensions.css);
+@import url(uc-misc.css);
+@import url(compact-bookmarks.css);
+@import url(components/clean_extensions_menu.css);
+@import url(addons.css);
+@import url(components/colored_soundplaying_tab.css);
+@import url(components/search_bar_transparent_background.css);
+@import url(components/url_bar_no_border.css);
+@import url(components/autohide_sidebar.css);
+@import url(components/dark_additional_windows.css);
+@import url(components/urlbar_container_color_border.css);
+@import url(components/integrated_searchbar_popup.css);
+@import url(components/autohide_bookmarks_toolbar.css);
+@import url(components/compact_extensions_panel.css);
+@import url(custom-chrome.css);
 
  /* Remove Tab When Only One */
  #tabbrowser-tabs tab:first-of-type:last-of-type {
@@ -820,7 +815,7 @@
 }
 /* Firefox userChrome.css tweaks ****************************************************************/
 /* Github: https://github.com/aris-t2/customcssforfx ********************************************/
-/************************************************************************************************
+/************************************************************************************************/
 
 
 .tabbrowser-tab:not(:hover) > .tab-stack > .tab-background:not([selected], [multiselected]) {
@@ -921,4 +916,87 @@
   margin-inline-end: calc(-1 * var(--sidebar-visible-width)) !important;
 }/* Firefox userChrome.css tweaks ********************************************************/
 /* Github: https://github.com/aris-t2/customcssforfx ************************************/
-/****************************************************************************************/
+/****************************************************************************************
+
+
+:root{
+  --sidebar-hover-width: 8px;
+  --sidebar-visible-width: 300px;
+}
+
+#sidebar-box {
+  min-width: var(--sidebar-hover-width) !important;
+  width: var(--sidebar-hover-width) !important;
+  max-width: var(--sidebar-hover-width) !important;
+}
+
+#sidebar-box #sidebar {
+  opacity: 0 !important;
+  position: absolute !important;
+  display: block !important;
+}
+
+#sidebar-box:hover {
+  min-width: var(--sidebar-visible-width) !important;
+  width: var(--sidebar-visible-width) !important;
+  max-width: var(--sidebar-visible-width) !important;
+}
+
+#sidebar-box:hover #sidebar {
+  opacity: 1.0 !important;
+}
+
+#sidebar-box #sidebar-header {
+  visibility: collapse !important;
+}
+
+#sidebar-box:hover #sidebar-header {
+  visibility: visible !important;
+}
+
+#sidebar-box {
+  z-index: 1000 !important;
+  position: relative !important;
+  opacity: 0 !important;
+}
+
+#sidebar-box:hover {
+  opacity: 1.0 !important;
+}
+
+#sidebar-box:not([positionend="true"]) {
+  margin-inline-end: calc(-1 * var(--sidebar-hover-width)) !important;
+}
+
+#sidebar-box:not([positionend="true"]):hover {
+  margin-inline-end: unset !important;
+}
+
+#sidebar-box:not([positionend="true"]) ~ #appcontent {
+  margin-inline-start: 0 !important;
+}
+
+#sidebar-box:not([positionend="true"]):hover ~ #appcontent {
+  margin-inline-start: calc(-1 * var(--sidebar-visible-width)) !important;
+}
+
+#sidebar-box[positionend="true"] {
+  margin-inline-start: calc(-1 * var(--sidebar-hover-width)) !important;
+}
+
+#sidebar-box[positionend="true"]:hover {
+  margin-inline-start: unset !important;
+}
+
+#sidebar-box[positionend="true"] ~ #appcontent {
+  margin-inline-end: 0 !important;
+}
+
+#sidebar-box[positionend="true"]:hover ~ #appcontent {
+  margin-inline-end: calc(-1 * var(--sidebar-visible-width)) !important;
+} */
+
+    :root[tabsintitlebar]:not([lwtheme], :-moz-window-inactive)
+    {
+        -moz-default-appearance: menupopup !important;
+    }
