@@ -14,8 +14,12 @@ docs do not inherit from <browser> elements. */
 :root,
 menupopup {
   --lwt-text-color: var(--uc-arrowpanel-color) !important;
+  --toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
   --toolbar-field-color: var(--uc-toolbar-field-color) !important;
   --toolbar-field-focus-color: var(--uc-toolbar-field-color) !important;
+  --toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
+  --identity-box-margin-inline: 3px !important;
+  --urlbar-box-bgcolor: var(--identity-box-solid-bg) !important;
   --urlbar-box-focus-bgcolor: var(--button-bgcolor) !important;
   --urlbar-box-hover-bgcolor: var(--button-hover-bgcolor) !important;
   --urlbar-box-active-bgcolor: var(--button-active-bgcolor) !important;
@@ -172,11 +176,11 @@ toolbar {
 panel {
   --warning-icon-bgcolor: var(--low-warning-icon-background) !important;
 }
-/*
+
 #urlbar {
   --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
 }
-*/
+
 #confirmation-hint {
   --arrowpanel-background: var(--confirmation-hint-bgcolor) !important;
   --arrowpanel-color: var(--confirmation-hint-color) !important;
@@ -186,7 +190,7 @@ panel {
 .tab-loading-burst {
   --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }
-/*
+
 :root,
 #TabsToolbar {
   --toolbarbutton-inner-padding: var(--uc-toolbarbutton-inner-padding, 8px) !important;

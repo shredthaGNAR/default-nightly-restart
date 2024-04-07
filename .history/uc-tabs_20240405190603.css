@@ -5,9 +5,11 @@
 #tabbrowser-tabs .tabbrowser-tab[justmoved] * {
   transform: none !important;
 }
-
+/*
 .tab-background {
-  border-radius: 6px !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 8px !important;
   box-shadow: none !important;
   opacity: 1 !important;
   z-index: 1;
@@ -385,7 +387,7 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
   display: block !important;
   -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
   position: relative;
-  margin-inline: 0 -20px !important;
+  margin-inline: 0 -16px !important;
   list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
   fill-opacity: 0 !important;
   stroke-opacity: 0.6 !important;

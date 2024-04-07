@@ -576,7 +576,7 @@
 
  .tabbrowser-tab[selected="true"] .tab-icon-image {
      /* Your CSS properties for the selected tab's icon here */
-     filter: blur(5px) grayscale(0%) contrast(200%) opacity(100%) brightness(2) drop-shadow(1px 1px rgba(58, 58, 58, 0.55)) !important;
+     filter: blur(5px) grayscale(0%) contrast(200%) opacity(100%) brightness(2) drop-shadow(1px 1px rgba(58, 58, 58, 0.55)) !important*/
 
  .tabbrowser-tab:not([selected="true"]):not([multiselected="true"]) .tab-background {
    border-top: 1px solid rgba(130, 130, 130, 0.3) !important;
@@ -947,4 +947,3 @@ See the above repository for updates as well as full license text. *
   position: relative !important;
   z-index: 1 !important;
 }*/
- }

@@ -7,7 +7,9 @@
 }
 
 .tab-background {
-  border-radius: 6px !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 8px !important;
   box-shadow: none !important;
   opacity: 1 !important;
   z-index: 1;
@@ -86,8 +88,6 @@
 #TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
   border-top-right-radius: 5px !important;
   border-top-left-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
-  border-bottom-left-radius: 5px !important;
   overflow: clip;
 }
 
@@ -139,12 +139,12 @@ not expand until you move your mouse out of the tab strip. */
   #tabbrowser-arrowscrollbox:not([overflowing])
   .tabbrowser-tab:last-of-type[style*="max-width"]
   :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-  border-top-right-radius: 5px !important;
+  border-top-right-radius: 8px !important;
 }
 
 #TabsToolbar :is(toolbarbutton, toolbaritem, toolbarpaletteitem):not([hidden]) + #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]),
 #TabsToolbar :is(toolbarbutton, toolbaritem, toolbarpaletteitem):not([hidden]) + #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]) :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-  border-top-left-radius: 5px !important;
+  border-top-left-radius: 8px !important;
 }
 
 /* set rounded outside corners on tabs so they look like folder labels.
@@ -154,7 +154,7 @@ this CSS is complicated because the outside corner needs to take on the color of
 
 /* overflow needs to be visible since the corners need to be outside the
 bounding box of the tab, otherwise they won't overlap with other tabs, they'll
-just push tabs 10px away from each other, and from the edge of the tab bar. */
+just push tabs 10px away from each other, and from the edge of the tab bar. *
 #TabsToolbar .tabbrowser-tab,
 #TabsToolbar .tabbrowser-tab .tab-stack {
   overflow: visible;
@@ -221,7 +221,7 @@ else they'll end up being covered up or showing through things they shouldn't. *
   z-index: -1;
 }
 
-/* hide the corners on first/last visible tabs, just like we unround the top corners */
+/* hide the corners on first/last visible tabs, just like we unround the top corners *
 #tabbrowser-tabs:not([movingtab], [using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]) .tab-stack::before,
 #tabbrowser-tabs:not([movingtab], [using-closing-tabs-spacer]) .tabbrowser-tab:last-of-type:not([justmoved], [style*="transform"]) .tab-stack::after {
   display: none;
@@ -237,7 +237,7 @@ tab, while the tab strip is not overflowing, then there'll be no animation when
 the tab closes. which would look very ugly so it's not worth it. this means
 there'll be rounded inside corners on the last tab when it's not stretching to
 the right edge of the tab strip, but unfortunately it won't have rounded outside
-corners unless the tab strip is overflowing. */
+corners unless the tab strip is overflowing. *
 #TabsToolbar #tabbrowser-tabs #tabbrowser-arrowscrollbox:not([overflowing]) .tabbrowser-tab:last-of-type[pinned] .tab-stack::after {
   display: block;
 }
@@ -249,7 +249,7 @@ line, but the corners are taller than the bottom line, so they can't be fully
 the same color as the line. they must have a 1px tall stripe at the bottom, the
 color of the bottom line (should it exist), with the remaining 4px being the
 current bg color of the tab. */
-/*
+
 .tabbrowser-tab[multiselected] .tab-stack::after,
 .tabbrowser-tab[multiselected] .tab-stack::before {
   background-image: linear-gradient(0deg, var(--multiselected-color) 0px, var(--multiselected-color) 1px, var(--tab-bg-current) 1px);
@@ -370,10 +370,10 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
 /* tab buttons are generally styled the same */
 .tab-close-button,
 .tab-icon-sound {
-  width: 20px !important;
-  height: 20px !important;
-  min-width: 20px !important;
-  min-height: 20px !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
   padding: 0 !important;
   opacity: 0 !important;
   fill: currentColor !important;
@@ -385,7 +385,7 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
   display: block !important;
   -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
   position: relative;
-  margin-inline: 0 -20px !important;
+  margin-inline: 0 -16px !important;
   list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
   fill-opacity: 0 !important;
   stroke-opacity: 0.6 !important;
@@ -766,7 +766,8 @@ gets bigger when you hover the tab, apparently because the close button gains a
 background in that condition. this is ugly in general imo but it's useless with
 this theme in particular since we put the close button on the right, meaning it
 doesn't overlap with the right side of the label at all, which is where the
-overflowing mask is applied. so we make the mask size constant. */
+overflowing mask is applied. so we make the mask size constant. *
 .tabbrowser-tab {
-  --tab-label-mask-size: 1em !important;
+  --tab-label-mask-size: 2em !important;
 }
+*/

@@ -59,7 +59,7 @@ See the above repository for updates as well as full license text. */
 
 .sidebar-panel #search-box{
   -moz-appearance: none !important;
-  background-color: rgba(249,249,250,0.1) !important; 
+  background-color: rgba(249,249,250,0.1) !important;
   color: inherit !important;
 }
 
@@ -84,5 +84,5 @@ See the above repository for updates as well as full license text. */
 }
 #sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel-label{
   margin-inline: 0px !important;
-  border-left-style: solid !important; 
+  border-left-style: solid !important;
 }

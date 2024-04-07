@@ -1,6 +1,6 @@
 @import url(uc-globals.css);
 @import url(uc-tabs.css);
- @import url(uc-variables.css);
+ /*@import url(uc-variables.css);*/
  @import url(uc-panels.css);
  @import url(uc-app-menu.css);
  @import url(uc-findbar.css);
@@ -28,7 +28,7 @@
  @import url(components/integrated_searchbar_popup.css);
  @import url(components/tab_closing_animation.css);
 /* @import url(components/centered_tab_content.css);*/
-/*@import url(components/tab_line_loading_indicator.css);*/
+ @import url(components/tab_line_loading_indicator.css);
  @import url(components/autohide_bookmarks_toolbar.css);
  @import url(custom-chrome.css);
 
@@ -48,7 +48,8 @@
    background-color: transparent !important;
    -webkit-backdrop-filter: blur(24px) !important;
    backdrop-filter: blur(24px) !important;
-   appearance: menupopupt!important;
+   -moz-appearance: -moz-mac-source-list !important;
+   appearance: -moz-mac-source-list !important;
  }
 
  /* Remove empty space from tabs bar*
@@ -139,7 +140,7 @@
 
  .tabbrowser-tab[soundplaying] .tab-background {
 
-   background-color: rgb(20, 146, 151) !important;
+   background-color: rgb(0, 255, 72) !important;
 
  }
 
@@ -153,7 +154,7 @@
  }
 
  #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab .tab-label-container {
-   --tab-label-mask-size: 1em !important;
+   --tab-label-mask-size: 2em !important;
  }
 
  /* need layout.css.has-selector.enabled*/
@@ -221,7 +222,7 @@
    box-shadow: -4px 4px 0 4px var(--uc-tab-corner-bg) !important;
  }
 
- /* tab open/close transition *
+ /* tab open/close transition */
  .tabbrowser-tab:not([pinned]) {
    transition-property: min-width, max-width !important;
    transition-duration: 150ms !important;
@@ -232,7 +233,7 @@
  .tabbrowser-tab[tab-grouping],
  .tabbrowser-tab[tabdrop-samewindow] {
    transition: transform 200ms cubic-bezier(0, .75, .25, 1) !important;
- }*/
+ }
 
 
  :root:is([inFullscreen], :not([tabsintitlebar])) #titlebar {
@@ -324,6 +325,7 @@
 
  .tabbrowser-tab[selected="true"] .tab-icon-image {
    /* Your CSS properties for the selected tab's icon here */
+   /* For example, you can change the background color or add a filter background-color: #ff0000;*/
    filter: grayscale(0%) opacity(100%) brightness(100%) drop-shadow(3px 3px rgba(36, 36, 36, 0.757)) !important
  }
 
@@ -344,12 +346,12 @@
  /*unread tabs -use tab flag extension*/
  .tabbrowser-tab[titlechanged]:not([selected="true"]) .tab-label {
    font-style: italic !important;
-   color: #fea561a0 !important;
+   color: #8c36f5 !important;
  }
 
  .tabbrowser-tab[busy]:not([selected="true"]) .tab-label {
    font-style: italic !important;
-   color: #841fffae !important;
+   color: #8c36f5 !important;
  }
 
  .tabbrowser-tab[class*="identity-color-"] .tab-background {
@@ -426,7 +428,7 @@
   outline: none !important;
 }
 
-/* Multiselect tabs */
+/* Multiselect tabs *
 #tabbrowser-tabs .tabbrowser-tab .tab-background[multiselected] {
   border: 0 !important;
   border-radius: var(--firefoxcss-border-radius) !important;
@@ -435,14 +437,14 @@
   background-color: var(--firefoxcss-tab-active-bg-color) !important;
   box-shadow: none !important;
 }
-*/
+
 #tabbrowser-tabs
   .tabbrowser-tab
   .tab-background:is([selected]):is([multiselected]) {
   outline: 1px solid var(--firefoxcss-tab-multiselect-outline) !important;
   outline-offset: 0px !important;
   outline-width: 1px !important;
-}
+}*/
  /* Set tab icon color to gray when selected */
  .tab-icon:active {
    filter: none !important;
@@ -462,7 +464,9 @@
  .tabbrowser-tab .tab-icon-image,
  .tabbrowser-tab .tab-icon-sound {
      filter: grayscale(100%) !important;
- }*/
+ }
+
+ /* userChrome.css */
 
  .tabbrowser-tab .tab-icon {
      filter: grayscale(1) opacity(0.7) !important;
@@ -479,7 +483,7 @@
  /* Bookmarks toolbar */
  #PersonalToolbar {
    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)) !important;
-   /*border-top: 1px solid rgba(255, 255, 255, 0.5);*/
+   border-top: 1px solid rgba(255, 255, 255, 0.5);
    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) !important;
    -webkit-backdrop-filter: blur(24px) !important;
    backdrop-filter: blur(24px) !important;
@@ -502,7 +506,7 @@
  #nav-bar .toolbarbutton-1 {
    &:not([disabled]) {
      &:is([open], [checked], :hover:active)> :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
-       fill: rgba(47, 0, 188, 0.666);
+       fill: #07D;
        box-shadow: 0 1px 3px inset rgba(0, 0, 0, 0.2) !important;
        background-image: radial-gradient(rgba(255, 255, 255, 0.2), transparent) !important;
      }
@@ -568,15 +572,16 @@
          rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
  }
 
- /* ----- My Custom Colors ----- */
+ /* ----- My Custom Colors ----- *
  :root {
    --firefoxcss-bookmarks-bg-color: hsl(240, 2%, 20%) !important;
  }
 
-
+ /*
  .tabbrowser-tab[selected="true"] .tab-icon-image {
      /* Your CSS properties for the selected tab's icon here */
-     filter: blur(5px) grayscale(0%) contrast(200%) opacity(100%) brightness(2) drop-shadow(1px 1px rgba(58, 58, 58, 0.55)) !important;
+ /* For example, you can change the background color or add a filter background-color: #ff0000;
+     filter: blur(5px) grayscale(0%) contrast(200%) opacity(100%) brightness(2) drop-shadow(1px 1px rgba(58, 58, 58, 0.55)) !important*/
 
  .tabbrowser-tab:not([selected="true"]):not([multiselected="true"]) .tab-background {
    border-top: 1px solid rgba(130, 130, 130, 0.3) !important;
@@ -686,7 +691,7 @@
    box-shadow: inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
  }
 
- /**  inactive Favicons */
+ /**  inactive Favicons /
  .tabbrowser-tab:not([visuallyselected="true"], [multiselected]) .tab-icon-image {
    filter: brightness(80%) grayscale(20%) contrast(120%) blur(0.5px) opacity(100%) !important;
  }
@@ -827,8 +832,8 @@
 /* Github: https://github.com/aris-t2/customcssforfx ************************************/
 /****************************************************************************************/
 :root{
-  --sidebar-hover-width: 8px !important;
-  --sidebar-visible-width: 300px !important;
+  --sidebar-hover-width: 8px;
+  --sidebar-visible-width: 300px;
 }
 
 #sidebar-box {
@@ -947,4 +952,3 @@ See the above repository for updates as well as full license text. *
   position: relative !important;
   z-index: 1 !important;
 }*/
- }
