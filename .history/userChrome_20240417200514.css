@@ -1297,7 +1297,3 @@ border-inline-end-width: 0px !important;}
 :root {
 --tab-min-width: initial !important; /*dont touch*/
 --tab-overflow-pinned-tabs-width: initial !important;} /*dont touch*/}
-
-#tab-preview-panel {
-	--panel-background: var(--arrowpanel-background) !important;
-}

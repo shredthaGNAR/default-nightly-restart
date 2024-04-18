@@ -1217,8 +1217,10 @@ border-bottom-right-radius: 50% !important;
 /* Styles for the navigation bar */
 
 /*dim nav bar on inactive windows*/
+@media not (-moz-bool-pref:"uc.tweak.af.no-dimming") {
 :root:-moz-window-inactive #nav-bar-customization-target {
   opacity: 0.6 !important;
+}
 }
 
 /*add padding to toolbar items*/
@@ -1229,24 +1231,24 @@ border-bottom-right-radius: 50% !important;
 #navigator-toolbox {
   .toolbarbutton-1,
   .toolbarbutton-1 .toolbarbutton-icon {
-    opacity: 0.8 !important;
+    opacity: 0.8;
     transition: opacity 300ms linear !important;
   }
 /* Greyscale extension buttons */
 #navigator-toolbox:not(:hover) .toolbarbutton-icon {
-    filter: grayscale(100%) !important;
+    filter: grayscale(100%);
     transition: filter 300ms ease !important;
 }
 
 /* Restore color on hover */
 #navigator-toolbox:hover .toolbarbutton-icon {
-    filter: grayscale(0%) !important;
+    filter: grayscale(0%);
     transition: filter 300ms ease !important;
 }
 /* Style 2 */
 /* Border around full tab */
 
- .tabbrowser-tab .tab-context-line {
+/ .tabbrowser-tab .tab-context-line {
   border: 2px solid var(--identity-icon-color);
   margin: 0 !important;
   width: 100%;
@@ -1255,7 +1257,6 @@ border-bottom-right-radius: 50% !important;
   border-radius: var(--tab-border-radius) !important;
   opacity: 0.6 !important;
 }
-/*
 .tabbrowser-tab .tab-background {
     overflow: clip !important;
 }}
@@ -1296,8 +1297,4 @@ border-inline-end-width: 0px !important;}
 
 :root {
 --tab-min-width: initial !important; /*dont touch*/
---tab-overflow-pinned-tabs-width: initial !important;} /*dont touch*/}
-
-#tab-preview-panel {
-	--panel-background: var(--arrowpanel-background) !important;
-}
+--tab-overflow-pinned-tabs-width: initial !important; /*dont touch*/}

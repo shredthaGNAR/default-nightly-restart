@@ -12,7 +12,7 @@
  @import url(uc-search-mode-icons.css);
  @import url(uc-extensions.css);
  @import url(uc-unified-extensions.css);
- @import url(uc-sidebar.css);
+ /*@import url(uc-sidebar.css);*/
  @import url(uc-misc.css);
  @import url(uc-search-one-offs.css);
  @import url(uc-context-menus.css);
@@ -1213,12 +1213,79 @@ border-bottom-right-radius: 50% !important;
 #tabbrowser-tabpanels {
   background-color: transparent !important;
 }
+/*remove banner notification bg*/
+#tab-notification-deck .notificationbox-stack {
+  background-color: transparent !important;
+  padding: 8px !important;
+}
+
+/* fix sidebar opacity when auto collapse enabled **/
+:root[titlepreface="᠎"] {
+  #sidebar-box {
+    opacity: 0.75 !important;
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+
+  /*Add shadow to auto-expanded sidebar on hover*/
+  #sidebar-box:hover>#sidebar {
+    box-shadow: var(--uc-sidebar-shadow) !important;
+    z-index: 3 !important;
+  }
+}
+
+/*make sure sidebar expand animation look and feel less jank*/
+#webextpanels-window {
+  background-color: transparent !important;
+}
+
+/* Fixes for Firefox to enable autohide */
+#sidebar-box {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* Common styles for #sidebar and #sidebar-box */
+#sidebar,
+#sidebar-box {
+  border-radius: var(--uc-tweak-rounded-corners-radius);
+}
+
+/* Styles specific to #sidebar */
+#sidebar {
+  margin: 0 !important;
+  padding-top: 0 !important;
+  opacity: 1 !important;
+  padding-bottom: 0 !important;
+}
+
+#sidebar-box {
+  background-color: transparent;
+}
+
+/* Styles for .sidebar-splitter */
+.sidebar-splitter {
+  border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.sidebar-splitter:hover {
+  border-radius: 20px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  border: 3px dotted #fff;
+  background-color: var(--urlbar-box-active-bgcolor) !important;
+  transition: background-color 200ms ease-in-out;
+}
+
 
 /* Styles for the navigation bar */
 
 /*dim nav bar on inactive windows*/
+@media not (-moz-bool-pref:"uc.tweak.af.no-dimming") {
 :root:-moz-window-inactive #nav-bar-customization-target {
   opacity: 0.6 !important;
+}
 }
 
 /*add padding to toolbar items*/
@@ -1229,24 +1296,123 @@ border-bottom-right-radius: 50% !important;
 #navigator-toolbox {
   .toolbarbutton-1,
   .toolbarbutton-1 .toolbarbutton-icon {
-    opacity: 0.8 !important;
+    opacity: 0.8;
     transition: opacity 300ms linear !important;
   }
+}
+
+/* collapse sidebar header by default */
+#sidebar-header {
+  visibility: collapse;
+}
+
+
+:root:not([customizing]):has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])),
+:root:not([customizing]):has(#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])),
+:root:not([customizing]):has(#sidebar-box[sidebarcommand="tabcenter-reborn_ariasuni-sidebar-action"]:not([hidden])) {
+  /* Height of navbar, used for determining height and position of window controls */
+  --uc-navbar-height: 38px;
+
+  /* Hide tabs when vertical tab extensions are present */
+  & #TabsToolbar {
+    visibility: collapse !important;
+  }
+
+  /* Fix issue with missing window controls. */
+  &[tabsintitlebar] #titlebar {
+    will-change: auto !important;
+  }
+
+  /* Adjust navbar padding */
+  &[tabsintitlebar] #nav-bar {
+    --uc-tab-top-margin: 0px;
+    padding-top: var(--uc-tab-top-margin, 0) !important;
+    margin-top: 1px !important;
+  }
+}
+
+/*use --uc-window-bg as sidebar header background for vertical tabs*/
+@media (-moz-bool-pref: "uc.tweak.af.show-sidebar-header") {
+
+  :root:not([customizing]):has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])),
+  :root:not([customizing]):has(#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])),
+  :root:not([customizing]):has(#sidebar-box[sidebarcommand="tabcenter-reborn_ariasuni-sidebar-action"]:not([hidden])) {
+    #sidebar-header {
+      background-color: var(--uc-window-bg) !important;
+    }
+  }
+
+  /*hide sidebar header when sidebar is auto collapsed*/
+  :root {
+    &[titlepreface="᠎"] {
+      #sidebar-header {
+        visibility: collapse !important;
+      }
+    }
+    /*force sidebar header visibility when sidebar is expanded*/
+    &:not([titlepreface="᠎"]) {
+      #sidebar-header {
+        visibility: visible !important;
+      }
+    }
+  }
+
+  #sidebar-header {
+
+      order: 3 !important;
+
+
+    /*set sidebar header to bottom of sibebar*/
+    overflow: hidden;
+    color: var(--chrome-color, inherit) !important;
+    padding-inline: 0 !important;
+    opacity:1 !important;
+    padding:0 4px !important;
+    border-bottom:0px !important;
+
+    /*remove sidebar elements*/
+    & #sidebar-close {
+      display: none !important;
+    }
+
+    #sidebar-throbber,
+    #sidebar-spacer {
+      display: none !important;
+    }
+  }
+}
+
+#sidebar-title {
+  padding-inline: 10px !important;
+  padding-top: 0px !important;
+  font-size: 0.88em;
+}
+
+/*sidebar header rounded container*/
+#sidebar-switcher-target {
+  padding: 5px !important;
+  margin: auto 2px !important;
+  opacity: 0.5 !important;
+
+  &:hover {
+    border: 1px solid light-dark(rgba(30, 30, 30, 0.5), rgba(180, 180, 180, 0.5)) !important;
+  }
+}
 /* Greyscale extension buttons */
 #navigator-toolbox:not(:hover) .toolbarbutton-icon {
-    filter: grayscale(100%) !important;
+    filter: grayscale(100%);
     transition: filter 300ms ease !important;
 }
 
 /* Restore color on hover */
 #navigator-toolbox:hover .toolbarbutton-icon {
-    filter: grayscale(0%) !important;
+    filter: grayscale(0%);
     transition: filter 300ms ease !important;
 }
 /* Style 2 */
 /* Border around full tab */
 
- .tabbrowser-tab .tab-context-line {
+/ .tabbrowser-tab .tab-context-line {
   border: 2px solid var(--identity-icon-color);
   margin: 0 !important;
   width: 100%;
@@ -1255,49 +1421,6 @@ border-bottom-right-radius: 50% !important;
   border-radius: var(--tab-border-radius) !important;
   opacity: 0.6 !important;
 }
-/*
 .tabbrowser-tab .tab-background {
     overflow: clip !important;
-}}
-/*---------------Browser - Side bar---------------*/
-
-/*--quick hack, bigger sidebar, 50vw = 50% of the screen width--*/
-/*--great for view-tab-in-sidebar extensions--*/
-#sidebar-box { max-width: 50vw !important; }
-#sidebar-box { min-width: 14em; width: 18em; } /*defaults*/
-
-/*--default left side--<--*/
-#sidebar-box {
-border-radius: var(--uc-all-border-radius);
-margin: var(--uc-sb-margin-leftside) !important;
-}
-/*--right side-->--*/
-#sidebar-box[positionend="true"]
-{margin: var(--uc-sb-margin-rightside) !important;}
-
-#sidebar-header {
-border-top-left-radius: var(--uc-all-border-radius) !important;
-border-top-right-radius: var(--uc-all-border-radius) !important; }
-/*--sidebar content--*/
-#sidebar {
-border-bottom-left-radius: var(--uc-all-border-radius) !important;
-border-bottom-right-radius: var(--uc-all-border-radius) !important; }
-
-/*remove ugly border*/
-/*but keep the splitter accessible, it resizes the sidebar*/
-#sidebar-box[positionend] + .sidebar-splitter{
-border: 2px rgba(0,0,0,0) solid !important;
-border-inline-width: 0px !important;
-margin-inline: 0px !important;
-border-inline-end-width: 0px !important;}
-
-.sidebar-splitter
-{width: 2px !important;}
-
-:root {
---tab-min-width: initial !important; /*dont touch*/
---tab-overflow-pinned-tabs-width: initial !important;} /*dont touch*/}
-
-#tab-preview-panel {
-	--panel-background: var(--arrowpanel-background) !important;
 }

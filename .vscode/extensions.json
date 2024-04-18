@@ -48,6 +48,7 @@
 		"qiu.graphviz-language-support-and-preivew",
 		"kevinghadyani.vscode-colormate",
 		"jabacchetta.vscode-essentials",
-		"be5invis.vscode-custom-css"
+		"be5invis.vscode-custom-css",
+		"ex3ndr.llama-coder"
 	]
 }
