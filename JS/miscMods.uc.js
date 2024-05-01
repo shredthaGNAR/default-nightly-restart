@@ -88,9 +88,9 @@
     // icon disappears. the icon just instantly changes. I suspect this is done in order to
     // avoid potential problems with density modes, but it doesn't seem necessary. as long as
     // you provide some CSS it works fine:
-    // #stop-reload-button {position: relative;}
-    // #stop-reload-button > :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {display: block;}
-    // :is(#reload-button, #stop-button) > .toolbarbutton-icon {padding: var(--toolbarbutton-inner-padding) !important;}
+    #stop-reload-button {position: relative;}
+    #stop-reload-button > :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {display: block;}
+    :is(#reload-button, #stop-button) > .toolbarbutton-icon {padding: var(--toolbarbutton-inner-padding) !important;}
     "Allow stop/reload button to animate in other toolbars":
       Services.prefs.getBoolPref(
         "miscMods.allowStopReloadButtonToAnimateInOtherToolbars",
@@ -190,22 +190,22 @@
     // same icon that shows in the urlbar on container tabs. Firefox's built-in
     // styles don't use this for tabs, but duskFox does. Here's the style I use
     // to show these icons in tabs in duskFox:
-    // .tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected="true"]
-    //   .tab-content::after {
-    //   content: "";
-    //   display: flex;
-    //   height: 12px;
-    //   width: 12px;
-    //   margin-inline: 3px;
-    //   background: var(--identity-icon) center/contain no-repeat;
-    //   fill: var(--identity-icon-color);
-    //   -moz-context-properties: fill;
-    // }
+    .tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected="true"]
+    .tab-content::after {
+       content: "";
+      display: flex;
+      height: 12px;
+      width: 12px;
+      margin-inline: 3px;
+     background: var(--identity-icon) center/contain no-repeat;
+      fill: var(--identity-icon-color);
+      -moz-context-properties: fill;
+    }
     // This is a pretty opinionated change and it doesn't do anything without
     // duskFox or the above CSS, so it's disabled by default.
     "Show container icons on multiselected tabs": Services.prefs.getBoolPref(
       "miscMods.showContainerIconsOnMultiselectedTabs",
-      false
+      true
     ),
   };
   class UCMiscMods {

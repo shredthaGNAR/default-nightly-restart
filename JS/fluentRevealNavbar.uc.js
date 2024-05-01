@@ -21,20 +21,20 @@
 
       // the color of the gradient. default is the browser's color on navbar button hover, or a faint baby blue if it's not available. 
       // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
-      lightColor: "var(--button-hover-bgcolor, hsla(224, 100%, 80%, 0.15))",
+      lightColor: "hsla(0, 0%, 100%, 0.35)",
 
       // how wide the radial gradient is.
-      gradientSize: 50,
+      gradientSize: 75,
 
       // whether to show an additional light burst when clicking an element. (not recommended)
-      clickEffect: false,
+      clickEffect: true,
 
       // don't process mouse movements greater than {gradientSize}px from top of the screen, in order to reduce system load.
       // disable if you modified the ui to have toolbar buttons on different side of the screen (left, right or bottom)
-      filterDy: false,
+      filterDy: true,
 
       // looks for all toolbar buttons only once on script startup — reduces system load, but requires browser restart if toolbar buttons were changed
-      cacheButtons: false,
+      cacheButtons: true,
     };
 
     // instantiate the handler for a given window

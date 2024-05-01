@@ -26,7 +26,7 @@ class ExtensionOptionsWidget {
     // at the top of the panel
     "Show header": Services.prefs.getBoolPref(
       "extensionOptionsPanel.showHeader",
-      true
+      False
     ),
 
     // show the addon version next to its name in the list
@@ -54,7 +54,7 @@ class ExtensionOptionsWidget {
     // show system extensions?
     "Show hidden extensions": Services.prefs.getBoolPref(
       "extensionOptionsPanel.showHiddenExtensions",
-      false
+      True
     ),
 
     // show extensions that you've disabled?

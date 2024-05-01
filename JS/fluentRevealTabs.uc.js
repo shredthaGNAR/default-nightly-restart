@@ -23,11 +23,11 @@
 
       // the color of the gradient. default is sort of a faint baby blue.
       // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
-      lightColor: "hsla(224, 100%, 80%, 0.35)",
+      lightColor: "hsla(0, 0%, 100%, 0.35)",
 
       // how wide the radial gradient is. 50px looks best with my theme, but
       // default proton tabs are larger so you may want to try 60 or even 70.
-      gradientSize: 30,
+      gradientSize: 75,
 
       // whether to show an additional light burst when clicking a tab. I don't
       // recommend this since it doesn't play nicely with dragging & dropping if

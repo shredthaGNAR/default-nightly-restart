@@ -23,6 +23,6 @@
 		"iLoveWorkSpaceColors": true,
 		"iLoveWorkSpaceRandom": false
 	},
-	"CodeGPT.apiKey": "CodeGPT Plus Beta",
+	"CodeGPT.apiKey": "Ollama",
 	"checkpoints.showActiveFileOnly": false
 }
