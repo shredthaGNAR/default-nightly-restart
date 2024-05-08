@@ -49,6 +49,8 @@
 		"kevinghadyani.vscode-colormate",
 		"jabacchetta.vscode-essentials",
 		"be5invis.vscode-custom-css",
-		"ex3ndr.llama-coder"
+		"ex3ndr.llama-coder",
+		"anbuselvanrocky.bootstrap5-vscode",
+		"vitaliymaz.vscode-svg-previewer"
 	]
 }

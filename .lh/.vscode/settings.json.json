@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 101,
+            "activePatchIndex": 108,
             "patches": [
                 {
                     "date": 1638259850756,
@@ -412,6 +412,34 @@
                 {
                     "date": 1650799209610,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n {\n-    \"editor.fontFamily\": \"Operator Mono Liq, Victor Mono, Fira Code iScript, JetBrains Mono, \",\n+    \"editor.fontFamily\": \"Operator Mono Liq, Victor Mono, Fira Code iScript, JetBrains Mono,\",\n     \"editor.fontSize\": 18,\n     \"workbench.editor.enablePreview\": true,\n     \"editor.definitionLinkOpensInPeek\": true,\n     \"editor.bracketPairColorization.enabled\": true,\n"
+                },
+                {
+                    "date": 1715149265852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,31 @@\n {\n-    \"editor.fontFamily\": \"Operator Mono Liq, Victor Mono, Fira Code iScript, JetBrains Mono,\",\n-    \"editor.fontSize\": 18,\n-    \"workbench.editor.enablePreview\": true,\n-    \"editor.definitionLinkOpensInPeek\": true,\n-    \"editor.bracketPairColorization.enabled\": true,\n-    \"back-n-forth.withLastEditLocation\": true,\n-    \"editor.formatOnType\": true,\n-    \"editor.formatOnSave\": true,\n-    \"editor.formatOnPaste\": true,\n-    \"bookmarks.useWorkaroundForFormatters\": true,\n-    \"editor.defaultFormatter\": null,\n-    \"[plaintext]\": {\n-        \"editor.defaultFormatter\": \"esbenp.prettier-vscode\"\n-    }\n-}\n\\ No newline at end of file\n+\t\"editor.fontFamily\": \"Operator Mono Liq, Victor Mono, Fira Code iScript, JetBrains Mono\",\n+\t\"editor.fontSize\": 18,\n+\t\"workbench.editor.enablePreview\": true,\n+\t\"editor.definitionLinkOpensInPeek\": true,\n+\t\"editor.bracketPairColorization.enabled\": true,\n+\t\"back-n-forth.withLastEditLocation\": true,\n+\t\"editor.formatOnType\": true,\n+\t\"editor.formatOnSave\": false,\n+\t\"editor.formatOnPaste\": true,\n+\t\"bookmarks.useWorkaroundForFormatters\": true,\n+\t\"[plaintext]\": {\n+\t\t\"editor.defaultFormatter\": \"esbenp.prettier-vscode\"\n+\t},\n+\t\"workbench.colorCustomizations\": {\n+\t\t\"editorBracketHighlight.foreground1\": \"#92c5ef\",\n+\t\t\"editorBracketHighlight.foreground2\": \"#f59c02\",\n+\t\t\"editorBracketHighlight.foreground3\": \"#85309f\",\n+\t\t\"editorBracketHighlight.foreground4\": \"#00a3b6\",\n+\t\t\"editorBracketHighlight.foreground5\": \"#88ff10\",\n+\t\t\"editorBracketHighlight.foreground6\": \"#9a9a9a\",\n+\t\t\"editorBracketHighlight.unexpectedBracket.foreground\": \"#e3363c\",\n+\t\t\"iLoveWorkSpaceColors\": true,\n+\t\t\"iLoveWorkSpaceRandom\": false,\n+\t\t\"activityBar.background\": \"#581605\",\n+\t\t\"titleBar.activeBackground\": \"#7B1F07\",\n+\t\t\"titleBar.activeForeground\": \"#FFFBFA\"\n+\t},\n+\t\"CodeGPT.apiKey\": \"Ollama\",\n+\t\"checkpoints.showActiveFileOnly\": false\n+}\n"
+                },
+                {
+                    "date": 1715151887721,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,9 @@\n \t\t\"editorBracketHighlight.foreground5\": \"#88ff10\",\n \t\t\"editorBracketHighlight.foreground6\": \"#9a9a9a\",\n \t\t\"editorBracketHighlight.unexpectedBracket.foreground\": \"#e3363c\",\n \t\t\"iLoveWorkSpaceColors\": true,\n-\t\t\"iLoveWorkSpaceRandom\": false,\n-\t\t\"activityBar.background\": \"#581605\",\n-\t\t\"titleBar.activeBackground\": \"#7B1F07\",\n-\t\t\"titleBar.activeForeground\": \"#FFFBFA\"\n+\t\t\"iLoveWorkSpaceRandom\": false\n \t},\n \t\"CodeGPT.apiKey\": \"Ollama\",\n \t\"checkpoints.showActiveFileOnly\": false\n }\n"
+                },
+                {
+                    "date": 1715152101395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,12 @@\n \t\t\"editorBracketHighlight.foreground5\": \"#88ff10\",\n \t\t\"editorBracketHighlight.foreground6\": \"#9a9a9a\",\n \t\t\"editorBracketHighlight.unexpectedBracket.foreground\": \"#e3363c\",\n \t\t\"iLoveWorkSpaceColors\": true,\n-\t\t\"iLoveWorkSpaceRandom\": false\n+\t\t\"iLoveWorkSpaceRandom\": false,\n+\t\t\"activityBar.background\": \"#581605\",\n+\t\t\"titleBar.activeBackground\": \"#7B1F07\",\n+\t\t\"titleBar.activeForeground\": \"#FFFBFA\"\n \t},\n \t\"CodeGPT.apiKey\": \"Ollama\",\n \t\"checkpoints.showActiveFileOnly\": false\n }\n"
+                },
+                {
+                    "date": 1715152108737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,9 @@\n \t\t\"editorBracketHighlight.foreground5\": \"#88ff10\",\n \t\t\"editorBracketHighlight.foreground6\": \"#9a9a9a\",\n \t\t\"editorBracketHighlight.unexpectedBracket.foreground\": \"#e3363c\",\n \t\t\"iLoveWorkSpaceColors\": true,\n-\t\t\"iLoveWorkSpaceRandom\": false,\n-\t\t\"activityBar.background\": \"#581605\",\n-\t\t\"titleBar.activeBackground\": \"#7B1F07\",\n-\t\t\"titleBar.activeForeground\": \"#FFFBFA\"\n+\t\t\"iLoveWorkSpaceRandom\": false\n \t},\n \t\"CodeGPT.apiKey\": \"Ollama\",\n \t\"checkpoints.showActiveFileOnly\": false\n }\n"
+                },
+                {
+                    "date": 1715152363498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,12 @@\n \t\t\"editorBracketHighlight.foreground5\": \"#88ff10\",\n \t\t\"editorBracketHighlight.foreground6\": \"#9a9a9a\",\n \t\t\"editorBracketHighlight.unexpectedBracket.foreground\": \"#e3363c\",\n \t\t\"iLoveWorkSpaceColors\": true,\n-\t\t\"iLoveWorkSpaceRandom\": false\n+\t\t\"iLoveWorkSpaceRandom\": false,\n+\t\t\"activityBar.background\": \"#581605\",\n+\t\t\"titleBar.activeBackground\": \"#7B1F07\",\n+\t\t\"titleBar.activeForeground\": \"#FFFBFA\"\n \t},\n \t\"CodeGPT.apiKey\": \"Ollama\",\n \t\"checkpoints.showActiveFileOnly\": false\n }\n"
+                },
+                {
+                    "date": 1715152508521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,12 @@\n \t\t\"editorBracketHighlight.foreground5\": \"#88ff10\",\n \t\t\"editorBracketHighlight.foreground6\": \"#9a9a9a\",\n \t\t\"editorBracketHighlight.unexpectedBracket.foreground\": \"#e3363c\",\n \t\t\"iLoveWorkSpaceColors\": true,\n-\t\t\"iLoveWorkSpaceRandom\": false\n+\t\t\"iLoveWorkSpaceRandom\": false,\n+\t\t\"activityBar.background\": \"#581605\",\n+\t\t\"titleBar.activeBackground\": \"#7B1F07\",\n+\t\t\"titleBar.activeForeground\": \"#FFFBFA\"\n \t},\n \t\"CodeGPT.apiKey\": \"Ollama\",\n \t\"checkpoints.showActiveFileOnly\": false\n }\n"
+                },
+                {
+                    "date": 1715153009865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,9 @@\n \t\t\"editorBracketHighlight.foreground5\": \"#88ff10\",\n \t\t\"editorBracketHighlight.foreground6\": \"#9a9a9a\",\n \t\t\"editorBracketHighlight.unexpectedBracket.foreground\": \"#e3363c\",\n \t\t\"iLoveWorkSpaceColors\": true,\n-\t\t\"iLoveWorkSpaceRandom\": false,\n-\t\t\"activityBar.background\": \"#581605\",\n-\t\t\"titleBar.activeBackground\": \"#7B1F07\",\n-\t\t\"titleBar.activeForeground\": \"#FFFBFA\"\n+\t\t\"iLoveWorkSpaceRandom\": false\n \t},\n \t\"CodeGPT.apiKey\": \"Ollama\",\n \t\"checkpoints.showActiveFileOnly\": false\n }\n"
                 }
             ],
             "date": 1638259850756,

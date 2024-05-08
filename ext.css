@@ -1,0 +1,454 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+/* Example 1: limit popup width to 50% of window width */
+#panel {
+    max-width: 50%;
+}
+
+
+/* Example 2: reduce panel padding */
+#panel {
+    padding: 1px;
+}
+
+
+/* Example 3: add rounded corners */
+.bottom_left #panel {
+    border-top-right-radius: 3px;
+}
+.left #panel, .bottom_left.evaded #panel {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.float #panel {
+    border-radius: 3px;
+}
+
+
+/* Example 4: set background color according to
+   visited/bookmarked/both/currently_open */
+.visited div {
+    background: #aaf;
+    border-color: #77c;
+}
+.visited #overflow_begin {
+    background: linear-gradient(to right, transparent, #aaf);
+}
+.visited #overflow_end {
+    background: linear-gradient(to left, transparent, #aaf);
+}
+.bookmarked div {
+    background: #faa;
+    border-color: #c77;
+}
+.bookmarked #overflow_begin {
+    background: linear-gradient(to right, transparent, #faa);
+}
+.bookmarked #overflow_end {
+    background: linear-gradient(to left, transparent, #faa);
+}
+.visited.bookmarked div {
+    background: #faf;
+    border-color: #c7c;
+}
+.visited.bookmarked #overflow_begin {
+    background: linear-gradient(to right, transparent, #faf);
+}
+.visited.bookmarked #overflow_end {
+    background: linear-gradient(to left, transparent, #faf);
+}
+.currently_open div {
+    background: #afa;
+    border-color: #7c7;
+}
+.currently_open #overflow_begin {
+    background: linear-gradient(to right, transparent, #afa);
+}
+.currently_open #overflow_end {
+    background: linear-gradient(to left, transparent, #afa);
+}
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/*
+ This file contains CSS rules that you can add to your own
+ userChrome.css to achieve the described effect. For information on
+ how to find/create userChrome.css, see:
+   http://kb.mozillazine.org/index.php?title=UserChrome.css
+
+ Note that you have to restart Firefox for any changes to the file to
+ take effect.
+*/
+
+
+
+/*
+ Note: 'statuspanel' works in Firefox 60 and earlier, '#statuspanel'
+ works in Firefox 61 and later.
+*/
+
+
+
+/*
+ This rule hides the popup that shows when hovering over a link.
+*/
+statuspanel[type=overLink],
+#statuspanel[type=overLink]
+{
+    display: none !important;
+}
+
+
+
+/*
+ This rule disables the fading in/out of the overlink popup. You may
+ also wish to set browser.overlink-delay = 0 in about:config
+*/
+statuspanel[type=overLink],
+statuspanel[inactive][previoustype=overLink],
+#statuspanel[type=overLink],
+#statuspanel[inactive][previoustype=overLink]
+{
+    -moz-transition: none !important;
+}
+
+
+/* Example 4: set background color according to
+   visited/bookmarked/both/currently_open */
+.visited div {
+    background: #aaf;
+    border-color: #77c;
+}
+.visited #overflow_begin {
+    background: linear-gradient(to right, transparent, #aaf);
+}
+.visited #overflow_end {
+    background: linear-gradient(to left, transparent, #aaf);
+}
+.bookmarked div {
+    background: #faa;
+    border-color: #c77;
+}
+.bookmarked #overflow_begin {
+    background: linear-gradient(to right, transparent, #faa);
+}
+.bookmarked #overflow_end {
+    background: linear-gradient(to left, transparent, #faa);
+}
+.visited.bookmarked div {
+    background: #faf;
+    border-color: #c7c;
+}
+.visited.bookmarked #overflow_begin {
+    background: linear-gradient(to right, transparent, #faf);
+}
+.visited.bookmarked #overflow_end {
+    background: linear-gradient(to left, transparent, #faf);
+}
+.currently_open div {
+    background: #afa;
+    border-color: #7c7;
+}
+.currently_open #overflow_begin {
+    background: linear-gradient(to right, transparent, #afa);
+}
+.currently_open #overflow_end {
+    background: linear-gradient(to left, transparent, #afa);
+}
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/*
+ This file contains CSS rules that you can add to your own
+ userChrome.css to achieve the described effect. For information on
+ how to find/create userChrome.css, see:
+   http://kb.mozillazine.org/index.php?title=UserChrome.css
+
+ Note that you have to restart Firefox for any changes to the file to
+ take effect.
+*/
+
+
+
+/*
+ Note: 'statuspanel' works in Firefox 60 and earlier, '#statuspanel'
+ works in Firefox 61 and later.
+*/
+
+
+
+/*
+ This rule hides the popup that shows when hovering over a link.
+*/
+statuspanel[type=overLink],
+#statuspanel[type=overLink]
+{
+    display: none !important;
+}
+
+
+
+/*
+ This rule disables the fading in/out of the overlink popup. You may
+ also wish to set browser.overlink-delay = 0 in about:config
+*/
+statuspanel[type=overLink],
+statuspanel[inactive][previoustype=overLink],
+#statuspanel[type=overLink],
+#statuspanel[inactive][previoustype=overLink]
+{
+    -moz-transition: none !important;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+div {
+    color: #404040;
+    background: #cecece;
+    font: caption;
+    border-style: solid;
+    border-width: 0;
+    border-color: #909090;
+    line-height: 1.3em; /* hard-coded into JS, do not override */
+}
+.wrapper {
+    /* common for wrapper,url_wrapper,url_begin_wrapper,url_end_wrapper */
+    background: none !important;
+}
+#panel {
+    position: fixed;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+.affix {
+    /* common for prefix,postfix */
+    align-self: center;
+    white-space: pre;
+}
+#url_wrapper {
+    position: relative;
+    overflow: hidden;
+    align-self: center;
+    flex-shrink: 1;
+}
+.url {
+    /* common for url_begin,url_end */
+}
+.multiline #url_begin {
+    position: relative;
+    max-height: 2.6em; /* N * line-height, overridden by preferences */
+    white-space: pre-wrap;
+    word-break: break-all;
+    z-index: 0;
+}
+.oneline #url_begin_wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.oneline #url_begin {
+    position: relative;
+    white-space: pre;
+    z-index: 0;
+    height: 1.3em; /* 1*line-height */
+    overflow: hidden;
+}
+.multiline #url_end {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-top: 2px dashed #f44;
+    height: 1.3em; /* 1*line-height */
+    white-space: pre;
+    text-align: right;
+    z-index: 1;
+}
+.oneline #url_end_wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 1.3em; /* 1*line-height */
+    overflow: hidden;
+}
+.oneline #url_end {
+    position: absolute;
+    right: 0;
+    top: 0;
+    white-space: pre;
+    z-index: 1;
+    height: 1.3em; /* 1*line-height */
+    text-align: right;
+}
+.overflow {
+    /* common for overflow_begin,overflow_end */
+    position: absolute;
+    z-index: 2;
+    width: 3em;
+    height: 1.3em; /* 1*line-height */
+}
+#overflow_begin {
+    background: linear-gradient(to right, transparent, #cecece);
+}
+.multiline #overflow_begin {
+    bottom: 1.3em;
+    right: 0;
+}
+.oneline #overflow_begin {
+    bottom: 0;
+    right: 50%;
+}
+#overflow_end {
+    background: linear-gradient(to left, transparent, #cecece);
+}
+.multiline #overflow_end {
+    bottom: 0;
+    left: 0;
+}
+.oneline #overflow_end {
+    bottom: 0;
+    left: 50%;
+    border-left: 2px dotted #f44;
+    margin-left: -2px;
+    z-index: 3;
+}
+
+
+/* styles for operating modes */
+.bottom_left #panel { /* "normal" */
+    bottom: 0px; /* overridden by JS */
+    left: 0px; /* do not override, otherwise evasion won't work */
+    border-top-width: 1px;
+    border-right-width: 1px;
+}
+.left #panel, .bottom_left.evaded #panel {
+    /* "hybrid"/diverted upwards from under mouse pointer */
+    bottom: 25px; /* overridden by preferences and evasion */
+    left: 0px; /* do not override, otherwise evasion won't work */
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+}
+.float #panel { /* "tooltip" */
+    top: 0px;  /* overridden by mouse position */
+    left: 0px; /* overridden by mouse position */
+    border-width: 1px;
+}
+/*@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/*
+ This file contains CSS rules that you can add to your own
+ userChrome.css to achieve the described effect. For information on
+ how to find/create userChrome.css, see:
+   http://kb.mozillazine.org/index.php?title=UserChrome.css
+
+ Note that you have to restart Firefox for any changes to the file to
+ take effect.
+*/
+
+
+
+/*
+ Note: 'statuspanel' works in Firefox 60 and earlier, '#statuspanel'
+ works in Firefox 61 and later.
+*/
+
+
+
+/*
+ This rule hides the popup that shows when hovering over a link.
+*/
+statuspanel[type=overLink],
+#statuspanel[type=overLink]
+{
+    display: none !important;
+}
+
+
+
+/*
+ This rule disables the fading in/out of the overlink popup. You may
+ also wish to set browser.overlink-delay = 0 in about:config
+*/
+statuspanel[type=overLink],
+statuspanel[inactive][previoustype=overLink],
+#statuspanel[type=overLink],
+#statuspanel[inactive][previoustype=overLink]
+{
+    -moz-transition: none !important;
+}
+/* Example 1: limit popup width to 50% of window width */
+#panel {
+    max-width: 50%;
+}
+
+
+/* Example 2: reduce panel padding */
+#panel {
+    padding: 1px;
+}
+
+
+/* Example 3: add rounded corners */
+.bottom_left #panel {
+    border-top-right-radius: 3px;
+}
+.left #panel, .bottom_left.evaded #panel {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.float #panel {
+    border-radius: 3px;
+}
+
+
+/* Example 4: set background color according to
+   visited/bookmarked/both/currently_open */
+.visited div {
+    background: #aaf;
+    border-color: #77c;
+}
+.visited #overflow_begin {
+    background: linear-gradient(to right, transparent, #aaf);
+}
+.visited #overflow_end {
+    background: linear-gradient(to left, transparent, #aaf);
+}
+.bookmarked div {
+    background: #faa;
+    border-color: #c77;
+}
+.bookmarked #overflow_begin {
+    background: linear-gradient(to right, transparent, #faa);
+}
+.bookmarked #overflow_end {
+    background: linear-gradient(to left, transparent, #faa);
+}
+.visited.bookmarked div {
+    background: #faf;
+    border-color: #c7c;
+}
+.visited.bookmarked #overflow_begin {
+    background: linear-gradient(to right, transparent, #faf);
+}
+.visited.bookmarked #overflow_end {
+    background: linear-gradient(to left, transparent, #faf);
+}
+.currently_open div {
+    background: #afa;
+    border-color: #7c7;
+}
+.currently_open #overflow_begin {
+    background: linear-gradient(to right, transparent, #afa);
+}
+.currently_open #overflow_end {
+    background: linear-gradient(to left, transparent, #afa);
+}
