@@ -107,9 +107,9 @@ no longer necessary after modern flexbox emulation. */
   }
 }
 
-.panel-subview-body + toolbarseparator {
+/* .panel-subview-body + toolbarseparator {
   margin-top: 0 !important;
-}
+} */
 
 #widget-overflow {
   panelview[extension] {
@@ -208,6 +208,20 @@ no longer necessary after modern flexbox emulation. */
           transition-property: -moz-window-transform, -moz-window-opacity !important;
           transition-duration: 0.18s, 0.18s !important;
           transition-timing-function: var(--animation-easing-function), ease-out !important;
+        }
+      }
+
+      @media (-moz-mac-big-sur-theme: 0) {
+        panel[type="arrow"],
+        #BMB_bookmarksPopup {
+          &:not([animate="false"]) {
+            -moz-window-opacity: 0 !important;
+            -moz-window-transform: translateY(-70px) !important;
+
+            &[side="bottom"] {
+              -moz-window-transform: translateY(70px) !important;
+            }
+          }
         }
       }
 
@@ -1392,12 +1406,12 @@ toolbar button slider script. but just in case) */
 #identity-popup-securityView-body {
   padding-block: 4px 8px;
 }
-/*
+
 .unified-extensions-panel-header,
 .panel-header {
 	box-sizing: border-box !important;
 }
-8*/
+
 .unified-extensions-panel-header > h1,
 .panel-header > h1 {
   font-size: 1.1em !important;

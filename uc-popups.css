@@ -26,6 +26,9 @@ tabmodalprompt {
   --link-color: var(--purple-35) !important;
   --link-color-hover: var(--purple-30) !important;
   --link-color-active: var(--purple-30) !important;
+  --color-accent-primary: var(--purple-40) !important;
+  --color-accent-primary-hover: var(--purple-35) !important;
+  --color-accent-primary-active: var(--purple-30) !important;
   --in-content-primary-button-background: var(--purple-40) !important;
   --in-content-primary-button-background-hover: var(--purple-35) !important;
   --in-content-primary-button-background-active: var(--purple-30) !important;
@@ -43,6 +46,7 @@ tabmodalprompt {
   --in-content-button-border-radius: var(--general-button-border-radius) !important;
   --in-content-button-vertical-padding: 5px !important;
   --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+  --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
   --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
 }
 
@@ -72,10 +76,10 @@ tabmodalprompt * {
   /* temporarily disabled due to backdrop-filter being disabled.
   see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
 
-  background-color: var(--dialog-bgcolor) !important;
+  /* background-color: var(--dialog-bgcolor) !important;
   background-image: var(--acrylic-texture) !important;
   backdrop-filter: var(--acrylic-blur) !important;
-  border-color: var(--blurred-dialog-border-color) !important;
+  border-color: var(--blurred-dialog-border-color) !important; */
 
   background-color: var(--ui-quaternary-bg) !important;
   border-color: var(--uc-menu-border-color) !important;
@@ -109,7 +113,7 @@ tabmodalprompt input {
   border-radius: var(--general-button-border-radius) !important;
 }
 
-tabmodalprompt select:not([size], [multiple])>option {
+tabmodalprompt select:not([size], [multiple]) > option {
   background-color: var(--dropdown-bgcolor) !important;
   color: var(--ui-text-80) !important;
 }
@@ -218,13 +222,13 @@ tabmodalprompt checkbox {
 }
 
 /* in-content autocomplete popup */
-panel[type="autocomplete-richlistbox"]>richlistbox {
+panel[type="autocomplete-richlistbox"] > richlistbox {
   background: none !important;
   color: inherit !important;
   border: none !important;
 }
 
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   appearance: none !important;
   color: var(--menu-color) !important;
   padding: 4px 8px !important;
@@ -233,7 +237,7 @@ panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem {
   border-radius: var(--context-menuitem-border-radius) !important;
 }
 
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem:is([selected], :hover):not([disabled="true"]) {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([selected], :hover):not([disabled="true"]) {
   background-color: var(--arrowpanel-dimmed) !important;
   color: var(--menu-color) !important;
 }
@@ -245,33 +249,33 @@ panel[type="autocomplete-richlistbox"] richlistitem:is([originaltype="generatedP
   margin-inline-end: 6px !important;
 }
 
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="generatedPassword"]>.two-line-wrapper>.labels-wrapper>.generated-password-autosave,
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="importableLearnMore"]>.ac-title,
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem>.two-line-wrapper>.labels-wrapper>.line2-label {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="generatedPassword"] > .two-line-wrapper > .labels-wrapper > .generated-password-autosave,
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="importableLearnMore"] > .ac-title,
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem > .two-line-wrapper > .labels-wrapper > .line2-label {
   opacity: 1 !important;
   color: var(--panel-shortcut-color) !important;
 }
 
-#PopupAutoComplete>richlistbox>richlistitem[originaltype="insecureWarning"]>.ac-title>description>.ac-title-text {
+#PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title > description > .ac-title-text {
   padding-inline: 0 8px !important;
 }
 
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="loginsFooter"] {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] {
   color: inherit !important;
   border: none !important;
   margin-top: 4px;
   background-color: var(--arrowpanel-dimmed) !important;
 }
 
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="loginsFooter"] .ac-title {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] .ac-title {
   margin-inline: 0 !important;
 }
 
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="loginsFooter"]:hover[selected] {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"]:hover[selected] {
   background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
@@ -516,15 +520,15 @@ panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="lo
     background-color: var(--in-content-button-background-active) !important;
   }
 
-  input:checked+.slider {
+  input:checked + .slider {
     background-color: var(--purple-40) !important;
   }
 
-  input:checked+.slider:hover {
+  input:checked + .slider:hover {
     background-color: var(--purple-35) !important;
   }
 
-  input:checked+.slider:hover:active {
+  input:checked + .slider:hover:active {
     background-color: var(--purple-30) !important;
   }
 
@@ -536,7 +540,7 @@ panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="lo
     gap: 8px !important;
   }
 
-  .font-size-selection>label>input[type="radio"] {
+  .font-size-selection > label > input[type="radio"] {
     appearance: radio !important;
     margin: 0 !important;
   }
@@ -591,8 +595,7 @@ panel[type="autocomplete-richlistbox"]>richlistbox>richlistitem[originaltype="lo
   --arrowpanel-border-color: inherit !important;
 }
 
-@-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
-url-prefix("chrome://global/content/datepicker.xhtml") {
+@-moz-document url-prefix("chrome://global/content/timepicker.xhtml"), url-prefix("chrome://global/content/datepicker.xhtml") {
   body {
     background-color: var(--arrowpanel-background) !important;
     color: var(--font-color) !important;
@@ -621,15 +624,15 @@ url-prefix("chrome://global/content/datepicker.xhtml") {
     height: 14.6rem !important;
   }
 
-  .days-view>.out-of-range,
-  .days-view>.off-step {
+  .days-view > .out-of-range,
+  .days-view > .off-step {
     pointer-events: none !important;
     background: none !important;
     opacity: 0.5 !important;
     color: var(--uc-menu-disabled-color) !important;
   }
 
-  .calendar-container .days-view>div::before {
+  .calendar-container .days-view > div::before {
     display: revert !important;
   }
 
@@ -644,7 +647,7 @@ url-prefix("chrome://global/content/datepicker.xhtml") {
     opacity: 1 !important;
   }
 
-  .month-year-view>.spinner-container {
+  .month-year-view > .spinner-container {
     margin: 1rem 0 !important;
   }
 
@@ -654,14 +657,14 @@ url-prefix("chrome://global/content/datepicker.xhtml") {
     color: var(--font-color) !important;
   }
 
-  .nav>button:is(.prev, .next) {
+  .nav > button:is(.prev, .next) {
     fill-opacity: 0.6 !important;
     width: var(--date-picker-item-height) !important;
     height: var(--date-picker-item-height) !important;
     border-radius: var(--general-button-border-radius);
   }
 
-  .nav>button:is(.prev, .next):hover {
+  .nav > button:is(.prev, .next):hover {
     fill-opacity: 1 !important;
     background-color: var(--arrowpanel-dimmed) !important;
   }
@@ -685,7 +688,7 @@ url-prefix("chrome://global/content/datepicker.xhtml") {
     color: var(--font-color) !important;
   }
 
-  .month-year-view .spinner>div {
+  .month-year-view .spinner > div {
     align-self: center !important;
     padding-block: calc(var(--spinner-item-height) / 5) !important;
     align-items: center !important;
@@ -706,10 +709,10 @@ url-prefix("chrome://global/content/datepicker.xhtml") {
   /* temporarily disabled due to backdrop-filter being disabled.
   see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
 
-  background-color: var(--dialog-bgcolor) !important;
+  /* background-color: var(--dialog-bgcolor) !important;
   background-image: var(--acrylic-texture) !important;
   backdrop-filter: var(--acrylic-blur) !important;
-  border: 1px solid var(--blurred-dialog-border-color) !important;
+  border: 1px solid var(--blurred-dialog-border-color) !important; */
 
   background-color: var(--ui-tertiary-bg) !important;
   border: 1px solid var(--uc-menu-border-color) !important;
@@ -767,7 +770,7 @@ url-prefix("chrome://global/content/datepicker.xhtml") {
   border-radius: 5px !important;
 }
 
-:is(.tab-prompt-dialog, #window-modal-dialog) .printDialogBox>.dialogFrame {
+:is(.tab-prompt-dialog, #window-modal-dialog) .printDialogBox > .dialogFrame {
   border-radius: 0 !important;
 }
 
@@ -786,7 +789,7 @@ rtl languages. adjust the border radius accordingly */
 }
 
 /* modal dialog background overlay */
-:not(#window-modal-dialog)>.dialogOverlay[topmost="true"],
+:not(#window-modal-dialog) > .dialogOverlay[topmost="true"],
 #window-modal-dialog::backdrop {
   /* background-color: transparent !important; */
   background-color: hsla(240, 4%, 4%, 0.5) !important;
@@ -808,13 +811,7 @@ rtl languages. adjust the border radius accordingly */
   justify-items: center;
 }
 
-@-moz-document url("chrome://global/content/commonDialog.xhtml"),
-url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-url("chrome://mozapps/content/handling/appChooser.xhtml"),
-url("chrome://global/content/appPicker.xhtml"),
-url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-url-prefix("chrome://browser/content/sanitize.xhtml") {
-
+@-moz-document url("chrome://global/content/commonDialog.xhtml"), url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url("chrome://global/content/appPicker.xhtml"), url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml"), url("chrome://browser/content/preferences/dialogs/siteDataRemoveSelected.xhtml") {
   #commonDialogWindow[dialogroot],
   #commonDialogWindow[dialogroot] *,
   .dialog-button-box {
@@ -836,12 +833,16 @@ url-prefix("chrome://browser/content/sanitize.xhtml") {
     --link-color: var(--purple-35) !important;
     --link-color-hover: var(--purple-30) !important;
     --link-color-active: var(--purple-30) !important;
+    --color-accent-primary: var(--purple-40) !important;
+    --color-accent-primary-hover: var(--purple-35) !important;
+    --color-accent-primary-active: var(--purple-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-primary-button-text-color-hover: white !important;
     --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -871,7 +872,7 @@ url-prefix("chrome://browser/content/sanitize.xhtml") {
     margin-block-start: 2px !important;
   }
 
-  :is(.dialog-content-box, [part="content-box"]):not([hidden])+.dialog-button-box {
+  :is(.dialog-content-box, [part="content-box"]):not([hidden]) + .dialog-button-box {
     margin-top: 5px;
   }
 
@@ -880,11 +881,11 @@ url-prefix("chrome://browser/content/sanitize.xhtml") {
     margin-inline: 4px;
   }
 
-  .dialog-button-box>button {
+  .dialog-button-box > button {
     flex-grow: 0.1;
   }
 
-  .dialog-button-box>button {
+  .dialog-button-box > button {
     appearance: none !important;
     min-height: var(--menuitem-height) !important;
     color: var(--in-content-button-text-color) !important;
@@ -898,41 +899,41 @@ url-prefix("chrome://browser/content/sanitize.xhtml") {
     font-size: 1em !important;
   }
 
-  .dialog-button-box>button:not([disabled="true"]):is(:hover, :focus-visible) {
+  .dialog-button-box > button:not([disabled="true"]):is(:hover, :focus-visible) {
     background-color: var(--in-content-button-background-hover) !important;
     color: var(--in-content-button-text-color-hover) !important;
     border-color: var(--in-content-button-border-color-hover) !important;
   }
 
-  .dialog-button-box>button:not([disabled="true"]):focus-visible {
+  .dialog-button-box > button:not([disabled="true"]):focus-visible {
     outline: var(--global-focus-outline, var(--default-focusring, auto)) !important;
   }
 
-  .dialog-button-box>button:not([disabled="true"]):hover:active,
-  .dialog-button-box>button[open],
-  .dialog-button-box>button[open]:hover {
+  .dialog-button-box > button:not([disabled="true"]):hover:active,
+  .dialog-button-box > button[open],
+  .dialog-button-box > button[open]:hover {
     background-color: var(--in-content-button-background-active) !important;
     color: var(--in-content-button-text-color-active) !important;
     border-color: var(--in-content-button-border-color-active) !important;
   }
 
-  .dialog-button-box>button[disabled="true"] {
+  .dialog-button-box > button[disabled="true"] {
     opacity: 0.4 !important;
   }
 
-  .dialog-button-box>button:is([autofocus], [type="submit"], [default], .primary) {
+  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary) {
     background-color: var(--in-content-primary-button-background) !important;
     color: var(--in-content-primary-button-text-color) !important;
     border-color: var(--in-content-primary-button-border-color) !important;
   }
 
-  .dialog-button-box>button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
+  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
     background-color: var(--in-content-primary-button-background-hover) !important;
     color: var(--in-content-primary-button-text-color-hover) !important;
     border-color: var(--in-content-primary-button-border-hover) !important;
   }
 
-  .dialog-button-box>button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
+  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
     background-color: var(--in-content-primary-button-background-active) !important;
   }
 
@@ -952,7 +953,8 @@ url-prefix("chrome://browser/content/sanitize.xhtml") {
   }
 
   richlistbox[id] richlistitem {
-    min-height: 32px !important;
+    min-height: var(--menuitem-height) !important;
+    align-items: center !important;
   }
 
   richlistbox[id] richlistitem[selected="true"] {
@@ -960,26 +962,26 @@ url-prefix("chrome://browser/content/sanitize.xhtml") {
     color: var(--in-content-page-color) !important;
   }
 
-  richlistbox[id] richlistitem>button {
+  richlistbox[id] richlistitem > button {
     padding-block: 0 !important;
     min-height: 24px !important;
   }
 
-  richlistbox[id] richlistitem>button[label] {
+  richlistbox[id] richlistitem > button[label] {
     background-color: var(--in-content-primary-button-background) !important;
   }
 
-  richlistbox[id] richlistitem:not([disabled="true"])>button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
+  richlistbox[id] richlistitem:not([disabled="true"]) > button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
     background-color: var(--in-content-primary-button-background-hover) !important;
   }
 
-  richlistbox[id] richlistitem:not([disabled="true"])>button[label]:is(:enabled, :not([disabled="true"])):hover:active,
-  richlistbox[id] richlistitem>button[label][open],
-  richlistbox[id] richlistitem>button[label][open]:hover {
+  richlistbox[id] richlistitem:not([disabled="true"]) > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
+  richlistbox[id] richlistitem > button[label][open],
+  richlistbox[id] richlistitem > button[label][open]:hover {
     background-color: var(--in-content-primary-button-background-active) !important;
   }
 
-  select:not([size], [multiple])>option {
+  select:not([size], [multiple]) > option {
     background-color: var(--dropdown-bgcolor) !important;
     color: var(--ui-text-80) !important;
   }
@@ -1089,9 +1091,7 @@ url-prefix("chrome://browser/content/sanitize.xhtml") {
   }
 }
 
-@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-url("chrome://global/content/appPicker.xhtml") {
-
+@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url("chrome://global/content/appPicker.xhtml"), url("chrome://browser/content/preferences/dialogs/siteDataRemoveSelected.xhtml") {
   :root,
   :root dialog,
   .dialog-button-box {
@@ -1120,11 +1120,15 @@ url("chrome://global/content/appPicker.xhtml") {
     --link-visited-color: var(--pink-40) !important;
     --link-visited-color-hover: var(--pink-35) !important;
     --link-visited-color-active: var(--pink-30) !important;
+    --color-accent-primary: var(--purple-40) !important;
+    --color-accent-primary-hover: var(--purple-35) !important;
+    --color-accent-primary-active: var(--purple-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-accent-color: var(--purple-35) !important;
     --in-content-table-background: var(--in-content-box-background) !important;
@@ -1159,9 +1163,9 @@ url("chrome://global/content/appPicker.xhtml") {
     margin-block: 0 !important;
   }
 
-  separator.thin:not([orient="vertical"]) {
+  /* separator.thin:not([orient="vertical"]) {
     height: 5px !important;
-  }
+  } */
 
   .dialog-button-box:not([hidden]) {
     column-gap: 10px !important;
@@ -1183,7 +1187,6 @@ url("chrome://global/content/appPicker.xhtml") {
   }
 
   @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
-
     .header,
     #location {
       font-weight: var(--uc-font-weight-extrabold, 500) !important;
@@ -1192,17 +1195,10 @@ url("chrome://global/content/appPicker.xhtml") {
   }
 }
 
-@-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-url("chrome://mozapps/content/handling/appChooser.xhtml"),
-url-prefix("chrome://global/content/print.html"),
-url("chrome://browser/content/places/bookmarkProperties.xhtml"),
-url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
-url-prefix("chrome://browser/content/sanitize.xhtml"),
-url("chrome://browser/content/spotlight.html") {
-
+@-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url-prefix("chrome://global/content/print.html"), url("chrome://browser/content/places/bookmarkProperties.xhtml"), url("chrome://browser/content/places/bookmarkProperties2.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml"), url("chrome://browser/content/spotlight.html"), url("chrome://browser/content/preferences/dialogs/siteDataRemoveSelected.xhtml") {
   :root[dialogroot],
   :root[dialogroot] dialog,
-  :root[dialogroot] richlistbox[id]:not(#categories)>richlistitem[selected],
+  :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected],
   :root[dialogroot] .onboardingContainer,
   :root[dialogroot] .onboardingContainer .screen {
     --in-content-page-background: var(--ui-quaternary-bg) !important;
@@ -1224,11 +1220,15 @@ url("chrome://browser/content/spotlight.html") {
     --link-color: var(--purple-30) !important;
     --link-color-hover: var(--purple-25) !important;
     --link-color-active: var(--purple-20) !important;
+    --color-accent-primary: var(--purple-40) !important;
+    --color-accent-primary-hover: var(--purple-35) !important;
+    --color-accent-primary-active: var(--purple-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -1264,26 +1264,7 @@ url("chrome://browser/content/spotlight.html") {
     background-color: var(--in-content-page-background) !important;
   }
 
-  :root[dialogroot] input[type="checkbox"]:checked {
-    background-image: url(chrome://userchrome/content/check.svg) !important;
-    background-size: contain !important;
-  }
-
-  :root[dialogroot] input[type="radio"],
-  :root[dialogroot] .radio-check {
-    appearance: none;
-    border: 1px solid var(--in-content-box-border-color);
-    border-radius: 100%;
-    margin-block: 3px;
-    margin-inline: 0 10px;
-    background-color: var(--in-content-button-background);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain !important;
-    flex-shrink: 0;
-  }
-
-  :root[dialogroot] select:not([size], [multiple])>option {
+  :root[dialogroot] select:not([size], [multiple]) > option {
     background-color: var(--dropdown-bgcolor) !important;
     color: var(--ui-text-80) !important;
   }
@@ -1320,9 +1301,10 @@ url("chrome://browser/content/spotlight.html") {
   :where(:root[dialogroot], .dialog-button-box) select:focus-visible,
   :where(:root[dialogroot], .dialog-button-box) input:is([type="checkbox"], [type="color"], [type="radio"]):focus-visible,
   :where(:root[dialogroot], .dialog-button-box) menulist:focus-visible,
-  :where(:root[dialogroot], .dialog-button-box) checkbox:not([native]):focus-visible>.checkbox-check,
-  :where(:root[dialogroot], .dialog-button-box) radio[focused="true"]>.radio-check,
-  :where(:root[dialogroot], .dialog-button-box) tab:focus-visible>.tab-middle>.tab-text {
+  :where(:root[dialogroot], .dialog-button-box) checkbox:not([native]):focus-visible > .checkbox-check,
+  :where(:root[dialogroot], .dialog-button-box) radio[focused="true"] > .radio-check,
+  :where(:root[dialogroot], .dialog-button-box) tab:focus-visible > .tab-middle > .tab-text,
+  :where(:root[dialogroot], .dialog-button-box) .toggle-group-input:focus-visible + .toggle-group-label{
     outline-offset: 0 !important;
   }
 
@@ -1332,14 +1314,12 @@ url("chrome://browser/content/spotlight.html") {
     color: var(--ui-selection-color) !important;
   }
 
-  :root[dialogroot] details>summary {
+  :root[dialogroot] details > summary {
     border-radius: 0.01px;
   }
 
-  :root[dialogroot] details>summary:focus-visible {
-    box-shadow: none;
-    outline: 2px solid var(--in-content-focus-outline-color);
-    outline-offset: 5px;
+  :root[dialogroot] details > summary:focus-visible {
+    outline-offset: 2px;
   }
 
   :root[dialogroot] menulist,
@@ -1400,39 +1380,14 @@ url("chrome://browser/content/spotlight.html") {
   }
 
   button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
-  button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
+  button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
+  .toggle-group-input:checked:focus-visible + .toggle-group-label {
     background-color: var(--in-content-primary-button-background-hover) !important;
     color: var(--in-content-primary-button-text-color-hover) !important;
   }
 
   :root[dialogroot] input[type="number"] {
-    overflow: hidden !important;
-    overflow-clip-box: padding-box !important;
     border-radius: var(--in-content-button-border-radius) !important;
-    background-clip: padding-box !important;
-    border-right: none !important;
-  }
-
-  :root[dialogroot] input[type="number"]::-moz-number-spin-box {
-    border-top-right-radius: var(--in-content-button-border-radius) !important;
-    border-bottom-right-radius: var(--in-content-button-border-radius) !important;
-    border-right: 1px solid var(--in-content-box-border-color) !important;
-    border-left: none !important;
-    width: calc(1em + 0.67px) !important;
-  }
-
-  :root[dialogroot] input[type="number"]:hover,
-  :root[dialogroot] input[type="number"]:hover::-moz-number-spin-box {
-    border-color: var(--in-content-border-hover) !important;
-  }
-
-  :root[dialogroot] input[type="number"]:hover:active::-moz-number-spin-box {
-    border-color: var(--purple-40) !important;
-  }
-
-  :root[dialogroot] input[type="number"]:focus,
-  :root[dialogroot] input[type="number"]:focus::-moz-number-spin-box {
-    border-color: var(--in-content-focus-outline-color) !important;
   }
 
   :root[dialogroot] #titleText {
@@ -1447,11 +1402,11 @@ url("chrome://browser/content/spotlight.html") {
     margin: 0 !important;
   }
 
-  :root[dialogroot] #titleContainer:not([noicon])>#titleCropper {
+  :root[dialogroot] #titleContainer:not([noicon]) > #titleCropper {
     translate: none !important;
   }
 
-  :root[dialogroot] #handling>#description {
+  :root[dialogroot] #handling > #description {
     font-size: 1.15em !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
   }
@@ -1466,7 +1421,7 @@ url("chrome://browser/content/spotlight.html") {
     margin-left: 24px !important;
   }
 
-  :root[dialogroot] #rememberContainer>.toggle-container-with-text {
+  :root[dialogroot] #rememberContainer > .toggle-container-with-text {
     color: inherit !important;
   }
 
@@ -1530,10 +1485,36 @@ url("chrome://browser/content/spotlight.html") {
     scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
 
-  @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
+  richlistbox.theme-listbox > richlistitem {
+    --in-content-button-background: var(--purple-50) !important;
+    --in-content-button-background-hover: var(--purple-55) !important;
+    --in-content-button-background-active: var(--purple-60) !important;
+    --in-content-button-text-color: var(--in-content-item-selected-text) !important;
+    --in-content-button-text-color-hover: var(--in-content-item-selected-text) !important;
+    --in-content-button-text-color-active: var(--in-content-button-text-color-hover) !important;
+    --in-content-focus-outline-color: var(--in-content-item-selected-text) !important;
+    --focus-outline-color: var(--in-content-item-selected-text) !important;
+    --listitem-selectedTextColor: inherit !important;
+    --listitem-selectedColor: var(--purple-50) !important;
+    --listitem-selectedBorder: transparent !important;
+    --listitem-selectedBottomBorder: transparent !important;
+    --listitem-selectedBackground: var(--purple-50) !important;
+    --listitem-selectedImage: none;
+    --listitem-selectedCurrentBorder: transparent !important;
+    --listitem-selectedFocusColor: var(--purple-40) !important;
+    --listitem-selectedFocusBorder: transparent !important;
+    --listitem-selectedFocusBottomBorder: transparent !important;
+    --listitem-selectedFocusBackground: var(--purple-40) !important;
+    --listitem-selectedFocusImage: none;
+    --listitem-selectedFocusCurrentBorder: transparent !important;
+    --listitem-selectedFocusCurrentBottomBorder: transparent !important;
+    --listitem-selectedFocusCurrentBackground: var(--listitem-selectedFocusColor);
+    margin-inline: 0 !important;
+  }
 
-    :root[dialogroot] dialog>#description,
-    :root[dialogroot] dialog>#description-box>#description {
+  @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
+    :root[dialogroot] dialog > #description,
+    :root[dialogroot] dialog > #description-box > #description {
       font-size: 1.15em !important;
       font-weight: var(--uc-font-weight-bold, 600) !important;
     }
@@ -1542,7 +1523,7 @@ url("chrome://browser/content/spotlight.html") {
       margin-bottom: 10px !important;
     }
 
-    :root[dialogroot] #description:not([hidden], :empty)~#description-extra {
+    :root[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
       margin-top: -10px !important;
     }
   }
@@ -1555,7 +1536,6 @@ url("chrome://browser/content/spotlight.html") {
   }
 
   @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
-
     :root[dialogroot],
     :root[dialogroot] dialog,
     :root[dialogroot] body {
@@ -1607,39 +1587,54 @@ url("chrome://browser/content/spotlight.html") {
   }
 }
 
-link[href="chrome://global/content/printPagination.css"]~.container {
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container {
   border-radius: 4px !important;
   overflow: hidden !important;
 }
 
-link[href="chrome://global/content/printPagination.css"]~.container :is(.toolbarButton, .toolbarCenter) {
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    :is(.toolbarButton, .toolbarCenter) {
   border-color: var(--menu-separator-color) !important;
   border-block: none !important;
 }
 
-link[href="chrome://global/content/printPagination.css"]~.container .toolbarCenter {
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    .toolbarCenter {
   min-width: calc(8px + 12ch) !important;
   padding-inline: 24px !important;
   box-sizing: border-box !important;
   margin-block: 1px !important;
 }
 
-link[href="chrome://global/content/printPagination.css"]~.container :is(#navigatePrevious, #navigateNext)::after {
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    :is(#navigatePrevious, #navigateNext)::after {
   background-image: url("chrome://userchrome/content/arrow-left.svg") !important;
 }
 
-link[href="chrome://global/content/printPagination.css"]~.container #navigatePrevious:-moz-locale-dir(rtl)::after,
-link[href="chrome://global/content/printPagination.css"]~.container #navigateNext:-moz-locale-dir(ltr)::after {
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    #navigatePrevious:-moz-locale-dir(rtl)::after,
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    #navigateNext:-moz-locale-dir(ltr)::after {
   scale: -1 1 !important;
 }
 
-link[href="chrome://global/content/printPagination.css"]~.container .startItem {
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    .startItem {
   border-inline-start: none !important;
   border-start-start-radius: 4px !important;
   border-end-start-radius: 4px !important;
 }
 
-link[href="chrome://global/content/printPagination.css"]~.container .endItem {
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    .endItem {
   border-inline-end: none !important;
   border-start-end-radius: 4px !important;
   border-end-end-radius: 4px !important;
@@ -1654,7 +1649,7 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
     background-size: 20px !important;
   }
 
-  window[sharingaudio][sharingvideo]>#audioVideoButton {
+  window[sharingaudio][sharingvideo] > #audioVideoButton {
     min-width: 46px !important;
   }
 }
@@ -1775,7 +1770,7 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
     background: hsla(0, 0%, 0%, 0.15) !important;
   }
 
-  #icons>.icon {
+  #icons > .icon {
     margin-block: 8px !important;
   }
 
@@ -1886,7 +1881,7 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
     padding-inline-start: 4px !important;
   }
 
-  #viewGroup>radio {
+  #viewGroup > radio {
     margin: 4px 0 !important;
     padding: 2px !important;
     color: var(--uc-arrowanel-color) !important;
@@ -1896,27 +1891,27 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
   }
 
-  #viewGroup>radio>.radio-label-box {
+  #viewGroup > radio > .radio-label-box {
     flex-flow: row nowrap !important;
     justify-items: center !important;
     min-height: var(--subviewbutton-height) !important;
     border-radius: var(--general-button-border-radius);
   }
 
-  #viewGroup>radio:hover .radio-label-box {
+  #viewGroup > radio:hover .radio-label-box {
     background-color: var(--uc-places-cell-focus-bgcolor) !important;
   }
 
-  #viewGroup>radio[selected="true"] .radio-label-box,
-  #viewGroup>radio:hover:active .radio-label-box {
+  #viewGroup > radio[selected="true"] .radio-label-box,
+  #viewGroup > radio:hover:active .radio-label-box {
     background-color: var(--uc-places-cell-hover-bgcolor) !important;
   }
 
-  #viewGroup:focus-visible>radio[focused="true"] .radio-label-box {
+  #viewGroup:focus-visible > radio[focused="true"] .radio-label-box {
     outline: var(--global-focus-outline, auto) !important;
   }
 
-  #viewGroup>radio .radio-icon {
+  #viewGroup > radio .radio-icon {
     width: 16px !important;
     height: 16px !important;
     margin-inline-end: 6px !important;
@@ -2028,7 +2023,7 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
   }
 
   treechildren::-moz-tree-row(hover),
-  #permList>.permission:hover {
+  #permList > .permission:hover {
     background-color: var(--uc-places-cell-focus-bgcolor) !important;
   }
 
@@ -2102,19 +2097,19 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
     color-adjust: exact;
   }
 
-  radio:not([disabled="true"]):hover:active>.radio-check[selected] {
+  radio:not([disabled="true"]):hover:active > .radio-check[selected] {
     background-color: var(--checkbox-checked-active-bgcolor, color-mix(in srgb, currentColor 25%, -moz-accent-color));
   }
 
-  radio:not([disabled="true"]):hover>.radio-check[selected] {
+  radio:not([disabled="true"]):hover > .radio-check[selected] {
     background-color: var(--checkbox-checked-hover-bgcolor, color-mix(in srgb, currentColor 12.5%, -moz-accent-color));
   }
 
-  radio:not([disabled="true"]):hover:active>.radio-check {
+  radio:not([disabled="true"]):hover:active > .radio-check {
     background-color: var(--checkbox-unchecked-active-bgcolor, color-mix(in srgb, -moz-accent-color 8%, Field));
   }
 
-  radio:not([disabled="true"]):hover>.radio-check {
+  radio:not([disabled="true"]):hover > .radio-check {
     background-color: var(--checkbox-unchecked-hover-bgcolor, color-mix(in srgb, -moz-accent-color 4%, Field));
   }
 
@@ -2122,7 +2117,7 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
     color: var(--uc-menu-disabled-color) !important;
   }
 
-  radio[disabled="true"]>.radio-check {
+  radio[disabled="true"] > .radio-check {
     opacity: var(--ui-disabled-alpha) !important;
   }
 
@@ -2136,7 +2131,7 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
     -moz-context-properties: fill, fill-opacity;
   }
 
-  #imagecontainerbox>* {
+  #imagecontainerbox > * {
     color: initial;
     fill: white;
     stroke: white;
@@ -2234,7 +2229,6 @@ link[href="chrome://global/content/printPagination.css"]~.container .endItem {
   }
 
   @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
-
     strong,
     .header,
     .permissionLabel {

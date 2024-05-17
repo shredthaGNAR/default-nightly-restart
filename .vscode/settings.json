@@ -12,17 +12,6 @@
 	"[plaintext]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"workbench.colorCustomizations": {
-		"editorBracketHighlight.foreground1": "#92c5ef",
-		"editorBracketHighlight.foreground2": "#f59c02",
-		"editorBracketHighlight.foreground3": "#85309f",
-		"editorBracketHighlight.foreground4": "#00a3b6",
-		"editorBracketHighlight.foreground5": "#88ff10",
-		"editorBracketHighlight.foreground6": "#9a9a9a",
-		"editorBracketHighlight.unexpectedBracket.foreground": "#e3363c",
-		"iLoveWorkSpaceColors": true,
-		"iLoveWorkSpaceRandom": false
-	},
 	"CodeGPT.apiKey": "Ollama",
 	"checkpoints.showActiveFileOnly": false
 }

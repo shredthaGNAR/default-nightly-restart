@@ -3,11 +3,17 @@
 // @description    サイドバーの自動開閉
 // @namespace      http://forums.mozillazine.org/viewtopic.php?p=2592073#2592073
 // @include        main
-// @compatibility  Firefox 113
+// @compatibility  Firefox 127
 // @author         Alice0775
 // @Note           _SIDEBARPOSITIONにあなたの環境におけるサイドバーの位置を指示しておく
 // @Note           keycongigやmousegesture等には SidebarUI.toggle(何タラ);
 // @Note
+// @version        2024/05/05 Bug 1892965 - Rename Sidebar launcher and SidebarUI
+// @version        2024/03/19 WIP Bug 1884792 - Remove chrome-only :-moz-lwtheme pseudo-class
+// @version        2023/10/10 00:00 Stop using xml-stylesheet processing instructions
+// @version        2023/08/31 fix z-index
+// @version        2023/08/25 make hidden overflowed header
+// @version        2023/03/09 Bug 1820534 - Move front-end to modern flexbox.
 // @version        2023/03/09 Bug 1820534 - Move front-end to modern flexbox.
 // @version        2022/10/14 20:00 sidebar width:100%
 // @version        2022/09/30 20:00 Bug 1792748
@@ -188,14 +194,14 @@ var ucjs_expand_sidebar = {
       /*-moz-box-pack: center;*/
       justify-content: center;
       cursor: ew-resize; 
-      border-width: 0;
+      border-width: 0 !important;
       border-style: solid; 
       width: 2px; 
       max-width: 2px; 
       min-width: 0px; 
       background-color: transparent;
-      border-inline-start-color: var(--toolbar-bgcolor);
-      border-inline-end-color: var(--toolbar-bgcolor);
+      border-inline-start-color: var(--toolbar-bgcolor) !important;
+      border-inline-end-color: var(--toolbar-bgcolor) !important;
       margin-left: 0px; 
       margin-inline-start: 0px; 
     } 
@@ -210,6 +216,14 @@ var ucjs_expand_sidebar = {
       background-color: ThreeDFace; 
     }  
     `;
+
+/*
+    var sss = Cc['@mozilla.org/content/style-sheet-service;1']
+              .getService(Ci.nsIStyleSheetService);
+    var uri = makeURI('data:text/css;charset=UTF=8,' + encodeURIComponent(style));
+    if(!sss.sheetRegistered(uri, sss.AUTHER_SHEET))
+      sss.loadAndRegisterSheet(uri, sss.AUTHER_SHEET);
+*/
     var sspi = document.createProcessingInstruction(
       'xml-stylesheet',
       'type="text/css" href="data:text/css,' + encodeURIComponent(style) + '"'
@@ -227,7 +241,7 @@ var ucjs_expand_sidebar = {
         #sidebar-box { 
         position: fixed ; 
         display: block; 
-        z-index: 55555; 
+        z-index: 100000000; 
         left: 4px; 
         min-width: unset;
         max-width: unset;
@@ -242,6 +256,7 @@ var ucjs_expand_sidebar = {
         #sidebar-box #sidebar-header 
         { 
         width :100%; 
+        overflow: hidden;
         } 
         #sidebar-box #sidebar 
         { 
@@ -250,7 +265,7 @@ var ucjs_expand_sidebar = {
         border-right:3px solid var(--toolbar-bgcolor); 
         border-bottom:3px solid var(--toolbar-bgcolor); 
         } 
-        #sidebar-box #sidebar:-moz-lwtheme
+        :root[lwtheme] #sidebar-box #sidebar
         { 
         border-left:3px solid var(--sidebar-background-color);
         border-right:3px solid var(--sidebar-background-color);
@@ -265,10 +280,10 @@ var ucjs_expand_sidebar = {
         #sidebar-box:-moz-locale-dir(rtl) { 
           border-left: 1px solid var(--sidebar-border-color); 
         } 
-        #sidebar-box:-moz-lwtheme { 
+        :root[lwtheme] #sidebar-box { 
           background-color: var(--sidebar-background-color);
         } 
-        #sidebar-box sidebarheader:-moz-lwtheme { 
+        :root[lwtheme] #sidebar-box sidebarheader { 
           color: -moz-dialogtext; 
           text-shadow: none; 
           background-color: var(--sidebar-background-color);
@@ -280,7 +295,7 @@ var ucjs_expand_sidebar = {
         background-color: var(--toolbar-bgcolor); 
         width:100%; 
         }
-        #sidebar-box #sidebarpopuppanel-bottom:-moz-lwtheme { 
+        :root[lwtheme] #sidebar-box #sidebarpopuppanel-bottom { 
         background-color: var(--sidebar-background-color);
         }`;
 
@@ -295,7 +310,11 @@ var ucjs_expand_sidebar = {
         cursor: sw-resize; \
         }';
       }
-
+/*
+    uri = makeURI('data:text/css;charset=UTF=8,' + encodeURIComponent(style));
+    if(!sss.sheetRegistered(uri, sss.AUTHER_SHEET))
+      sss.loadAndRegisterSheet(uri, sss.AUTHER_SHEET);
+*/
        sspi = document.createProcessingInstruction(
         'xml-stylesheet',
         'type="text/css" href="data:text/css,' + encodeURIComponent(floatingStyle) + '"'
@@ -304,6 +323,7 @@ var ucjs_expand_sidebar = {
       sspi.getAttribute = function(name) {
       return document.documentElement.getAttribute(name);
       };
+
       let template = 
         ["hbox", {id: "sidebarpopuppanel-bottom"},
           ["spacer", {style: "flex: auto;"}],
@@ -352,7 +372,7 @@ var ucjs_expand_sidebar = {
       if(document.getElementById("sidebar-box") && 
          !!document.getElementById("sidebar-box").getAttribute("sidebarcommand")) { 
         if (window.ucjs_expand_sidebar._FLOATING_SIDEBAR)
-          SidebarUI.hide();
+          SidebarController.hide();
       }
       window.PrintUtils.printPreview_org(arg);
     };
@@ -388,11 +408,11 @@ var ucjs_expand_sidebar = {
     /**
      * hack
      */
-		defineGetter(SidebarUI, "isOpen", function isOpen(){return this._box && !this._box.collapsed;})
+		defineGetter(SidebarController, "isOpen", function isOpen(){return this._box && !this._box.collapsed;})
 
 
-		SidebarUI.show_org = SidebarUI.show;
-		SidebarUI.show = function show(commandID, triggerNode) {
+		SidebarController.show_org = SidebarController.show;
+		SidebarController.show = function show(commandID, triggerNode) {
 	      //this._box.hidden = false;
 	      this._box.collapsed = false;
 	      this._splitter.hidden = false;
@@ -403,11 +423,11 @@ var ucjs_expand_sidebar = {
           let x = document.getElementById("appcontent").getBoundingClientRect().x;
           ucjs_expand_sidebar._sidebar_box.style.setProperty("left", x + "px", "");
         }
-      SidebarUI.show_org(commandID, triggerNode);
+      SidebarController.show_org(commandID, triggerNode);
 	  }
 
-		SidebarUI.hide_org = SidebarUI.hide;
-		SidebarUI.hide =
+		SidebarController.hide_org = SidebarController.hide;
+		SidebarController.hide =
 		function hide(triggerNode) {
 	    if (!this.isOpen) {
 	      return;
@@ -419,7 +439,7 @@ var ucjs_expand_sidebar = {
           gBrowser.treeStyleTab.updateFloatingTabbar(gBrowser.treeStyleTab.kTABBAR_UPDATE_BY_WINDOW_RESIZE);
 	    gBrowser.selectedBrowser.focus();
 
-	    //SidebarUI.hide(triggerNode);
+	    //SidebarController.hide(triggerNode);
 	  }
 
     //fireSidebarFocusedEventの置き換え
@@ -432,10 +452,10 @@ var ucjs_expand_sidebar = {
       }
     }
 
-    if (typeof SidebarUI._fireFocusedEvent == "function") {
-      SidebarUI._fireFocusedEvent_org = SidebarUI._fireFocusedEvent;
-      SidebarUI._fireFocusedEvent = function () {
-        SidebarUI._fireFocusedEvent_org();
+    if (typeof SidebarController._fireFocusedEvent == "function") {
+      SidebarController._fireFocusedEvent_org = SidebarController._fireFocusedEvent;
+      SidebarController._fireFocusedEvent = function () {
+        SidebarController._fireFocusedEvent_org();
         ucjs_expand_sidebar._focused();
       }
     }
@@ -448,7 +468,7 @@ var ucjs_expand_sidebar = {
         self._lastcommand = command;
       var broadcasters = document.getElementsByAttribute("group", "sidebar");
       if (self._CLOSE_AT_STARTUP) {
-        SidebarUI.hide();
+        SidebarController.hide();
         //self._sidebar_box.setAttribute('collapsed',true);
         for (var i = 0; i < broadcasters.length; ++i) {
           if (broadcasters[i].localName != "broadcaster") {
@@ -586,7 +606,7 @@ var ucjs_expand_sidebar = {
           if (this._mouse_Timeout)
             clearTimeout(this._mouse_Timeout);
           this._mouse_Timeout = null;
-          SidebarUI.toggle(this._getDefaultCommandID());
+          SidebarController.toggle(this._getDefaultCommandID());
           this._openSidebar(this._getDefaultCommandID());
           this._mousedown = false;
           break;
@@ -603,7 +623,7 @@ var ucjs_expand_sidebar = {
                  var hidden = (self._sidebar_box.hasAttribute('hidden')?true:false) ||
                                self._sidebar_box.getAttribute('collapsed') == "true";
                  if (hidden) {
-                   SidebarUI.toggle(self._getDefaultCommandID(), true);
+                   SidebarController.toggle(self._getDefaultCommandID(), true);
                    self._openSidebar(self._getDefaultCommandID(), true);
                  }
               }, this._OPEN_DELAY_DRAGOVER, this);
@@ -703,7 +723,7 @@ var ucjs_expand_sidebar = {
 
   //現在のコマンドをget
   getCommandId: function(){
-    return SidebarUI._box.getAttribute("sidebarcommand");
+    return SidebarController._box.getAttribute("sidebarcommand");
   },
 
 	toggleSidebar: function expandsidebartoggleSidebar(commandID, forceOpen = false) {
@@ -713,9 +733,9 @@ var ucjs_expand_sidebar = {
       this._sidebar.style.setProperty("left", x - 1  + "px", "");
     }
     if (forceOpen) {
-      SidebarUI.show(commandID);
+      SidebarController.show(commandID);
     } else {
-      SidebarUI.toggle(commandID);
+      SidebarController.toggle(commandID);
     }
   },
 
@@ -877,7 +897,7 @@ var ucjs_expand_sidebar = {
         this._close_Timeout = null;
         if (!this._open_Timeout) {
           this._open_Timeout = setTimeout(function(self){
-            SidebarUI.toggle(self._getDefaultCommandID());
+            SidebarController.toggle(self._getDefaultCommandID());
             self._openSidebar(self._getDefaultCommandID());
           }, this._OPEN_DELAY, this);
         }
