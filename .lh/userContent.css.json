@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 93,
+            "activePatchIndex": 94,
             "patches": [
                 {
                     "date": 1629755073787,
@@ -380,6 +380,10 @@
                 {
                     "date": 1715145157531,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,18 +7,15 @@\n @import url(resources/in-content/downloads.css);\n @import url(resources/in-content/system.css);\n @import url(resources/in-content/ext-containers.css);\n @import url(resources/in-content/ext-darkreader.css);\n-@import url(resources/in-content/ext-nordvpn.css);\n @import url(resources/in-content/ext-mdm.css);\n @import url(resources/in-content/ext-bitwarden.css);\n @import url(resources/in-content/ext-ublock.css);\n-@import url(resources/in-content/ext-simpletranslate);\n @import url(resources/in-content/ext-tabnotes.css);\n @import url(resources/in-content/ext-firefoxnotes.css);\n @import url(resources/in-content/ext-sortbookmarks.css);\n @import url(resources/in-content/ext-privatebookmarks.css);\n-@import url(resources/in-content/ext-zoomscheduler.css);\n @import url(resources/in-content/ext-rss.css);\n @import url(resources/in-content/site-google.css);\n @import url(resources/in-content/misc-content.css);\n @import url(resources/in-content/custom-content.css);\n"
+                },
+                {
+                    "date": 1718645467913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,15 +19,20 @@\n @import url(resources/in-content/site-google.css);\n @import url(resources/in-content/misc-content.css);\n @import url(resources/in-content/custom-content.css);\n /*@import url(components/onetab-darknew.css);\n-@import url(components/circular_homepage_shortcuts.css);*\n+@import url(components/circular_homepage_shortcuts.css);*/\n @import url(components/compact_addons_manager.css);\n @import url(components/standalone_image_page_mods.css);\n-@import url(components/dark_settings_pages.css);*/\n+@import url(components/dark_settings_pages.css);\n @import url(components/mozilla.css);\n @import url(addons.css);\n+@import url(addons.css);\n+@import url(components/addons.css);\n+@import url(components/floating-findbar-on-top.css);\n+@import url(components/show-tab-close-button-on-hover.css);\n \n+\n /*  https://github.com/Godiesc/opera-gx *=\n @import url(components/one_root-personal.css);\n @import url(components/one_UC-newtabpage.css);\n @import url(components/one_UC-settings-addons-pages.css);\n@@ -170,5 +175,5 @@\n   #content,\n   browser[type=\"content\"]>html {\n     background: #00000020 !important;\n   }\n-}\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1629755073787,

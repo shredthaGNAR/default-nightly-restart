@@ -120,7 +120,7 @@ tooltip .uc-tooltip-box {
   margin: calc(0px - var(--panel-inner-box-margin, 4px)) !important;
 }
 
-.tab-preview-container {
+#tab-preview-panel {
   --tab-preview-background-color: var(--tooltip-bgcolor, Menu) !important;
   --tab-preview-text-color: var(--tooltip-color) !important;
   --tab-preview-border-color: var(--dialog-box-border-color) !important;
@@ -523,7 +523,7 @@ checkbox[native]:-moz-focusring > .checkbox-label-box {
 checkbox[native]:focus-visible > .checkbox-check,
 radiogroup:focus-visible radio[focused="true"] > .radio-check,
 radiogroup deck menulist:focus-visible {
-  outline: var(--default-focusring, auto);
+  outline: var(--default-focusring, var(--focus-outline, auto));
 }
 
 toolbarbutton:focus-visible,
@@ -768,7 +768,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
   tooltip > description,
   tooltip .uc-tooltip-box,
   .places-tooltip-box,
-  .tab-preview-container,
+  #tab-preview-panel,
   #tracking-protection-container tooltip,
   #statuspanel-label {
     border: none !important;

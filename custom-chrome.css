@@ -1,43 +1,43 @@
 /*** photon-like Menu Colors (14 Jan 2022) ***/
 
 /* Bookmarks Toolbar folders */
- #PersonalToolbar menupopup,
- /* Right-click context menus */
- #mainPopupSet menupopup,
- /* Top menu bar on Windows (not sure about others) */
- #toolbar-menubar menupopup,
- /* Sidebar/Library bookmark/history context menus */
- #placesContext,
- /* Address bar context menu (2021-10-25) */
- #urlbar-input-container menupopup,
- /* Various toolbar drop-down panels (Fx96) */
- #back-button menupopup,
- #forward-button menupopup,
- #identity-popup,
- #appMenu-popup,
- #downloadsPanel,
- #BMB_bookmarksPopup {
-   /* Text color */
-   --menu-color: #fff !important;
-   --arrowpanel-color: #fff !important;
-   --panel-color: #fff !important;
-   /* Background color */
-   --menu-background-color: rgba(78, 23, 100, 0.514) !important;
-   --arrowpanel-background: #2b014598 !important;
-   --panel-background: #4e1669b1 !important;
-   /* Border color (if any) */
-   --menu-border-color: threedshadow !important;
-   --arrowpanel-border-color: threedshadow !important;
-   --panel-border-color: threedshadow !important;
-   /* Hovered/expanded item background color */
-   --menuitem-hover-background-color: #cc89ffa1 !important;
-   --button-hover-bgcolor: #52006356 !important;
-   /* Disabled items text color and hovered background */
-   --menu-disabled-color: rgba(21, 20, 26, 0.4) !important;
-   --menuitem-disabled-hover-background-color: rgba(224, 224, 230, 0.4) !important;
- }
+#PersonalToolbar menupopup,
+/* Right-click context menus */
+#mainPopupSet menupopup,
+/* Top menu bar on Windows (not sure about others) */
+#toolbar-menubar menupopup,
+/* Sidebar/Library bookmark/history context menus */
+#placesContext,
+/* Address bar context menu (2021-10-25) */
+#urlbar-input-container menupopup,
+/* Various toolbar drop-down panels (Fx96) */
+#back-button menupopup,
+#forward-button menupopup,
+#identity-popup,
+#appMenu-popup,
+#downloadsPanel,
+#BMB_bookmarksPopup {
+  /* Text color */
+  --menu-color: #fff !important;
+  --arrowpanel-color: #fff !important;
+  --panel-color: #fff !important;
+  /* Background color */
+  --menu-background-color: rgba(78, 23, 100, 0.514) !important;
+  --arrowpanel-background: #2b014598 !important;
+  --panel-background: #4e1669b1 !important;
+  /* Border color (if any) */
+  --menu-border-color: threedshadow !important;
+  --arrowpanel-border-color: threedshadow !important;
+  --panel-border-color: threedshadow !important;
+  /* Hovered/expanded item background color */
+  --menuitem-hover-background-color: #cc89ffa1 !important;
+  --button-hover-bgcolor: #52006356 !important;
+  /* Disabled items text color and hovered background */
+  --menu-disabled-color: rgba(21, 20, 26, 0.4) !important;
+  --menuitem-disabled-hover-background-color: rgba(224, 224, 230, 0.4) !important;
+}
 
- /* ----- My Custom Colors ----- */
+/* ----- My Custom Colors ----- */
 :root {
   --firefoxcss-main-bg-color: hsl(240, 2%, 13%);
   /* ^ Main dark color, url bar, active tab etc. ^ */
@@ -55,7 +55,7 @@
   --firefoxcss-top-bar-border-bottom-color: hsla(0, 0%, 6%, 0.75);
   --firefoxcss-other-color: hsla(0, 0%, 60%, 0.35);
   --firefoxcss-top-bar-border-bottom-size: 1px;
-  --firefoxcss-border-radius:8px;
+  --firefoxcss-border-radius: 8px;
   --firefoxcss-normal-tabs-box-shadow: 1px 1px 1px -1px rgba(0, 0, 0, 0.4);
 }
 
@@ -203,7 +203,7 @@ See the above repository for updates as well as full license text. */
   background-color: color-mix(in srgb,
       var(--identity-tab-color) 50%,
       transparent) !important;
-   outline: 1px solid var(--identity-tab-color) !important;
+  outline: 1px solid var(--identity-tab-color) !important;
   /*box-shadow: inset 0em -2em 0em var(--identity-tab-color) !important;*/
   box-shadow: 5px 3px 6px rgb(1 1 1 / 16%), 4px 4px 2px rgb(0 0 0 / 23%) !important;
 }
@@ -340,7 +340,7 @@ tooltip {
 
 toolbar #tabs-newtab-button:not([disabled="true"]):-moz-any([open], [checked], :hover:active)>.toolbarbutton-icon,
 toolbar #new-tab-button:not([disabled="true"]):-moz-any([open], [checked], :hover:active)>.toolbarbutton-icon {
- /*border: 0 !important;88/*/
+  /*border: 0 !important;88/*/
   box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -833,8 +833,8 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
   --tab-label-mask-size: 1em !important;
 }
 
-/* Small fix for Firefox complete themes */s
-.private-browsing-indicator,
+/* Small fix for Firefox complete themes */
+s .private-browsing-indicator,
 #private-browsing-indicator-titlebar,
 #private-browsing-indicator,
 .private-browsing-indicator {
@@ -1420,6 +1420,7 @@ Works with Firefox 93 *
       transparent 75%,
       var(--identity-tab-color)) !important;
 }
+
 /* Need to use FILTER dro shadow fo ouline so it is a circle */
 /*rework en la Linea de Contenedores-BordeFavicon*
 .tab-icon-pending:not([selected], [pinned]),

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "JS/dwlete.txt",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1719849833008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1719849833008,
+            "name": "Commit-0",
+            "content": "\t127.0.0.1\tlocalhost\n\t255.255.255.255\tbroadcasthost\n\t::1 localhost\n\tfe80::1%lo0\tlocalhost\n\n127.0.0.1 auth.services.adobe.com\n127.0.0.1 sstats.adobe.com\n127.0.0.1 ims-prod07.adobelogin.com\n127.0.0.1 cclibraries-defaults-cdn.adobe.com\n127.0.0.1 na1e-acc.services.adobe.com\n127.0.0.1 cdn-ffc.oobesaas.adobe.com\n127.0.0.1 cc-api-data.adobe.io\n127.0.0.1 adobe.io\n127.0.0.1 lcs-cops.adobe.io\n127.0.0.1 na1r.services.adobe.com\n127.0.0.1 hlrcv.stage.adobe.com\n127.0.0.1 lmlicenses.wip4.adobe.com\n127.0.0.1 lm.licenses.adobe.com\n127.0.0.1 activate.adobe.com\n127.0.0.1 practivate.adobe.com\n127.0.0.1 genuine.adobe.com\n127.0.0.1 prod.adobegenuine.com\n127.0.0.1 lightroom.adobe.com1\n127.0.0.1 ic.adobe.io\n127.0.0.1 52.6.155.20\n127.0.0.1 52.10.49.85\n127.0.0.1 23.22.30.141\n127.0.0.1 34.215.42.131\n127.0.0.1 52.84.156.37\n127.0.0.1 65.8.207.109\n127.0.0.1 3.220.11.113\n127.0.0.1 3.221.72.231\n127.0.0.1 3.216.32.253\n127.0.0.1 3.208.248.199\n127.0.0.1 3.219.243.226\n127.0.0.1 13.227.103.57\n127.0.0.1 34.192.151.90\n127.0.0.1 34.237.241.83\n127.0.0.1 44.240.189.42\n127.0.0.1 52.20.222.155\n127.0.0.1 52.208.86.132\n127.0.0.1 54.208.86.132\n127.0.0.1 63.140.38.120\n127.0.0.1 63.140.38.160\n127.0.0.1 63.140.38.169\n127.0.0.1 63.140.38.219\n127.0.0.1 wip.adobe.com\n127.0.0.1 adobeereg.com\n127.0.0.1 18.228.243.121\n127.0.0.1 18.230.164.221\n127.0.0.1 54.156.135.114\n127.0.0.1 54.221.228.134\n127.0.0.1 54.224.241.105\n127.0.0.1 100.24.211.130\n127.0.0.1 162.247.242.20\n127.0.0.1 wip1.adobe.com\n127.0.0.1 wip2.adobe.com\n127.0.0.1 wip3.adobe.com\n127.0.0.1 wip4.adobe.com\n127.0.0.1 3dns.adobe.com\n127.0.0.1 ereg.adobe.com\n127.0.0.1 199.232.114.137\n127.0.0.1 bam.nr-data.net\n127.0.0.1 practivate.adobe\n127.0.0.1 ood.opsource.net\n127.0.0.1 crl.verisign.net\n127.0.0.1 3dns-1.adobe.com\n127.0.0.1 3dns-2.adobe.com\n127.0.0.1 3dns-3.adobe.com\n127.0.0.1 3dns-4.adobe.com\n127.0.0.1 hl2rcv.adobe.com\n127.0.0.1 www.adobeereg.com\n127.0.0.1 www.wip.adobe.com\n127.0.0.1 www.wip1.adobe.com\n127.0.0.1 www.wip2.adobe.com\n127.0.0.1 www.wip3.adobe.com\n127.0.0.1 www.wip4.adobe.com\n127.0.0.1 ereg.wip.adobe.com\n127.0.0.1 adobe-dns.adobe.com\n127.0.0.1 ereg.wip1.adobe.com\n127.0.0.1 ereg.wip2.adobe.com\n127.0.0.1 ereg.wip3.adobe.com\n127.0.0.1 ereg.wip4.adobe.com\n127.0.0.1 practivate.adobe.ntp\n127.0.0.1 practivate.adobe.ipp\n127.0.0.1 adobe-dns-1.adobe.com\n127.0.0.1 adobe-dns-2.adobe.com\n127.0.0.1 adobe-dns-3.adobe.com\n127.0.0.1 adobe-dns-4.adobe.com\n127.0.0.1 practivate.adobe.newoa\n127.0.0.1 activate.wip.adobe.com\n127.0.0.1 activate-sea.adobe.com\n127.0.0.1 uds.licenses.adobe.com\n127.0.0.1 k.sni.global.fastly.net\n127.0.0.1 activate-sjc0.adobe.com\n127.0.0.1 activate.wip1.adobe.com\n127.0.0.1 activate.wip2.adobe.com\n127.0.0.1 activate.wip3.adobe.com\n127.0.0.1 activate.wip4.adobe.com\n127.0.0.1 na2m-pr.licenses.adobe.com\n127.0.0.1 wwis-dubc1-vip60.adobe.com\n127.0.0.1 workflow-ui-prod.licensingstack.com"
+        }
+    ]
+}

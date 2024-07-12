@@ -38,7 +38,7 @@ from the style editor in the browser toolbox. */
   }
 
   #forward-button,
-  #urlbar-go-button,
+  .urlbar-go-button,
   .search-go-button,
   .unified-nav-forward[_moz-menuactive="true"]:-moz-locale-dir(ltr),
   .unified-nav-back[_moz-menuactive="true"]:-moz-locale-dir(rtl) {
@@ -2113,6 +2113,10 @@ of moz-document in stylesheets with file:// urls */
       /* TODO: Make this em-based, probably? */
       width: 16px;
       height: 16px;
+
+      checkbox:focus-visible > & {
+        outline: var(--focus-outline);
+      }
     }
 
     &[checked] {
@@ -2168,11 +2172,6 @@ of moz-document in stylesheets with file:// urls */
         }
       }
     }
-  }
-
-  checkbox:not([native]):focus-visible > .checkbox-check {
-    outline: var(--focus-outline);
-    outline-offset: var(--focus-outline-offset);
   }
 
   .checkbox-label[native] {
@@ -2361,6 +2360,12 @@ of moz-document in stylesheets with file:// urls */
       min-width: 13px;
       min-height: 13px;
       margin-inline-end: 5px;
+    }
+
+    checkbox:focus-visible > .checkbox-check,
+    radiogroup:focus-visible > radio[focused] > .radio-check,
+    radiogroup:focus-visible radio[focused] .radio-check  {
+      outline: var(--global-focus-outline);
     }
 
     .radio-label-box {
