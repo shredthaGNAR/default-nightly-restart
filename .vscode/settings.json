@@ -13,5 +13,6 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"CodeGPT.apiKey": "Ollama",
-	"checkpoints.showActiveFileOnly": false
+	"checkpoints.showActiveFileOnly": false,
+	"localaipilot.standalone.ollamaCodeModel": "codellama:13b"
 }

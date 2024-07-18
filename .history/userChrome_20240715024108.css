@@ -347,7 +347,6 @@ private browsing
 
  #main-window[privatebrowsingmode="temporary"] #nav-bar {
      -moz-appearance: none !important;
-     appearance: none !important;
      background: linear-gradient(to right, rgba(94, 75, 197, 1), rgba(162, 76, 141, 1)) !important;
      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
  }
@@ -699,7 +698,7 @@ See the above repository for updates as well as full license text. */
      -moz-margin-start: -12px !important;
  }
 
- /** custom button title (remove above Firefox/DevFox/Nightly codes)
+ /* custom button title (remove above Firefox/DevFox/Nightly codes) */
 
  #main-window[tabsintitlebar] #PanelUI-menu-button::after {
      content: "MyTitle" !important;
@@ -717,78 +716,4 @@ See the above repository for updates as well as full license text. */
          inset -2px 0 0 Highlight,
          inset 0 2px 0 Highlight,
          inset 0 -2px 0 Highlight !important;
- }
-
- /* test 3 */
- /* Hide 'this time, search with' in url dropdown *
- .search-panel-one-offs-header.search-panel-header {
-     display: none !important;
- }
-
- /* Hide page actions (bookmark star  & zoom), show them on hover *
- #page-action-buttons,
- .urlbar-page-action {
-     /*margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding) );*
-     max-width: 0px;
-     opacity: 0;
-     transition:
-         /*margin-inline 75ms linear,*
-         max-width 100ms linear, opacity 200ms linear;
- }
-
- #urlbar:hover #page-action-buttons,
- #urlbar:hover .urlbar-page-action,
- .urlbar-page-action[open],
- .urlbar-page-action[open]~.urlbar-page-action {
-     opacity: 1;
-     max-width: 100px !important;
-     /*32*
- }
-
- #urlbar:is([focused]) #page-action-buttons,
- #urlbar:is([focused]) .urlbar-page-action,
- .urlbar-page-action[open],
- .urlbar-page-action[open]~.urlbar-page-action {
-     opacity: 1;
-     max-width: 100px !important;
-     /*32*
- }
-
- /* Hide magnifying glass search icon */
- #urlbar[pageproxystate='invalid'] #identity-box,
- #urlbar-search-button,
- #identity-icon-box {
-     max-width: 0px;
-     display: none !important;
- }
-
- /* Show icons on hover, hide first *
- #tracking-protection-icon-container,
- #identity-box,
- #identity-permission-box,
- #notification-popup-box,
- #reader-mode-button,
- #remote-control-box,
- #urlbar:is([focused]) #identity-box,
- #urlbar:is([focused]) #identity-permission-box,
- #urlbar:is([focused]) #notification-popup-box {
-     color: #dddddd !important;
-     opacity: 0;
-     max-width: 0px;
-     transition: max-width 100ms linear, opacity 200ms linear !important;
- }
-
- /* show on hover *
- #urlbar:hover #identity-box,
- #urlbar:hover #identity-permission-box,
- #urlbar:hover #notification-popup-box,
- #urlbar:hover #identity-icon-box,
- #urlbar:hover #remote-control-box,
- #urlbar:hover #tracking-protection-icon-container {
-     opacity: 1;
-     max-width: 75px;
- }
-*/
- #urlbar:not([focused="true"])>#urlbar-background {
-     background: rgba(63, 1, 117, 0.903) !important;
  }

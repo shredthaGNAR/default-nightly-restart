@@ -1315,7 +1315,6 @@ Works with Firefox 93 *
       #5f3b927c,
       #19002f) !important;
   border: none !important;
-  box-shadow: none !important;
 }
 
 /*
@@ -2356,8 +2355,8 @@ spacer {
 .tab-background[selected="true"] {
   background-image:
     radial-gradient(circle at bottom center,
-      #6c3ac3d6 20px,
+      #48179ed6,
       #110421b8) !important;
-  border: #32026e38 !important;
+  border: #5103af38 !important;
   box-shadow: none !important;
 }

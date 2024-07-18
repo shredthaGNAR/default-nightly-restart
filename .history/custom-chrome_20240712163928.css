@@ -287,7 +287,6 @@ tooltip {
     radial-gradient(circle at bottom center,
       #48179ed6,
       #110421b8) !important;
-  border: #5103af38 !important;
 }
 
 /* Mouse Hover Background by passing by non-selected tabs */
@@ -1312,10 +1311,8 @@ Works with Firefox 93 *
 
 .tab-background:not(selected) {
   background-image: radial-gradient(circle at bottom center,
-      #5f3b927c,
-      #19002f) !important;
-  border: none !important;
-  box-shadow: none !important;
+      #5f3b92,
+      #19002f) !important
 }
 
 /*
@@ -1335,8 +1332,8 @@ Works with Firefox 93 *
   background-image: radial-gradient(circle at bottom center,
       #4a316ab3,
       #27104e50) !important;
-}
-*/
+}*/
+
 
 #urlbar-background,
 #urlbar {
@@ -2351,13 +2348,4 @@ spacer {
 .toggle-button#moz-toggle-button[part="button"] {
   --toggle-dot-background-color: color-mix(in srgb, currentColor 40%, var(--button-background-color-active)) !important;
   --toggle-dot-background-color-on-pressed: var(--arrowpanel-color) !important;
-}
-
-.tab-background[selected="true"] {
-  background-image:
-    radial-gradient(circle at bottom center,
-      #6c3ac3d6 20px,
-      #110421b8) !important;
-  border: #32026e38 !important;
-  box-shadow: none !important;
 }

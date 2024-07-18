@@ -207,10 +207,10 @@ See the above repository for updates as well as full license text. */
   /*box-shadow: inset 0em -2em 0em var(--identity-tab-color) !important;*/
 }
 
-/****
+
 .tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected="true"], [multiselected]) {
   background-image:
-    /*var(--button-hover-bgcolor)
+    /*var(--button-hover-bgcolor)*/
     radial-gradient(circle at bottom center,
       #9400ff 15px,
       #9500ff7d) !important;
@@ -228,7 +228,7 @@ See the above repository for updates as well as full license text. */
 /* Active tab brightness */
 
 .tab-content[selected="true"] {
-  background-color: color-mix(in srgb, #cbcbcb 20%, transparent) !important;
+  background-color: color-mix(in srgb, #5c04ae 20%, transparent) !important;
   text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
     1px 1px 1px rgba(0, 0, 0, 0.5) !important;
   margin-top: 0px !important;
@@ -282,22 +282,14 @@ tooltip {
   border-radius: 10px !important;
 }
 
-.tab-background[selected="true"] {
-  background-image:
-    radial-gradient(circle at bottom center,
-      #48179ed6,
-      #110421b8) !important;
-  border: #5103af38 !important;
-}
-
 /* Mouse Hover Background by passing by non-selected tabs */
 
 .tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected="true"], [multiselected]) {
   background-image:
     /*var(--button-hover-bgcolor)*/
     radial-gradient(circle at bottom center,
-      #7b51c3d6 20px,
-      #110421b8) !important;
+      #512995d6 15px,
+      #210246b8) !important;
   /*box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important; */
   box-shadow: 5px 3px 6px rgb(1 1 1 / 16%), 4px 4px 2px rgb(0 0 0 / 23%) !important;
 }
@@ -848,7 +840,6 @@ s .private-browsing-indicator,
   visibility: collapse !important;
 }
 
-/*
 .tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
   background-color: color-mix(in srgb, #0d0d0df7 25%, transparent) !important;
 }
@@ -1139,10 +1130,8 @@ toolbarbutton.bookmark-item:not([container="true"]) .toolbarbutton-icon for icon
 #tabbrowser-tabs .tab-background:is([selected], [multiselected]) {
   border: 1px solid color-mix(in srgb, currentColor 35%, transparent) !important;
   /*border-color: color-mix(in srgb, currentColor 35%, transparent) !important;*/
-  background: radial-gradient(circle at bottom center, #532a80ec 25px, #1f014a8d) !important;
-}
-
-/*outline: 1px solid color-mix(in srgb, #f9845b 35%, transparent) !important;
+  background: radial-gradient(circle at bottom center, #532a80ec 25px, #1f014a8d) !important;}
+  /*outline: 1px solid color-mix(in srgb, #f9845b 35%, transparent) !important;
 }
 
 /* Remove firefox view separator spacing */
@@ -1312,11 +1301,8 @@ Works with Firefox 93 *
 
 .tab-background:not(selected) {
   background-image: radial-gradient(circle at bottom center,
-      #5f3b927c,
-      #19002f) !important;
-  border: none !important;
-  box-shadow: none !important;
-}
+      #b98ff3,
+      #19002f) !important}
 
 /*
 :root .tab-background:not([selected]) {
@@ -1335,8 +1321,8 @@ Works with Firefox 93 *
   background-image: radial-gradient(circle at bottom center,
       #4a316ab3,
       #27104e50) !important;
-}
-*/
+}*/
+
 
 #urlbar-background,
 #urlbar {
@@ -2351,13 +2337,4 @@ spacer {
 .toggle-button#moz-toggle-button[part="button"] {
   --toggle-dot-background-color: color-mix(in srgb, currentColor 40%, var(--button-background-color-active)) !important;
   --toggle-dot-background-color-on-pressed: var(--arrowpanel-color) !important;
-}
-
-.tab-background[selected="true"] {
-  background-image:
-    radial-gradient(circle at bottom center,
-      #6c3ac3d6 20px,
-      #110421b8) !important;
-  border: #32026e38 !important;
-  box-shadow: none !important;
 }
