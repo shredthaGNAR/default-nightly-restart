@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/in-content/root.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1722635388473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1722635388473,
+            "name": "Commit-0",
+            "content": "/* This Source Code Form is subject to the terms of the Creative Commons\n * Attribution-NonCommercial-ShareAlike International License, v. 4.0.\n * If a copy of the CC BY-NC-SA 4.0 was not distributed with this\n * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/\n * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */\n\n/* fundamental content styles, e.g. plaintext pages. */\n\n@namespace html url(\"http://www.w3.org/1999/xhtml\");\n@namespace xul url(\"http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul\");\n\nhtml|tt,\nhtml|code,\nhtml|kbd,\nhtml|samp,\nhtml|xmp,\nhtml|pre,\nhtml|plaintext,\nhtml|listing,\nhtml|textarea,\nhtml|input:is([type=\"date\"], [type=\"time\"], [type=\"datetime-local\"]) {\n  font-family:SF Mono, -moz-fixed, monospace;\n  font-weight: 300;\n}\n\n@media (prefers-color-scheme: dark) {\n  ::selection {\n    background-color: var(--global-selection-bgcolor) !important;\n    color: var(--global-selection-color) !important;\n  }\n\n  /* pdf viewer: selection, findbar highlights */\n  .pdfViewer .textLayer .highlight {\n    background-color: var(--pdf-selection-bgcolor) !important;\n  }\n\n  .pdfViewer .textLayer .highlight.selected {\n    background-color: var(--pdf-highlight-bgcolor) !important;\n  }\n\n  .pdfViewer .textLayer ::selection {\n    background-color: var(--pdf-selection-bgcolor) !important;\n    color: revert !important;\n  }\n\n  /* optional dark mode for PDFs. to use, open the inspector\n  and change class=\"pdfViewer\" to class=\"pdfViewer invert\" */\n  .pdfViewer.invert {\n    filter: invert(1) brightness(1.15) contrast(0.85);\n  }\n}\n\n:read-only:focus:not(:focus-visible),\n:not(textarea, [contenteditable]:read-write, input[type=\"text\"], input[type=\"password\"], input[type=\"date\"], input[type=\"datetime-local\"], input[type=\"email\"], input[type=\"month\"], input[type=\"number\"], input[type=\"search\"], input[type=\"tel\"], input[type=\"time\"], input[type=\"url\"], input[type=\"week\"]):focus:not(:focus-visible) {\n  outline: unset;\n  outline-offset: unset;\n}\n\n@-moz-document plain-text-document() {\n  :root {\n    font-family: SF Pro, SF Mono, -moz-fixed, monospace;\n    font-weight: 300;\n  }\n\n  xmp,\n  pre,\n  plaintext {\n    font-family: SF Pro, SF Mono, -moz-fixed, monospace;\n    font-weight: 300;\n  }\n}\n\n@-moz-document plain-text-document(), media-document(all) {\n  @media (prefers-color-scheme: dark) {\n    :root {\n      color: var(--plaintext-color) !important;\n      background-color: var(--in-content-bg-dark) !important;\n    }\n\n    body:not([style*=\"background\"], [class], [id]) {\n      background-color: transparent !important;\n    }\n\n    ::selection {\n      color: var(--content-selection-color) !important;\n      background-color: var(--content-selection-bgcolor) !important;\n    }\n  }\n}\n\n.controlsContainer {\n  --control-focus-outline: 2px solid var(--purple-30) !important;\n}\n\n#texttracks {\n  font-family: SF Pro Text, SF Mono, Segoe UI, sans-serif !important;\n}\n"
+        }
+    ]
+}
