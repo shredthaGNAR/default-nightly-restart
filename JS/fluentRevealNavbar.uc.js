@@ -9,25 +9,31 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   class FluentRevealEffect {
     // user configuration
     static options = {
       // if true, show the effect on bookmarks on the toolbar
       includeBookmarks: true,
 
+<<<<<<< HEAD
       // if true, show the effect on the urlbar
       includeUrlBar: true,
 
       // the color of the gradient. default is the browser's color on navbar button hover, or a faint baby blue if it's not available. 
       // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
       lightColor: "var(--button-hover-bgcolor, hsla(224, 100%, 80%, 0.15))",
+=======
+      // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
+      lightColor: "hsla(224, 100%, 80%, 0.15)",
+>>>>>>> dbe3769 (bigupdate)
 
       // how wide the radial gradient is.
       gradientSize: 50,
 
       // whether to show an additional light burst when clicking an element. (not recommended)
       clickEffect: false,
+<<<<<<< HEAD
 
       // don't process mouse movements greater than {gradientSize}px from top of the screen, in order to reduce system load.
       // disable if you modified the ui to have toolbar buttons on different side of the screen (left, right or bottom)
@@ -35,6 +41,8 @@
 
       // looks for all toolbar buttons only once on script startup — reduces system load, but requires browser restart if toolbar buttons were changed
       cacheButtons: false,
+=======
+>>>>>>> dbe3769 (bigupdate)
     };
 
     // instantiate the handler for a given window
@@ -49,37 +57,22 @@
 
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
-      if (!this._toolbarButtons || !this._options.cacheButtons) {
-        this._toolbarButtons = Array.from(
-          gNavToolbox.querySelectorAll(".toolbarbutton-1")
-        );
-        if (this._options.includeUrlBar) {
-          this._toolbarButtons.push(gNavToolbox.querySelector("#urlbar-background"));
-        }
-        if (this._options.includeBookmarks) {
-          this._toolbarButtons = this._toolbarButtons.concat(
-            Array.from(
-              this.personalToolbar.querySelectorAll(
-                ".toolbarbutton-1, .bookmark-item"
-              )
-            )
-          );
-        }
-      }
-      return this._toolbarButtons;
-    }
-
-    get personalToolbar() {
-      return (
-        this._personalToolbar ||
-        (this._personalToolbar = document.getElementById("PersonalToolbar"))
+      let buttons = Array.from(
+        gNavToolbox.querySelectorAll(".toolbarbutton-1")
       );
+      if (this._options.includeBookmarks) {
+        buttons = buttons.concat(
+          Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
+        );
+      }
+      return buttons;
     }
 
-    get browser() {
+    get placesToolbarItems() {
       return (
-        this._browser ||
-        (this._browser = document.getElementById("browser"))
+        this._placesToolbarItems ||
+        (this._placesToolbarItems =
+          document.getElementById("PlacesToolbarItems"))
       );
     }
 
@@ -88,18 +81,6 @@
      * @param {object} e (event)
      */
     handleEvent(e) {
-      /// filter out mouse events which are too far from toolbar to cause any actual redraw
-      /// value is {gradientSize} + some additional padding to make sure effect fully clears out
-      if (
-        this._options.filterDy &&
-        e.clientY >
-          this.browser.getBoundingClientRect().y +
-            this._options.gradientSize
-      ) {
-        if (this._someEffectsApplied) this.clearEffectsForAll();
-        return;
-      }
-      
       requestAnimationFrame(time => {
         switch (e.type) {
           case "scroll":
@@ -174,15 +155,8 @@
         el.id === "PlacesChevron" || el.classList.contains("bookmark-item");
       let area = isBookmark
         ? el
-         : el.querySelector(".toolbarbutton-badge-stack") ||
-           el.querySelector(".toolbarbutton-icon");
-      if (el.id == "urlbar-background") area = el;
-
-      // don't apply effect to focused url bar
-      if (this._options.includeUrlBar && el.id == 'urlbar-background' && gURLBar.focused) {
-        return this.clearEffect(area);
-      }
-
+        : el.querySelector(".toolbarbutton-badge-stack") ||
+          el.querySelector(".toolbarbutton-icon");
       let areaStyle = getComputedStyle(area);
       if (
         areaStyle.display == "none" ||
@@ -193,7 +167,7 @@
         area = el.querySelector(".toolbarbutton-text");
       }
 
-      if (el.disabled || getComputedStyle(el).pointerEvents == "none") {
+      if (el.disabled || areaStyle.pointerEvents == "none") {
         return this.clearEffect(area);
       }
 
@@ -227,7 +201,6 @@
       this.toolbarButtons.forEach(button =>
         this.generateToolbarButtonEffect(button, e, click)
       );
-      this._someEffectsApplied = true;
     }
 
     /**
@@ -276,16 +249,6 @@
     clearEffect(el) {
       this._options.is_pressed = false;
       el.style.removeProperty("background-image");
-    }
-
-    /**
-    * invoked once when {filterDy} option enabled, and cursor leaves the interactive area
-    */
-    clearEffectsForAll() {
-      this.toolbarButtons.forEach(button =>
-        this.clearEffect(button)
-      );
-      this._someEffectsApplied = false;
     }
   }
 

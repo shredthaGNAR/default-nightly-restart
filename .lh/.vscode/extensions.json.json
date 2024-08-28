@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 12,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1637642447935,
@@ -56,6 +56,10 @@
                 {
                     "date": 1715149148673,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,7 +49,8 @@\n \t\t\"kevinghadyani.vscode-colormate\",\n \t\t\"jabacchetta.vscode-essentials\",\n \t\t\"be5invis.vscode-custom-css\",\n \t\t\"ex3ndr.llama-coder\",\n-\t\t\"anbuselvanrocky.bootstrap5-vscode\"\n+\t\t\"anbuselvanrocky.bootstrap5-vscode\",\n+\t\t\"vitaliymaz.vscode-svg-previewer\"\n \t]\n }\n"
+                },
+                {
+                    "date": 1723651949287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,7 +50,8 @@\n \t\t\"jabacchetta.vscode-essentials\",\n \t\t\"be5invis.vscode-custom-css\",\n \t\t\"ex3ndr.llama-coder\",\n \t\t\"anbuselvanrocky.bootstrap5-vscode\",\n-\t\t\"vitaliymaz.vscode-svg-previewer\"\n+\t\t\"vitaliymaz.vscode-svg-previewer\",\n+\t\t\"thertzlor.semantic-rainbow\"\n \t]\n }\n"
                 }
             ],
             "date": 1637642447935,

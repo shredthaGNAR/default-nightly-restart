@@ -33,7 +33,7 @@ class FindbarMods {
   // firefox layout, and requires a lot of CSS to implement. so leaving this set
   // to false will disable the miniaturization features of the script, and
   // solely implement the context menu and hotkey features.
-  forceMiniFindbar = true;
+  forceMiniFindbar = false;
 
   // firefox has no localization strings for these phrases, since they can only
   // be configured in about:config. change the label and accesskey values for

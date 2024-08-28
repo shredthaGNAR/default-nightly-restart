@@ -1,0 +1,897 @@
+ @import url(uc-globals.css);
+ /* @import url(uc-variables.css);*/
+ @import url(uc-panels.css);
+ @import url(uc-app-menu.css);
+ @import url(uc-findbar.css);
+ @import url(uc-ctrl-tab.css);
+ @import url(uc-bookmarks.css);
+ @import url(resources/in-content/library.css);
+ @import url(resources/in-content/downloads.css);
+ @import url(uc-popups.css);
+ @import url(uc-search-mode-icons.css);
+ @import url(uc-extensions.css);
+ @import url(uc-unified-extensions.css);
+ @import url(uc-sidebar.css);
+ @import url(uc-misc.css);
+ @import url(uc-search-one-offs.css);
+ @import url(uc-context-menus.css);
+ @import url(compact-bookmarks.css);
+ @import url(components/colored_soundplaying_tab.css);
+ @import url(components/search_bar_transparent_background.css);
+ @import url(components/url_bar_no_border.css);
+ @import url(components/autohide_sidebar.css);
+ /*@import url(components/overlay_tab_audio_icons.css);*/
+ @import url(components/urlbar_container_color_border.css);
+ /* @import url(components/buttonlike_toolbarbuttons.css);*/
+ /*@import url(components/shrinking_pinned_tabs.css);*/
+ @import url(components/centered_tab_content.css);
+ /*@import url(components/tab_line_loading_indicator.css);*/
+ /*@import url(components/dark_checkboxes_and_radios.css);*/
+ @import url(components/tab_close_button_always_on_hover.css);
+ @import url(components/floating-findbar-on-top.css);
+ @import url(components/show-tab-close-button-on-hover.css);
+ @import url(custom-chrome.css);
+
+ /* Remove Tab When Only One */
+ #tabbrowser-tabs tab:first-of-type:last-of-type {
+     visibility: collapse !important;
+ }
+
+ /* Add all around shadow-looks like an Outline */
+ /*.tabbrowser-tab[selected] .tab-icon-image {
+     filter:
+         drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white) !important;
+     border-radius: 15% !important;
+ }*/
+ /* Sidebar background color change */
+ /* Bookmarks bar background color */
+ #PersonalToolbar {
+     background-color: transparent !important;
+     backdrop-filter: blur(20px) !important;
+     -moz-default-appearance: menupopup;
+     appearance: menupopup !important;
+ }
+
+ /* Remove empty space from tabs bar*/
+ #TabsToolbar .titlebar-spacer[type="pre-tabs"],
+ #TabsToolbar .titlebar-spacer[type="post-tabs"],
+ #TabsToolbar .titlebar-spacer,
+ /* Private browser icons remove and change main menu to purple */
+ #private-browsing-indicator-with-label,
+ .private-browsing-indicator {
+     display: none !important;
+ }
+
+ .tabbrowser-tab .tab-label-container .tab-label {
+     transition: color 250ms ease !important;
+ }
+
+ .tabbrowser-tab[fadein]:not([style^="max-width"]) {
+     max-width: 100vw !important
+ }
+
+
+ #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([visuallyselected="true"], [multiselected])>.tab-stack>.tab-background:not(:-moz-lwtheme) {
+     box-shadow: 0 0 4px rgba(128, 128, 142, 0.5) !important;
+ }
+
+ #TabsToolbar:not([brighttext]) #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([visuallyselected="true"], [multiselected])>.tab-stack>.tab-background:not(:-moz-lwtheme) {
+     box-shadow: 0 0 1px var(--tab-line-color, rgba(128, 128, 142, 0.9)), 0 0 4px rgba(128, 128, 142, 0.5) !important;
+ }
+
+ :root[tabsintitlebar]:not(:-moz-window-inactive, :-moz-lwtheme) #urlbar[open]>#urlbar-background,
+ :root[tabsintitlebar][lwt-default-theme-in-dark-mode]:not(:-moz-window-inactive) #urlbar[open]>#urlbar-background {
+     border-color: color-mix(in srgb,
+             AccentColor 50%,
+             transparent) !important;
+ }
+
+ /* Like: --toolbar-field-focus-border-color */
+
+
+ :root[privatebrowsingmode="temporary"] #PanelUI-menu-button {
+     list-style-image: url("chrome://global/skin/icons/indicator-private-browsing.svg") !important;
+ }
+
+ /* This style simply makes the tab stay visible while it is being closed as well as makes the transition a bit slower */
+
+ .tabbrowser-tab:not([pinned], [fadein]) {
+     transition-duration: 240ms, 240ms !important;
+     transition-timing-function: ease-out, ease-out !important;
+     visibility: visible !important;
+ }
+
+ .tab-content:not([fadein], [pinned]) .tab-icon-pending:not([fadein]),
+ .tab-icon-image:not([fadein]),
+ .tab-label:not([fadein]) {
+     visibility: visible !important;
+ }
+
+ .tab-label:not([fadein]) {
+     display: flex !important;
+ }
+
+ /*
+ .tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected=true], [multiselected]) {
+     background-color: color-mix(in srgb, currentColor 17%, transparent) !important;
+ }
+
+ .tabbrowser-tab:not(:hover)>.tab-stack>.tab-background:not([selected], [multiselected]) {
+     background-color: color-mix(in srgb, currentColor 11%, transparent);
+ }
+
+ /* Turn tabs playing audio gold*/
+
+ .tabbrowser-tab[soundplaying] .tab-background {
+
+     background-color: rgb(0, 255, 72) !important;
+
+ }
+
+ #private-browsing-indicator-with-label .private-browsing-indicator-icon {
+     height: 24px !important;
+     width: 24px !important;
+ }
+
+ :root,
+ :root[lang^="en"] {
+     --uc-string-private: "Private";
+ }
+
+ /* Change "Private Browsing" text to "Private" (English locale only)*/
+ :root:is([lang^="en"]) #private-browsing-indicator-with-label>label {
+     display: none !important;
+ }
+
+ :root:is([lang^="en"]) #private-browsing-indicator-with-label::after {
+     content: var(--uc-string-private) !important;
+     margin-block: 1px 2px;
+     margin-inline: 6px 5px;
+ }
+
+ #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab .tab-label-container {
+     --tab-label-mask-size: 1em !important;
+ }
+
+ #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])>#tabbrowser-arrowscrollbox>.tabbrowser-tab[first-visible-unpinned-tab] {
+     margin-inline-start: 0 !important;
+ }
+
+ .titlebar-spacer[type="post-tabs"] {
+     display: flex !important;
+ }
+
+ #TabsToolbar .toolbarbutton-animatable-box,
+ #TabsToolbar .toolbarbutton-1 {
+     fill: currentColor !important;
+ }
+
+
+ :root:not(:-moz-lwtheme) #navigator-toolbox:-moz-window-inactive {
+     background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color)) !important;
+ }
+
+
+ /* tab open/close transition */
+ .tabbrowser-tab:not([pinned]) {
+     transition-property: min-width, max-width !important;
+     transition-duration: 150ms !important;
+     transition-timing-function: cubic-bezier(0, .75, .25, 1) !important;
+ }
+
+ #tabbrowser-tabs[movingtab]>#tabbrowser-arrowscrollbox>.tabbrowser-tab[fadein]:not([selected]):not([multiselected]),
+ .tabbrowser-tab[tab-grouping],
+ .tabbrowser-tab[tabdrop-samewindow] {
+     transition: transform 200ms cubic-bezier(0, .75, .25, 1) !important;
+ }
+
+
+ :root:is([inFullscreen], :not([tabsintitlebar])) #titlebar {
+     --tab-block-margin: 0px !important;
+ }
+
+ :root #titlebar {
+     --tab-border-radius: 8px !important;
+     --uc-toolbarbutton-inner-padding: 6px !important;
+     --toolbarbutton-tabsline-border-radius: 8px !important;
+     --tabs-navbar-shadow-size: 0 !important;
+     --tab-shadow-max-size: 0 !important;
+ }
+
+ /* button background transition */
+ @media not (prefers-reduced-motion) {
+
+     .toolbarbutton-1>.toolbarbutton-icon,
+     .toolbarbutton-1>.toolbarbutton-text,
+     .toolbarbutton-1>.toolbarbutton-badge-stack,
+     :not(.panel-subview-body>toolbaritem)>.bookmark-item:not(menu, menuitem),
+     .urlbar-page-action,
+     .identity-box-button,
+     #tracking-protection-icon-container,
+     panel button,
+     panel menulist,
+     .titlebar-button {
+         transition: background-color 0.25s ease !important;
+     }
+
+     .toolbarbutton-1:not([disabled=true]):is([open], [checked], :hover:active)>.toolbarbutton-icon,
+     .toolbarbutton-1:not([disabled=true]):is([open], [checked], :hover:active)>.toolbarbutton-text,
+     .toolbarbutton-1:not([disabled=true]):is([open], [checked], :hover:active)>.toolbarbutton-badge-stack,
+     :not(.panel-subview-body>toolbaritem)>.bookmark-item:not(menu, menuitem):not([disabled=true]):is([open], [checked], :hover:active),
+     .urlbar-page-action:not([disabled=true]):is([open], [checked], :hover:active),
+     .identity-box-button:not([disabled=true]):is([open], [checked], :hover:active),
+     #tracking-protection-icon-container:not([disabled=true]):is([open], [checked], :hover:active),
+     panel button:not([disabled=true]):is([open], [checked], :hover:active),
+     panel menulist:not([disabled=true]):is([open], [checked], :hover:active),
+     .titlebar-button:not([disabled=true]):hover:active {
+         transition-duration: 0s !important;
+     }
+ }
+
+ /* remove background from urlbar box */
+ #identity-box[pageproxystate="valid"].notSecureText>.identity-box-button:not(:hover, [open]),
+ #identity-box[pageproxystate="valid"].chromeUI>.identity-box-button:not(:hover, [open]),
+ #identity-box[pageproxystate="valid"].extensionPage>.identity-box-button:not(:hover, [open]) {
+     background-color: transparent !important;
+ }
+
+ #urlbar[open]>#urlbar-background {
+     border-color: transparent !important;
+     box-shadow: 0 10px 16px #0005, 0 0 1px #0006 !important;
+ }
+
+ .urlbarView-row:not([type="tip"], [type="dynamic"])[selected]>.urlbarView-row-inner,
+ .urlbarView-row-inner[selected] {
+     box-shadow: 3px 0 var(--toolbar-field-focus-border-color) inset !important;
+ }
+
+ /* Remove empty space from tabs bar */
+ #TabsToolbar .titlebar-spacer[type="pre-tabs"],
+ #TabsToolbar .titlebar-spacer[type="post-tabs"],
+ #TabsToolbar .titlebar-spacer,
+ /* Remove Line above search engine selection in search bar */
+ #urlbar .search-one-offs .search-panel-one-offs-header-label,
+ /* Remove lefover window buttons from extra menu bar (when pressing alt)*/
+ #titlebar #toolbar-menubar .titlebar-buttonbox-container,
+ /* Private browser icons remove and change main menu to purple */
+ #private-browsing-indicator-with-label,
+ .private-browsing-indicator,
+ /* Hide tracking protection icon from Search Bar */
+ #tracking-protection-icon-container,
+ /* Hide permission icons, see it when pressing permission button */
+ #blocked-permissions-container {
+     display: none !important;
+ }
+
+ /* Remove right and left side tab overflow border line */
+ #scrollbutton-up~spacer {
+     border-color: transparent !important;
+ }
+
+ :root {
+     --tabpanel-background-color: transparent !important;
+     -moz-default-appearance: menupopup !important;
+     appearance: menupopup !important;
+ }
+
+ .browser-toolbar {
+     &:not(.titlebar-color) {
+         background-color: transparent !important;
+         appearance: menupopup !important;
+     }
+ }
+
+ /***************
+private browsing
+****************/
+
+ /*** TILED/MAXIMIZED/FULLSCREEN WINDOW FIXES ***/
+ #main-window[privatebrowsingmode="temporary"][gtktiledwindow="true"] #nav-bar,
+ #main-window[privatebrowsingmode="temporary"][gtktiledwindow="true"] #nav-bar:-moz-window-inactive {
+     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"][sizemode="maximized"] #nav-bar,
+ #main-window[privatebrowsingmode="temporary"][sizemode="maximized"] #nav-bar:-moz-window-inactive,
+ #main-window[privatebrowsingmode="temporary"][sizemode="fullscreen"] #nav-bar {
+     border-radius: 0 0 0 0 !important;
+     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"][sizemode="fullscreen"] #nav-bar {
+     border-bottom: 1px solid rgba(0, 0, 0, 0.4) !important;
+ }
+
+ /*** FOCUS FIX for PRIVATE MODE ***/
+ #main-window[privatebrowsingmode="temporary"] #nav-bar:-moz-window-inactive {
+     background: linear-gradient(to right, rgba(139, 121, 226, 1), rgba(199, 128, 188, 1)) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #urlbar:not([focused="true"]):-moz-window-inactive {
+     background: linear-gradient(to right, #A793FF, #D198E5) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #searchbar:not([focused="true"]):-moz-window-inactive {
+     background: #D198E5 !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #TabsToolbar:-moz-window-inactive {
+     background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 6%),
+         linear-gradient(90deg, rgba(167, 147, 255, 1), rgba(229, 155, 216, 1) 100%) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #PersonalToolbar:-moz-window-inactive {
+     background: linear-gradient(90deg, rgba(167, 147, 255, 1), rgba(229, 155, 216, 1) 100%) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #toolbar-menubar:-moz-window-inactive {
+     background: linear-gradient(to right, rgba(139, 121, 226, 1), rgba(199, 128, 188, 1)) !important;
+ }
+
+ /*** ELEMENTS IN PRIVATE MODE ***/
+ #private-browsing-indicator-with-label {
+     display: none !important;
+ }
+
+ :root[privatebrowsingmode="temporary"] {
+     --toolbarseparator-color: rgba(28, 27, 27, 0.238) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #navigator-toolbox {
+     background-color: rgba(0, 0, 0, 1) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #nav-bar {
+     -moz-appearance: none !important;
+     appearance: none !important;
+     background: linear-gradient(to right, rgba(94, 75, 197, 1), rgba(162, 76, 141, 1)) !important;
+     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #searchbar:not([focused="true"]) {
+     border: 1px solid rgba(0, 0, 0, 0.4) !important;
+     border-radius: 3px !important;
+     background: #A267A9 !important;
+     box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.3), 0 1px 0 0 rgba(255, 255, 255, 0.05) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #urlbar:not([focused="true"]) {
+     border: 1px solid rgba(0, 0, 0, 0.4) !important;
+     border-radius: 3px !important;
+     background: linear-gradient(to right, #8266C4, #A267A9) !important;
+     box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.3), 0 1px 0 0 rgba(255, 255, 255, 0.05) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #urlbar[focused="true"] {
+     border: 1px solid rgba(0, 0, 0, 0.4) !important;
+     border-radius: 4px !important;
+     background: linear-gradient(to right, #8266C4, #A267A9) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] .urlbarView-body-inner,
+ #main-window[privatebrowsingmode="temporary"] .search-one-offs:not([is_searchbar="true"]),
+ #main-window[privatebrowsingmode="temporary"] #customization-footer {
+     border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #PopupSearchAutoComplete {
+     --panel-color: #fff !important;
+     --panel-background: #A267A9 !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] .autocomplete-richlistbox {
+     overflow-x: hidden !important;
+     overflow-y: hidden !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #TabsToolbar {
+     appearance: none !important;
+     background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 6%),
+         linear-gradient(90deg, rgba(115, 98, 200, 1), rgba(171, 100, 157, 1) 100%) !important;
+     border-top: 1px solid rgba(0, 0, 0, 0.4) !important;
+     border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] .tab-background:is([selected], [multiselected]) {
+     background: rgba(255, 255, 255, 0.25) !important;
+     border: 1px solid rgba(0, 0, 0, 0.4) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #tabbrowser-tabs[movingtab]>#tabbrowser-arrowscrollbox>.tabbrowser-tab[selected="true"] {
+     background: rgba(141, 32, 174, 1) !important;
+     border: none !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #PersonalToolbar {
+     background: linear-gradient(90deg, rgba(115, 98, 200, 1), rgba(171, 100, 157, 1) 100%) !important;
+     border-top: none !important;
+     border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #toolbar-menubar {
+     background: linear-gradient(to right, rgba(94, 75, 197, 1), rgba(162, 76, 141, 1)) !important;
+     border-top: none !important;
+     border-bottom: none !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #PlacesToolbarItems .bookmark-item:not(menuitem):not(menu):-moz-any([open], [checked], :hover, :active) {
+     background-color: rgba(255, 255, 255, 0.3) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #customization-container {
+     background: #2d0b44 !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] toolbar:not(#PersonalToolbar):not(#TabsToolbar) .toolbarbutton-1:not([disabled="true"]):not([data-extensionid]):-moz-any([open], [checked], :active)>.toolbarbutton-icon,
+ #main-window[privatebrowsingmode="temporary"] toolbar .toolbarbutton-1:not([disabled="true"]):not([data-extensionid]):-moz-any([open], [checked], :active)>.toolbarbutton-badge-stack {
+     background-color: rgba(255, 255, 255, 0.2) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] toolbar .toolbaritem-combined-buttons>.toolbarbutton-1:-moz-any([open], [checked], :active),
+ #main-window[privatebrowsingmode="temporary"] toolbar .toolbarbutton-1[data-extensionid]:-moz-any([open], [checked], :active) {
+     background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 49%, rgba(255, 255, 255, 0) 50%) !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #TabsToolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :active)>.toolbarbutton-icon,
+ #main-window[privatebrowsingmode="temporary"] #TabsToolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :hover, :active)>.toolbarbutton-badge-stack {
+     background: rgba(255, 255, 255, 0.2) !important;
+     clip-path: none !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #PersonalToolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :hover, :active),
+ #main-window[privatebrowsingmode="temporary"] #PersonalToolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :hover, :active)>.toolbarbutton-badge-stack {
+     background: rgba(255, 255, 255, 0.2) !important;
+     clip-path: none !important;
+ }
+
+ :root[privatebrowsingmode="temporary"] {
+     --toolbarbutton-hover-background: rgba(255, 255, 255, 0.3) !important;
+     --toolbarbutton-active-background: rgba(255, 255, 255, 0.3) !important;
+ }
+
+ /*** MAKE WINDOW CONTROLS WHITE for PRIVATE MODE ***/
+ #main-window[privatebrowsingmode="temporary"] .titlebar-min,
+ #main-window[privatebrowsingmode="temporary"] .titlebar-max,
+ #main-window[privatebrowsingmode="temporary"] .titlebar-restore,
+ #main-window[privatebrowsingmode="temporary"] .titlebar-close {
+     filter: brightness(450%) drop-shadow(0 1px 0 #603C7B) !important;
+ }
+
+ /*** BUTTONS for PRIVATE MODE ***/
+ #main-window[privatebrowsingmode="temporary"] #back-button>.toolbarbutton-icon {
+     list-style-image: url("data:image/svg+xml,%3Csvg xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:cc='http://creativecommons.org/ns%23' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' id='svg6' version='1.1' width='16' height='16'%3E%3Cmetadata id='metadata12'%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage' /%3E%3Cdc:title%3E%3C/dc:title%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cdefs id='defs10' /%3E%3Cpath id='path873-5' style='opacity:1;fill:%23ffffff;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stop-color:%23000000' d='m 7.2260666,2.5 c 0.4312184,0 0.7783725,0.3346464 0.7783725,0.7503279 V 6 H 13.221628 C 13.652847,6 14,6.3346463 14,6.7503279 V 8.249672 C 14,8.6653541 13.652847,9.0004099 13.221628,9 H 8.0044391 v 2.749674 C 8.0044391,12.165354 7.657285,12.5 7.2260666,12.5 6.9936571,12.5 6.7861919,12.40264 6.6438073,12.247938 L 2.212837,8.0241533 C 2.081227,7.8897736 2,7.7091601 2,7.5097679 2,7.3103755 2.081225,7.129763 2.212837,6.995383 L 6.6438073,2.7520634 C 6.7861919,2.5973529 6.9936571,2.5 7.2260666,2.5 Z' /%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #forward-button {
+     list-style-image: url("data:image/svg+xml,%3Csvg xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:cc='http://creativecommons.org/ns%23' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' id='svg6' version='1.1' width='16' height='16'%3E%3Cmetadata id='metadata12'%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage' /%3E%3Cdc:title%3E%3C/dc:title%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cdefs id='defs10' /%3E%3Cpath id='path873-5' style='opacity:1;fill:%23ffffff;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stop-color:%23000000' d='M 8.7739334,2.5 C 8.342715,2.5 7.9955609,2.8346464 7.9955609,3.2503279 L 7.9955609,6 H 2.778372 C 2.347153,6 2,6.3346463 2,6.7503279 L 2,8.249672 C 2,8.6653541 2.3471532,9.0004099 2.778372,9 h 5.2171889 l 0,2.749674 c 0,0.41568 0.3471541,0.750326 0.7783725,0.750326 0.2324095,0 0.4398747,-0.09736 0.5822593,-0.252062 L 13.787163,8.0241533 C 13.918773,7.8897736 14,7.7091601 14,7.5097679 14,7.3103755 13.918775,7.129763 13.787163,6.995383 L 9.3561927,2.7520634 C 9.2138081,2.5973529 9.0063429,2.5 8.7739334,2.5 Z' /%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #reload-button {
+     list-style-image: url("data:image/svg+xml,%3Csvg height='24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate%28-433 175%29'%3E%3Cpath color='%23bebebe' d='M445.531-172c-.3 0-.53.253-.53.563V-170a7 7 0 1 0 7 7h-3a4 4 0 1 1-4-4v1.438c0 .309.23.562.53.562a.56.56 0 0 0 .22-.031l4.905-2.938a.592.592 0 0 0 .344-.531.592.592 0 0 0-.344-.531l-4.906-2.938a.558.558 0 0 0-.219-.03z' fill='rgb(255, 255, 255)' overflow='visible' style='isolation:auto;mix-blend-mode:normal;marker:none'/%3E%3C/g%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #stop-button {
+     list-style-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:cc='http://creativecommons.org/ns%23' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' height='24' width='24' version='1.1' id='svg6'%3E%3Cmetadata id='metadata12'%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage' /%3E%3Cdc:title /%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cdefs id='defs10' /%3E%3Cpath d='m 7.1875,5.0026092 c -0.243988,0.0069 -0.474752,0.112716 -0.65625,0.3125 l -1.25,1.375 c -0.362996,0.399568 -0.353579,1.027726 0.03125,1.40625 l 3.96875,3.9062498 -3.96875,3.90625 c -0.384829,0.378524 -0.394246,1.006682 -0.03125,1.40625 l 1.25,1.375 c 0.362996,0.399568 0.958921,0.409774 1.34375,0.03125 l 4.125,-4.0625 4.125,4.0625 c 0.384829,0.378524 0.980754,0.368318 1.34375,-0.03125 l 1.25,-1.375 c 0.362996,-0.399568 0.353579,-1.027726 -0.03125,-1.40625 l -3.96875,-3.90625 3.96875,-3.9062498 c 0.384829,-0.378524 0.394246,-1.006682 0.03125,-1.40625 l -1.25,-1.375 C 17.105754,4.9155411 16.509829,4.9053351 16.125,5.2838592 L 12,9.3463592 7.875,5.2838592 C 7.682586,5.0945972 7.431488,4.9957431 7.1875,5.0026092 Z' id='rect3280' style='color:%23000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:%23ffffff;solid-opacity:1;fill:%23ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate' /%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #home-button {
+     list-style-image: url("data:image/svg+xml,%3Csvg height='24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate%28-353 255%29'%3E%3Cpath color='%23bebebe' d='M365-251l-8.844 8.844 1.688 1.719 1.156-1.157V-235h5v-4c0-.554.446-1 1-1s1 .446 1 1v4h5v-6.594l1.156 1.156 1.688-1.718zm4 1v1.531l2 2.094V-250z' fill='rgb(255, 255, 255)' overflow='visible' style='isolation:auto;mix-blend-mode:normal;marker:none'/%3E%3C/g%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] :root:not([customizing]) .toolbarbutton-1[disabled="true"] {
+     opacity: 0.50 !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #new-tab-button .toolbarbutton-icon {
+     list-style-image: url("data:image/svg+xml,%3Csvg height='16' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg color='%235b5b5b' transform='translate%28-293 -117%29'%3E%3Cpath d='M300 120v4h-4v2h4v4h2v-4h4v-2h-4v-4z' fill='rgb(255, 255, 255)' overflow='visible' style='marker:none'/%3E%3C/g%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #tabs-newtab-button .toolbarbutton-icon {
+     list-style-image: url("data:image/svg+xml,%3Csvg height='16' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg color='%235b5b5b' transform='translate%28-293 -117%29'%3E%3Cpath d='M300 120v4h-4v2h4v4h2v-4h4v-2h-4v-4z' fill='rgb(255, 255, 255)' overflow='visible' style='marker:none'/%3E%3C/g%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #TabsToolbar .tab-close-button {
+     list-style-image: url("data:image/svg+xml,%3Csvg height='16' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg color='%235b5b5b' transform='translate%28-713 -157%29'%3E%3Cpath d='M720.97 163.556L723.5 161l1.5 1.5-2.598 2.487L725 167.5l-1.5 1.5-2.512-2.599L718.5 169l-1.5-1.5 2.586-2.5-2.586-2.5 1.5-1.5z' fill='rgb(255, 255, 255)' overflow='visible' style='marker:none'/%3E%3C/g%3E%3C/svg%3E") !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #TabsToolbar tab .tab-close-button:active {
+     opacity: 1 !important;
+     background: rgba(255, 255, 255, 0.3) !important;
+ }
+
+ /*** CUSTOMIZATION BUTTONS for PRIVATE MODE ***/
+ #main-window[privatebrowsingmode="temporary"] #customization-lwtheme-button,
+ #main-window[privatebrowsingmode="temporary"] #customization-toolbar-visibility-button,
+ #main-window[privatebrowsingmode="temporary"] #customization-uidensity-button,
+ #main-window[privatebrowsingmode="temporary"] #customization-reset-button,
+ #main-window[privatebrowsingmode="temporary"] #customization-done-button {
+     appearance: none !important;
+     padding: 5px !important;
+     background-color: rgba(255, 255, 255, 0.2) !important;
+     border: 1px solid rgba(0, 0, 0, 0.50) !important;
+     border-radius: 3px !important;
+     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.10) !important;
+     color: #fff !important;
+ }
+
+ #main-window[privatebrowsingmode="temporary"] #customization-lwtheme-button[open="true"],
+ #main-window[privatebrowsingmode="temporary"] #customization-toolbar-visibility-button[open="true"],
+ #main-window[privatebrowsingmode="temporary"] #customization-uidensity-button[open="true"],
+ #main-window[privatebrowsingmode="temporary"] #customization-reset-button:active,
+ #main-window[privatebrowsingmode="temporary"] #customization-done-button:active {
+     appearance: none !important;
+     padding: 5px !important;
+     background-color: rgba(255, 255, 255, 0.2) !important;
+     border: 1px solid rgba(0, 0, 0, 0.50) !important;
+     border-radius: 3px !important;
+     box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.2) !important;
+     color: #fff !important;
+ }
+
+ /*** CHECKBOX BUTTONS CUSTOMIZATION PANEL for PRIVATE MODE ***/
+ #main-window[privatebrowsingmode="temporary"] .checkbox-check {
+     appearance: none !important;
+     height: 16px !important;
+     width: 16px !important;
+     background-color: white !important;
+     border: 1px solid rgba(0, 0, 0, 0.50) !important;
+     border-radius: 3px !important;
+     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.10) !important;
+ }
+
+ /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/urlbar_container_color_border.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+ /* Draws a border around urlbar using the color of the current container. */
+
+ .urlbar-input-container {
+     border-width: 0 !important;
+     padding: 2px !important;
+ }
+
+ #userContext-icons::before {
+     box-sizing: border-box;
+     display: block;
+     position: absolute;
+     content: "";
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     outline: 1px solid var(--identity-icon-color);
+     border-radius: var(--toolbarbutton-border-radius);
+     outline-offset: -1px;
+     pointer-events: none;
+ }
+
+ #urlbar[focused] #userContext-icons::before {
+     outline-width: 2px;
+     outline-offset: -2px
+ }
+
+ /* These might potentially cause some issues, but are needed to make the border extend the border to the full popup when urlbar popup is open */
+ #urlbar[open]>.urlbar-input-container {
+     position: static !important;
+     padding: calc(2px + var(--urlbar-margin-inline, 5px)) !important;
+ }
+
+ #urlbar[open]>#urlbar-background {
+     z-index: -1 !important;
+ }
+
+ /* OPTIONAL FEATURES */
+
+ /* Hide container label in urlbar */
+ /* #userContext-label{ display: none } */
+
+ /* Hide container icon in urlbar */
+ /* #userContext-indicator{ display: none } */
+
+ /* Hide the container line above tabs */
+ /* .tab-context-line{ display: none } */
+
+ /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/page_action_buttons_on_urlbar_hover.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+ .urlbar-page-action {
+     margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding));
+     opacity: 0;
+     transition: margin-inline-end 100ms linear, opacity 200ms linear;
+ }
+
+ #urlbar:hover .urlbar-page-action,
+ .urlbar-page-action[open],
+ .urlbar-page-action[open]~.urlbar-page-action {
+     opacity: 1;
+     margin-inline-end: 0px !important;
+ }
+
+
+ /*** TEST
+ #main-window[tabsintitlebar] #PanelUI-menu-button::after {
+     display: block !important;
+     color: white !important;
+     font-weight: bold !important;
+     text-shadow: 0 0 1px rgba(0, 0, 0, .7),
+         0 1px 1.5px rgba(0, 0, 0, .5) !important;
+     margin-top: 0px !important;
+     margin-bottom: 2px !important;
+     border: unset !important;
+     box-shadow: unset !important;
+ }
+
+ #main-window[tabsintitlebar][sizemode="normal"] #PanelUI-menu-button::after {
+     margin-bottom: 0px !important;
+ }
+
+ /* 'Firefox' title *
+ #main-window[tabsintitlebar] #PanelUI-menu-button[label="Firefox"]::after,
+ #main-window[tabsintitlebar] #PanelUI-menu-button:not([label="Nightly"]):not([label="Firefox Nightly"]):not([label="Firefox Developer Edition"]):not([label="Firefox"]):not([label="Tor Browser"]):not([label="Tor-Browser"])::after {
+     content: "Firefox" !important;
+     -moz-margin-start: -6px !important;
+ }
+
+ #main-window[uidensity=touch][tabsintitlebar] #PanelUI-menu-button[label="Firefox"]::after,
+ #main-window[uidensity=touch][tabsintitlebar] #PanelUI-menu-button:not([label="Nightly"]):not([label="Firefox Nightly"]):not([label="Firefox Developer Edition"]):not([label="Firefox"]):not([label="Tor Browser"]):not([label="Tor-Browser"])::after {
+     -moz-margin-start: -12px !important;
+ }
+
+ /* 'DevFox' title *
+ #main-window[tabsintitlebar] #PanelUI-menu-button[label="Firefox Developer Edition"]::after {
+     content: "DevFox" !important;
+     -moz-margin-start: -9px !important;
+ }
+
+ #main-window[uidensity=touch][tabsintitlebar] #PanelUI-menu-button[label="Firefox Developer Edition"]::after {
+     -moz-margin-start: -15px !important;
+ }
+
+ /* 'Nightly' title *
+ #main-window[tabsintitlebar] #PanelUI-menu-button[label="Nightly"]::after,
+ #main-window[tabsintitlebar] #PanelUI-menu-button[label="Firefox Nightly"]::after {
+     content: "Nightly" !important;
+     -moz-margin-start: -6px !important;
+ }
+
+ #main-window[uidensity=touch][tabsintitlebar] #PanelUI-menu-button[label="Nightly"]::after,
+ #main-window[uidensity=touch][tabsintitlebar] #PanelUI-menu-button[label="Firefox Nightly"]::after {
+     -moz-margin-start: -12px !important;
+ }
+
+ /* 'Tor-Browser' title *
+ #main-window[tabsintitlebar] #PanelUI-menu-button:-moz-any([label="Tor Browser"], [label="Tor-Browser"])::after {
+     content: "Tor-Fox" !important;
+     -moz-margin-start: -6px !important;
+ }
+
+ #main-window[uidensity=touch][tabsintitlebar] #PanelUI-menu-button:-moz-any([label="Tor Browser"], [label="Tor-Browser"])::after {
+     -moz-margin-start: -12px !important;
+ }
+
+ /** custom button title (remove above Firefox/DevFox/Nightly codes)
+
+ #main-window[tabsintitlebar] #PanelUI-menu-button::after {
+     content: "MyTitle" !important;
+     -moz-margin-start: -6px !important;
+ }
+
+ #main-window[uidensity=touch][tabsintitlebar] #PanelUI-menu-button::after {
+     -moz-margin-start: -12px !important;
+ }
+
+ /****TEST  2 ***/
+ /* indicator for multiselected tabs *
+ .tabbrowser-tab[multiselected="true"] .tab-stack .tab-content {
+     box-shadow: inset 2px 0 0 Highlight,
+         inset -2px 0 0 Highlight,
+         inset 0 2px 0 Highlight,
+         inset 0 -2px 0 Highlight !important;
+ }
+
+ /* test 3 */
+ /* Hide 'this time, search with' in url dropdown *
+ .search-panel-one-offs-header.search-panel-header {
+     display: none !important;
+ }
+
+ /* Hide page actions (bookmark star  & zoom), show them on hover *
+ #page-action-buttons,
+ .urlbar-page-action {
+     /*margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding) );*
+     max-width: 0px;
+     opacity: 0;
+     transition:
+         /*margin-inline 75ms linear,*
+         max-width 100ms linear, opacity 200ms linear;
+ }
+
+ #urlbar:hover #page-action-buttons,
+ #urlbar:hover .urlbar-page-action,
+ .urlbar-page-action[open],
+ .urlbar-page-action[open]~.urlbar-page-action {
+     opacity: 1;
+     max-width: 100px !important;
+     /*32*
+ }
+
+ #urlbar:is([focused]) #page-action-buttons,
+ #urlbar:is([focused]) .urlbar-page-action,
+ .urlbar-page-action[open],
+ .urlbar-page-action[open]~.urlbar-page-action {
+     opacity: 1;
+     max-width: 100px !important;
+     /*32*
+ }
+
+ /* Hide magnifying glass search icon *
+ #urlbar[pageproxystate='invalid'] #identity-box,
+ #urlbar-search-button,
+ #identity-icon-box {
+     max-width: 0px;
+     display: none !important;
+ }
+
+ /* Show icons on hover, hide first *
+ #tracking-protection-icon-container,
+ #identity-box,
+ #identity-permission-box,
+ #notification-popup-box,
+ #reader-mode-button,
+ #remote-control-box,
+ #urlbar:is([focused]) #identity-box,
+ #urlbar:is([focused]) #identity-permission-box,
+ #urlbar:is([focused]) #notification-popup-box {
+     color: #dddddd !important;
+     opacity: 0;
+     max-width: 0px;
+     transition: max-width 100ms linear, opacity 200ms linear !important;
+ }
+
+ /* show on hover */
+ #urlbar:hover #identity-box,
+ #urlbar:hover #identity-permission-box,
+ #urlbar:hover #notification-popup-box,
+ #urlbar:hover #identity-icon-box,
+ #urlbar:hover #remote-control-box,
+ #urlbar:hover #tracking-protection-icon-container {
+     opacity: 1;
+     max-width: 75px;
+ }
+
+ #urlbar:not([focused="true"])>#urlbar-background {
+     background: rgba(63, 1, 117, 0.903) !important;
+ }
+
+ /*  Clean and tight extensions menu */
+ #unified-extensions-panel #unified-extensions-view {
+     width: 100% !important;
+     /*  For firefox v115.x */
+ }
+
+ #unified-extensions-view {
+     --uei-icon-size: 22px;
+     /*  Change icon size */
+     --firefoxcss-number-of-extensions-in-a-row: 3;
+     /*  Increase to the number of icons you want in one row */
+ }
+
+ #unified-extensions-view .panel-header,
+ #unified-extensions-view .panel-header+toolbarseparator,
+ #unified-extensions-view .panel-subview-body+toolbarseparator,
+ #unified-extensions-view #unified-extensions-manage-extensions,
+ #unified-extensions-view .unified-extensions-item-menu-button.subviewbutton,
+ #unified-extensions-view .unified-extensions-item-action-button .unified-extensions-item-contents {
+     display: none !important;
+ }
+
+ #unified-extensions-view .panel-subview-body {
+     padding: 4px !important;
+ }
+
+ #unified-extensions-view .unified-extensions-item .unified-extensions-item-icon,
+ #unified-extensions-view .unified-extensions-item .toolbarbutton-badge-stack {
+     margin-inline-end: 0px !important;
+ }
+
+ #unified-extensions-view #overflowed-extensions-list,
+ #unified-extensions-view #unified-extensions-area,
+ #unified-extensions-view .unified-extensions-list {
+     display: grid !important;
+     grid-template-columns: repeat(var(--firefoxcss-number-of-extensions-in-a-row), auto);
+     justify-items: left !important;
+     align-items: left !important;
+ }
+
+ #unified-extensions-view .unified-extensions-list .unified-extensions-item,
+ #unified-extensions-view .unified-extensions-list {
+     max-width: max-content;
+ }
+
+ #unified-extensions-view #unified-extensions-area {
+     padding-bottom: 3px !important;
+     border-bottom: 1px solid #aeaeae33 !important;
+ }
+
+ #unified-extensions-view .unified-extensions-list {
+     border-top: 1px solid #aeaeae33 !important;
+ }
+
+ #wrapper-edit-controls:is([place="palette"],
+     [place="panel"])>#edit-controls,
+ #wrapper-zoom-controls:is([place="palette"],
+     [place="panel"])>#zoom-controls,
+ :is(panelview, #widget-overflow-fixed-list) .toolbaritem-combined-buttons {
+     margin: 0px !important;
+ }
+
+ /* Remove extra padding between tabs */
+ .tabbrowser-tab:not(:first-of-type) {
+     padding-left: 0 !important;
+ }
+
+ /* remove tab shadow *
+ .tabbrowser-tab>.tab-stack>.tab-background {
+     box-shadow: none !important;
+ }
+
+ /* multi tab selection */
+ #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([multiselected])>.tab-stack>.tab-background:-moz-lwtheme {
+     outline-color: transparent !important;
+ }
+
+ /* container tabs indicator */
+ .tabbrowser-tab[usercontextid]>.tab-stack>.tab-background>.tab-context-line {
+     margin: -1px var(--container-tabs-indicator-margin) 0 var(--container-tabs-indicator-margin) !important;
+     height: 1px !important;
+     box-shadow: var(--uc-identity-glow) var(--identity-tab-color) !important;
+
+ }
+
+ /* Change inactive tab favicon color *
+ .tabbrowser-tab[pinned][fadein]:not([selected="true"]) .tab-icon-image {
+     filter: grayscale(100%) opacity(50%) hue-rotate(180deg) saturate(50%)  !important;
+ }
+
+ /* Change inactive tab text color
+ .tabbrowser-tab[pinned][fadein]:not([selected="true"]) .tab-text {
+     color: #808080;
+
+ }
+   :root,
+  :root .tabbrowser-tab {
+    /* Light mode shadows. *
+    --uc-titlebar-shadow:
+      0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
+      0 -3px 2px -3px rgb(0 0 0 / .2) inset;
+    --uc-tab-shadow:
+      0 0 0 1px var(--lwt-tab-line-color, transparent),
+      0 4px 5px rgb(0 0 0 / .21),
+      0 0px 2px rgb(0 0 0 / .18);
+
+    & [brighttext],
+    & [brighttext] .tabbrowser-tab {
+      /* Dark mode shadows. *
+      --uc-titlebar-shadow:
+        0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
+        0 -3px 2px -3px rgb(0 0 0 / .7) inset;
+      --uc-tab-shadow:
+        0 0 0 1px var(--lwt-tab-line-color, transparent),
+        0 5px 7px rgb(0 0 0 / .44),
+        0 0px 2px rgb(0 0 0 / .7);
+    }
+  }
+
+/* Apply tab shadows. *
+#tabbrowser-tabs .tab-background:is([selected], [multiselected]),
+#TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon {
+  box-shadow: var(--uc-tab-shadow) !important;
+}
+
+/* Apply toolbar shadows. *
+#TabsToolbar {
+  box-shadow: var(--uc-titlebar-shadow) !important;
+}
+#nav-bar {
+	border-top: none !important;
+	box-shadow: 0 calc(-1 * var(--tabs-navbar-shadow-size)) 0 var(--tabs-navbar-separator-color, transparent) !important;
+}*./

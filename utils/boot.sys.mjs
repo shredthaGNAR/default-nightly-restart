@@ -1,9 +1,12 @@
 import { AppConstants } from "resource://gre/modules/AppConstants.sys.mjs";
 import { FileSystem as FS } from "chrome://userchromejs/content/fs.sys.mjs";
-import { _ucUtils as utils, loaderModuleLink, Pref, SharedGlobal } from "chrome://userchromejs/content/utils.sys.mjs";
+import { _ucUtils as utils, loaderModuleLink, Pref } from "chrome://userchromejs/content/utils.sys.mjs";
 
-const FX_AUTOCONFIG_VERSION = "0.9.0";
+const FX_AUTOCONFIG_VERSION = "0.8.6";
 console.warn( "Browser is executing custom scripts via autoconfig" );
+
+const SHARED_GLOBAL = {};
+Object.defineProperty(SHARED_GLOBAL,"widgetCallbacks",{value:new Map()});
 
 const APP_VARIANT = (() => {
   let is_tb = AppConstants.BROWSER_CHROME_URL.startsWith("chrome://messenger");
@@ -22,6 +25,7 @@ const BROWSERCHROME = (() => {
 
 const PREF_ENABLED = 'userChromeJS.enabled';
 const PREF_SCRIPTSDISABLED = 'userChromeJS.scriptsDisabled';
+const PREF_GBROWSERHACKENABLED = 'userChromeJS.gBrowser_hack.enabled';
 
 function getDisabledScripts(){
   return Services.prefs.getStringPref(PREF_SCRIPTSDISABLED,"").split(",")
@@ -65,27 +69,26 @@ class ScriptData {
       : null;
     this.useFileURI = /\/\/ @usefileuri\b/.test(headerText);
     this.noExec = isStyle || noExec;
+    // Construct regular expression to use to match target document
+    let match, rex = {
+      include: [],
+      exclude: []
+    };
+    let findNextRe = /^\/\/ @(include|exclude)\s+(.+)\s*$/gm;
+    while (match = findNextRe.exec(headerText)) {
+      rex[match[1]].push(
+        match[2].replace(/^main$/i, BROWSERCHROME).replace(/\*/g, '.*?')
+      );
+    }
+    if (!rex.include.length) {
+      rex.include.push(BROWSERCHROME);
+    }
+    let exclude = rex.exclude.length ? `(?!${rex.exclude.join('$|')}$)` : '';
+    this.regex = new RegExp(`^${exclude}(${rex.include.join('|') || '.*'})$`,'i');
     
-    if(this.inbackground || this.styleSheetMode === "agent" || (!isStyle && noExec)){
-      this.regex = null;
+    if(this.inbackground){
       this.loadOrder = -1;
     }else{
-      // Construct regular expression to use to match target document
-      let match, rex = {
-        include: [],
-        exclude: []
-      };
-      let findNextRe = /^\/\/ @(include|exclude)\s+(.+)\s*$/gm;
-      while (match = findNextRe.exec(headerText)) {
-        rex[match[1]].push(
-          match[2].replace(/^main$/i, BROWSERCHROME).replace(/\*/g, '.*?')
-        );
-      }
-      if (!rex.include.length) {
-        rex.include.push(BROWSERCHROME);
-      }
-      let exclude = rex.exclude.length ? `(?!${rex.exclude.join('$|')}$)` : '';
-      this.regex = new RegExp(`^${exclude}(${rex.include.join('|') || '.*'})$`,'i');
       let loadOrder = headerText.match(/\/\/ @loadOrder\s+(\d+)\s*$/im)?.[1];
       this.loadOrder = Number.parseInt(loadOrder) || 10;
     }
@@ -133,7 +136,7 @@ class ScriptData {
         aScript.#preCompiledESM = script;
         resolve(script);
       })
-      .catch( (ex) => resolve(ScriptData.onCompileRejection(ex,aScript)) )
+      .catch( (ex) => resolve(ScriptData.onCompileRejection(ex,aScript.filename)) )
       .finally(()=>{aScript.#preCompiling = null})
     });
     return aScript.#preCompiling
@@ -161,7 +164,7 @@ class ScriptData {
   }
   
   static tryLoadScriptIntoWindow(aScript,win){
-    if(aScript.regex === null || !aScript.regex.test(win.location.href)){
+    if(!aScript.regex.test(win.location.href)){
       return
     }
     if(aScript.type === "style" && aScript.styleSheetMode === "author"){
@@ -179,7 +182,7 @@ class ScriptData {
     }
     if(aScript.onlyonce && aScript.#isRunning) {
       if(aScript.startup){
-        SharedGlobal[aScript.startup]._startup(win)
+        SHARED_GLOBAL[aScript.startup]._startup(win)
       }
       return
     }
@@ -193,11 +196,7 @@ class ScriptData {
   }
   static markScriptRunning(aScript,aGlobal){
     aScript.#isRunning = true;
-    try{
-      aScript.startup && SharedGlobal[aScript.startup]._startup(aGlobal);
-    }catch(ex){
-      console.error(new Error(`${aScript.filename}: requested _startup function could not be found in SharedGlobal.${aScript.startup}`,{cause: ex}));
-    }
+    aScript.startup && SHARED_GLOBAL[aScript.startup]._startup(aGlobal);
     return
   }
   static injectESMIntoGlobal(aScript,aGlobal){
@@ -272,10 +271,10 @@ class ScriptData {
 
 Pref.setIfUnset(PREF_ENABLED,true);
 Pref.setIfUnset(PREF_SCRIPTSDISABLED,"");
+Pref.setIfUnset(PREF_GBROWSERHACKENABLED,false);
 
-// This is called if _previous_ startup was broken
 function showgBrowserNotification(){
-  Services.prefs.setBoolPref('userChromeJS.gBrowser_hack.enabled',true);
+  Services.prefs.setBoolPref(PREF_GBROWSERHACKENABLED,true);
   utils.showNotification(
   {
     label : "fx-autoconfig: Something was broken in last startup",
@@ -295,17 +294,12 @@ function showgBrowserNotification(){
   )
 }
 
-// This is called if startup somehow takes over 5 seconds
-function maybeShowBrokenNotification(window){
-  if(window.isFullyOccluded && "gBrowser" in window){
-    console.log("Window was fully occluded, no need to panic")
-    return
-  }
+function showBrokenNotification(window){
   let aNotificationBox = window.gNotificationBox;
   aNotificationBox.appendNotification(
     "fx-autoconfig-broken-notification",
     {
-      label: "fx-autoconfig: Startup might be broken",
+      label: "fx-autoconfig: Startup is broken",
       image: "chrome://browser/skin/notification-icons/popup.svg",
       priority: "critical"
     },
@@ -364,30 +358,29 @@ class UserChrome_js{
     this.initialized = false;
     this.init();
   }
-  registerScript(aScript,isDisabled){
+  registerScript(aScript,isEnabled){
     if(aScript.type === "script"){
       this.scripts.push(aScript);
     }else{
       this.styles.push(aScript);
     }
-    if(!isDisabled && aScript.manifest){
+    if(isEnabled && aScript.manifest){
       try{
         ScriptData.registerScriptManifest(aScript);
       }catch(ex){
         console.error(new Error(`@ ${aScript.filename}`,{cause:ex}));
       }
     }
-    return isDisabled
   }
   init(){
     if(this.initialized){
       return
     }
-    loaderModuleLink.setup(this,FX_AUTOCONFIG_VERSION,AppConstants.MOZ_APP_DISPLAYNAME_DO_NOT_USE,APP_VARIANT,ScriptData);
+    loaderModuleLink.setup(this,FX_AUTOCONFIG_VERSION,AppConstants.MOZ_APP_DISPLAYNAME_DO_NOT_USE,APP_VARIANT,SHARED_GLOBAL,ScriptData);
     // gBrowserHack setup
-    this.GBROWSERHACK_ENABLED = 
-      (Services.prefs.getBoolPref("userChromeJS.gBrowser_hack.required",false) ? 2 : 0)
-    + (Services.prefs.getBoolPref("userChromeJS.gBrowser_hack.enabled",false) ? 1 : 0);
+    const gBrowserHackRequired = Services.prefs.getBoolPref("userChromeJS.gBrowser_hack.required",false) ? 2 : 0;
+    const gBrowserHackEnabled = Services.prefs.getBoolPref(PREF_GBROWSERHACKENABLED,false) ? 1 : 0;
+    this.GBROWSERHACK_ENABLED = gBrowserHackRequired|gBrowserHackEnabled;
     const disabledScripts = getDisabledScripts();
     // load script data
     const scriptDir = FS.getScriptDir();
@@ -395,9 +388,7 @@ class UserChrome_js{
       for(let entry of scriptDir){
         if (/^[A-Za-z0-9]+.*(\.uc\.js|\.uc\.mjs|\.sys\.mjs)$/i.test(entry.leafName)) {
           let script = ScriptData.fromScriptFile(entry);
-          if(this.registerScript(script,disabledScripts.includes(script.filename))){
-            continue // script is disabled
-          }
+          this.registerScript(script,!disabledScripts.includes(script.filename));
           if(script.inbackground){
             try{
               if(script.isESM){
@@ -473,9 +464,9 @@ class UserChrome_js{
     }else if(_gb && this.isInitialWindow){
       this.isInitialWindow = false;
       let timeout = window.setTimeout(() => {
-        maybeShowBrokenNotification(window);
+        showBrokenNotification(window);
       },5000);
-      utils.windows.waitWindowLoading(window)
+      utils.windowIsReady(window)
       .then(() => {
         // startup is fine, clear timeout
         window.clearTimeout(timeout);
@@ -527,14 +518,12 @@ class UserChrome_js{
     }
     const window = aDoc.ownerGlobal;
     
-    window.MozXULElement.insertFTLIfNeeded("toolkit/about/aboutSupport.ftl");
+    window.MozXULElement.insertFTLIfNeeded("browser/browser.ftl");
     let menuFragment = window.MozXULElement.parseXULToFragment(`
       <menu id="userScriptsMenu" label="userScripts">
         <menupopup id="menuUserScriptsPopup">
-          <menuseparator></menuseparator>
-          <menuitem id="userScriptsMenu-OpenFolder" label="Open folder" oncommand="_ucUtils.openScriptDir()"></menuitem>
           <menuitem id="userScriptsMenu-Restart" label="Restart" oncommand="_ucUtils.restart(false)" tooltiptext="Toggling scripts requires restart"></menuitem>
-          <menuitem id="userScriptsMenu-ClearCache" label="Restart and clear startup cache" oncommand="_ucUtils.restart(true)" tooltiptext="Toggling scripts requires restart"></menuitem>
+          <menuseparator></menuseparator>
         </menupopup>
       </menu>
     `);
@@ -548,16 +537,11 @@ class UserChrome_js{
         UserChrome_js.appendScriptMenuitemToFragment(window,itemsFragment,style);
       }
     }
-    menuFragment.getElementById("menuUserScriptsPopup").prepend(itemsFragment);
+    menuFragment.getElementById("menuUserScriptsPopup").appendChild(itemsFragment);
     popup.prepend(menuFragment);
     popup.querySelector("#menuUserScriptsPopup").addEventListener("popupshown",updateMenuStatus);
-    aDoc.l10n.formatValues(["restart-button-label","clear-startup-cache-label","show-dir-label"])
-    .then(values => {
-      let baseTitle = `${values[0]} ${utils.brandName}`;
-      aDoc.getElementById("userScriptsMenu-Restart").setAttribute("label", baseTitle);
-      aDoc.getElementById("userScriptsMenu-ClearCache").setAttribute("label", values[1].replace("…","") + " & " + baseTitle);
-      aDoc.getElementById("userScriptsMenu-OpenFolder").setAttribute("label",values[2])
-    });
+    aDoc.l10n.formatValue("quickactions-restart")
+      .then(c => aDoc.getElementById("userScriptsMenu-Restart").setAttribute("label", c));
     return popup.querySelector("#userScriptsMenu");
   }
   static appendScriptMenuitemToFragment(aWindow,aFragment,aScript){
@@ -574,7 +558,7 @@ class UserChrome_js{
     return
   }
   observe(aSubject, aTopic, aData) {
-    aSubject.addEventListener('DOMContentLoaded', this, {once: true, capture: true});
+    aSubject.addEventListener('DOMContentLoaded', this, true);
   }
   
   handleEvent(aEvent){

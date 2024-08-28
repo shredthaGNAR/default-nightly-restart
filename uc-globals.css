@@ -137,6 +137,7 @@ but other than that these variables should be available everywhere. */
   --global-focus-outline: var(--global-focus-outline-width) solid var(--global-focus-outline-color);
   --global-focus-shadow: 0 0 0 2px var(--global-focus-shadow-color);
   --global-focus-outline-offset: -2px;
+  --primary-color-faint: hsl(236, 40%, 56%);
 
   --acrylic-blur: blur(15px);
   --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
@@ -345,7 +346,11 @@ but other than that these variables should be available everywhere. */
     hsla(var(--download-button-hue), 96%, 81.94%, 0.07) 60%,
     hsla(var(--download-button-hue), 95%, 79.94%, 0.05) 80%,
     hsla(var(--download-button-hue), 90%, 76.94%, 0.01) 96.3%
+<<<<<<< HEAD
   );
+=======
+  ); 
+>>>>>>> dbe3769 (bigupdate)
 
   --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5);
   --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8);
