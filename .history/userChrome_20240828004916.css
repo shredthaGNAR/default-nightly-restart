@@ -855,10 +855,10 @@ See the above repository for updates as well as full license text. */
  .tabbrowser-tab[pinned][fadein]:not([selected="true"]) .tab-text {
      color: #808080;
 
- }
+ }*/
    :root,
   :root .tabbrowser-tab {
-    /* Light mode shadows. *
+    /* Light mode shadows. */
     --uc-titlebar-shadow:
       0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
       0 -3px 2px -3px rgb(0 0 0 / .2) inset;
@@ -869,7 +869,7 @@ See the above repository for updates as well as full license text. */
 
     & [brighttext],
     & [brighttext] .tabbrowser-tab {
-      /* Dark mode shadows. *
+      /* Dark mode shadows. */
       --uc-titlebar-shadow:
         0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
         0 -3px 2px -3px rgb(0 0 0 / .7) inset;
@@ -880,24 +880,24 @@ See the above repository for updates as well as full license text. */
     }
   }
 
-/* Apply tab shadows. *
+/* Apply tab shadows. */
 #tabbrowser-tabs .tab-background:is([selected], [multiselected]),
 #TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon {
   box-shadow: var(--uc-tab-shadow) !important;
 }
 
-/* Apply toolbar shadows. *
+/* Apply toolbar shadows. */
 #TabsToolbar {
   box-shadow: var(--uc-titlebar-shadow) !important;
 }
 #nav-bar {
 	border-top: none !important;
 	box-shadow: 0 calc(-1 * var(--tabs-navbar-shadow-size)) 0 var(--tabs-navbar-separator-color, transparent) !important;
-}*./
-/* Target the favicon image within a selected tab
+}
+/*! Target the favicon image within a selected tab*/
 #tabbrowser-tabs .tab-icon-image[selected="true"] {
-  /* Apply your desired styles here *
-  filter: grayscale(100%); /* Example: Make favicon grayscale *
+  /* Apply your desired styles here */
+  filter: grayscale(0%); /* Example: Make favicon grayscale */
 }
  /*!Make favicon circle border */
  .tabbrowser-tab[selected] .tab-icon-image {
@@ -929,7 +929,7 @@ See the above repository for updates as well as full license text. */
      max-width: 300px;
  }
 
- /* Makes black favicons more visible on dark background, contrast will be lowered though */
+ /* Makes black favicons more visible on dark background, contrast will be lowered though *
  .tab-icon-image {
      filter: invert(40%) contrast(250%) saturate(250%) !important;
  }
@@ -939,21 +939,4 @@ See the above repository for updates as well as full license text. */
      filter: grayscale(70%) !important;
      transition: filter 0.2s ease-in;
      opacity: 0.7 !important;
- }
-
- /* Blend Inactive tabs favicon */
- #TabsToolbar #tabbrowser-tabs .tabbrowser-tab[pending] .tab-content:not(:hover) .tab-icon-image {
-     filter: grayscale(70%) !important;
-     transition: filter 0.2s ease-in;
-     opacity: 0.7 !important;
- }
-
- .tabbrowser-tab:not([selected="true"]) .tab-icon-image {
-     opacity: 0.5 !important;
- }
-
- /* Set the opacity of unselected tab labels */
- .tab-label:not([selected]) {
-     opacity: 0.5 !important;
-     /* Adjust the value as needed */
  }

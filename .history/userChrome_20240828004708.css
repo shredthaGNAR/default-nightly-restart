@@ -855,105 +855,176 @@ See the above repository for updates as well as full license text. */
  .tabbrowser-tab[pinned][fadein]:not([selected="true"]) .tab-text {
      color: #808080;
 
+ }*/
+ :root,
+ :root .tabbrowser-tab {
+     /* Light mode shadows. */
+     --uc-titlebar-shadow:
+         0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
+         0 -3px 2px -3px rgb(0 0 0 / .2) inset;
+     --uc-tab-shadow:
+         0 0 0 1px var(--lwt-tab-line-color, transparent),
+         0 4px 5px rgb(0 0 0 / .21),
+         0 0px 2px rgb(0 0 0 / .18);
+
+     & [brighttext],
+     & [brighttext] .tabbrowser-tab {
+         /* Dark mode shadows. */
+         --uc-titlebar-shadow:
+             0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
+             0 -3px 2px -3px rgb(0 0 0 / .7) inset;
+         --uc-tab-shadow:
+             0 0 0 1px var(--lwt-tab-line-color, transparent),
+             0 5px 7px rgb(0 0 0 / .44),
+             0 0px 2px rgb(0 0 0 / .7);
+     }
  }
-   :root,
-  :root .tabbrowser-tab {
-    /* Light mode shadows. *
-    --uc-titlebar-shadow:
-      0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
-      0 -3px 2px -3px rgb(0 0 0 / .2) inset;
-    --uc-tab-shadow:
-      0 0 0 1px var(--lwt-tab-line-color, transparent),
-      0 4px 5px rgb(0 0 0 / .21),
-      0 0px 2px rgb(0 0 0 / .18);
 
-    & [brighttext],
-    & [brighttext] .tabbrowser-tab {
-      /* Dark mode shadows. *
-      --uc-titlebar-shadow:
-        0 -1px var(--tabs-navbar-shadow-color, transparent) inset,
-        0 -3px 2px -3px rgb(0 0 0 / .7) inset;
-      --uc-tab-shadow:
-        0 0 0 1px var(--lwt-tab-line-color, transparent),
-        0 5px 7px rgb(0 0 0 / .44),
-        0 0px 2px rgb(0 0 0 / .7);
-    }
-  }
+ /* Apply tab shadows. */
+ #tabbrowser-tabs .tab-background:is([selected], [multiselected]),
+ #TabsToolbar #firefox-view-button[open]>.toolbarbutton-icon {
+     box-shadow: var(--uc-tab-shadow) !important;
+ }
 
-/* Apply tab shadows. *
-#tabbrowser-tabs .tab-background:is([selected], [multiselected]),
-#TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon {
-  box-shadow: var(--uc-tab-shadow) !important;
-}
+ /* Apply toolbar shadows. */
+ #TabsToolbar {
+     box-shadow: var(--uc-titlebar-shadow) !important;
+ }
 
-/* Apply toolbar shadows. *
-#TabsToolbar {
-  box-shadow: var(--uc-titlebar-shadow) !important;
-}
-#nav-bar {
-	border-top: none !important;
-	box-shadow: 0 calc(-1 * var(--tabs-navbar-shadow-size)) 0 var(--tabs-navbar-separator-color, transparent) !important;
-}*./
-/* Target the favicon image within a selected tab
-#tabbrowser-tabs .tab-icon-image[selected="true"] {
-  /* Apply your desired styles here *
-  filter: grayscale(100%); /* Example: Make favicon grayscale *
+ #nav-bar {
+     border-top: none !important;
+     box-shadow: 0 calc(-1 * var(--tabs-navbar-shadow-size)) 0 var(--tabs-navbar-separator-color, transparent) !important;
+ }
+
+ /* Target the favicon image within a selected tab*/
+ #tabbrowser-tabs .tab-icon-image[selected="true"] {
+     /* Apply your desired styles here */
+     filter: grayscale(0%);
+
+     /* Example: Make favicon grayscale *
 }
  /*!Make favicon circle border */
- .tabbrowser-tab[selected] .tab-icon-image {
-     filter:
-         drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white) !important;
-     border-radius: 15% !important;
- }
+     .tabbrowser-tab[selected] .tab-icon-image {
+         filter:
+             drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white) !important;
+         border-radius: 15% !important;
+     }
 
- /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/urlbar_info_icons_on_hover.css made available under Mozilla Public License v. 2.0
+     /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/urlbar_info_icons_on_hover.css made available under Mozilla Public License v. 2.0
 See the above repository for updates as well as full license text. */
 
- /* Hides info icons (except remote control icon) on the left side of urlbar and shows them when urlbar is hovered. */
+     /* Hides info icons (except remote control icon) on the left side of urlbar and shows them when urlbar is hovered. */
 
- #urlbar-search-button,
- #tracking-protection-icon-container,
- #identity-box,
- #identity-box.extensionPage #identity-icon-label {
-     max-width: 0px;
-     transition: max-width 100ms linear !important;
-     overflow: hidden;
- }
+     #urlbar-search-button,
+     #tracking-protection-icon-container,
+     #identity-box,
+     #identity-box.extensionPage #identity-icon-label {
+         max-width: 0px;
+         transition: max-width 100ms linear !important;
+         overflow: hidden;
+     }
 
- #identity-box.extensionPage {
-     max-width: 32px
- }
+     #identity-box.extensionPage {
+         max-width: 32px
+     }
 
- #urlbar:hover #urlbar-input-container>box,
- #urlbar:hover #identity-box.extensionPage #identity-icon-label {
-     max-width: 300px;
- }
+     #urlbar:hover #urlbar-input-container>box,
+     #urlbar:hover #identity-box.extensionPage #identity-icon-label {
+         max-width: 300px;
+     }
 
- /* Makes black favicons more visible on dark background, contrast will be lowered though */
+     /* Makes black favicons more visible on dark background, contrast will be lowered though *
  .tab-icon-image {
      filter: invert(40%) contrast(250%) saturate(250%) !important;
  }
 
  /* Blend Inactive tabs favicon */
- :is(#TabsToolbar, #vertical-tabs) #tabbrowser-tabs .tabbrowser-tab[pending] .tab-content:not(:hover) .tab-icon-image {
-     filter: grayscale(70%) !important;
-     transition: filter 0.2s ease-in;
-     opacity: 0.7 !important;
+     :is(#TabsToolbar, #vertical-tabs) #tabbrowser-tabs .tabbrowser-tab[pending] .tab-content:not(:hover) .tab-icon-image {
+         filter: grayscale(70%) !important;
+         transition: filter 0.2s ease-in;
+         opacity: 0.7 !important;
+     }
  }
 
- /* Blend Inactive tabs favicon */
- #TabsToolbar #tabbrowser-tabs .tabbrowser-tab[pending] .tab-content:not(:hover) .tab-icon-image {
-     filter: grayscale(70%) !important;
-     transition: filter 0.2s ease-in;
-     opacity: 0.7 !important;
+ /* ----------------------------- */
+ /* Firefox Sliding Bookmarks Bar */
+ /* ----------------------------- */
+ :root {
+     --toolbar-offset-height: 42px;
  }
 
- .tabbrowser-tab:not([selected="true"]) .tab-icon-image {
-     opacity: 0.5 !important;
+ #PersonalToolbar:not([customizing]) {
+     position: absolute !important;
+     bottom: 0 !important;
+     padding-bottom: 5px !important;
+     height: auto !important;
+     width: 100% !important;
+     border: none !important;
+     border-bottom: 0.01px var(--tabs-navbar-separator-style) ThreeDShadow !important;
+     box-shadow: 0 1px 0 0 light-dark(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+     transform: translateY(0%) scaleY(1);
+     transform-origin: center bottom;
+     transition: transform cubic-bezier(.05, .79, .15, 1) 0.3s !important;
+     z-index: 2;
  }
 
- /* Set the opacity of unselected tab labels */
- .tab-label:not([selected]) {
-     opacity: 0.5 !important;
-     /* Adjust the value as needed */
+ #PersonalToolbar:not([customizing]) #personal-bookmarks {
+     opacity: 0;
+     transform: translateY(100%) scaleY(1);
+     transform-origin: center bottom;
+     transition: opacity 0.15s, transform cubic-bezier(.05, .79, .15, 1) 0.3s;
+ }
+
+ /* prevent 1px border in selected tab */
+ #titlebar {
+     z-index: 4 !important;
+ }
+
+ #nav-bar {
+     z-index: 3 !important;
+ }
+
+ /* bring up nav-bar z-index when megabar is open */
+ #nav-bar[urlbar-exceeds-toolbar-bounds="true"] {
+     z-index: 5 !important;
+ }
+
+ .tabbrowser-tab[selected="true"] {
+     z-index: 4 !important;
+ }
+
+ #navigator-toolbox:hover>#PersonalToolbar:not([customizing]) {
+     position: absolute !important;
+     transform: translateY(100%) scaleY(1);
+     box-shadow: 0 1px 0 0 light-dark(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.9));
+ }
+
+ #navigator-toolbox:has(toolbarbutton[open="true"])>#PersonalToolbar:not([customizing]) {
+     position: absolute !important;
+     transform: translateY(100%) scaleY(1);
+ }
+
+ #navigator-toolbox:hover>#PersonalToolbar:not([customizing]) #personal-bookmarks {
+     transform: translateY(0%) scaleY(1);
+     opacity: 1;
+ }
+
+ #navigator-toolbox:has(toolbarbutton[open="true"])>#PersonalToolbar:not([customizing]) #personal-bookmarks {
+     transform: translateY(0%) scaleY(1);
+     opacity: 1;
+ }
+
+ /* z-index override for notification bar */
+ .notificationbox-stack[notificationside="top"] {
+     z-index: 2 !important;
+ }
+
+ #PlacesToolbarItems>toolbarseparator:before {
+     opacity: 0.8 !important;
+ }
+
+ .bookmark-item>.toolbarbutton-icon,
+ .bookmark-item>.menu-iconic-left>.menu-iconic-icon {
+     will-change: transform !important;
+     image-rendering: optimizequality !important;
  }

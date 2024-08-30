@@ -952,8 +952,8 @@ See the above repository for updates as well as full license text. */
      opacity: 0.5 !important;
  }
 
- /* Set the opacity of unselected tab labels */
- .tab-label:not([selected]) {
-     opacity: 0.5 !important;
-     /* Adjust the value as needed */
+ /* text shadow */
+ .tabbrowser-tab .tab-label {
+     text-shadow: 0px 1px 0px white,
+         0px 1px 4px white !important;
  }

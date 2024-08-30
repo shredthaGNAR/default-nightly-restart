@@ -1,5 +1,5 @@
  @import url(uc-globals.css);
- /* @import url(uc-variables.css);*/
+/* @import url(uc-variables.css);*/
  @import url(uc-panels.css);
  @import url(uc-app-menu.css);
  @import url(uc-findbar.css);
@@ -47,7 +47,7 @@
  #PersonalToolbar {
      background-color: transparent !important;
      backdrop-filter: blur(20px) !important;
-     -moz-default-appearance: menupopup;
+     -moz-appearance: menupopup !important;
      appearance: menupopup !important;
  }
 
@@ -688,7 +688,7 @@ See the above repository for updates as well as full license text. */
  }
 
  /* test 3 */
- /* Hide 'this time, search with' in url dropdown *
+ /* Hide 'this time, search with' in url dropdown */
  .search-panel-one-offs-header.search-panel-header {
      display: none !important;
  }
@@ -730,7 +730,7 @@ See the above repository for updates as well as full license text. */
      display: none !important;
  }
 
- /* Show icons on hover, hide first *
+ /* Show icons on hover, hide first */
  #tracking-protection-icon-container,
  #identity-box,
  #identity-permission-box,
@@ -828,13 +828,30 @@ See the above repository for updates as well as full license text. */
      padding-left: 0 !important;
  }
 
+<<<<<<< HEAD
+ /* remove tab shadow */
+=======
  /* remove tab shadow *
+>>>>>>> dbe3769 (bigupdate)
  .tabbrowser-tab>.tab-stack>.tab-background {
      box-shadow: none !important;
  }
 
  /* multi tab selection */
  #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([multiselected])>.tab-stack>.tab-background:-moz-lwtheme {
+<<<<<<< HEAD
+     outline-color: var(--toolbarseparator-color) !important;
+ }
+
+
+
+ /* container tabs indicator */
+ .tabbrowser-tab[usercontextid]>.tab-stack>.tab-background>.tab-context-line {
+
+     margin: -1px var(--container-tabs-indicator-margin) 0 var(--container-tabs-indicator-margin) !important;
+     height: 1px !important;
+
+=======
      outline-color: transparent !important;
  }
 
@@ -842,10 +859,45 @@ See the above repository for updates as well as full license text. */
  .tabbrowser-tab[usercontextid]>.tab-stack>.tab-background>.tab-context-line {
      margin: -1px var(--container-tabs-indicator-margin) 0 var(--container-tabs-indicator-margin) !important;
      height: 1px !important;
+>>>>>>> dbe3769 (bigupdate)
      box-shadow: var(--uc-identity-glow) var(--identity-tab-color) !important;
 
  }
 
+<<<<<<< HEAD
+ :root {
+     --tabs-navbar-separator-style: none !important;
+ }
+
+ :root {
+     --lwt-tab-line-color: transparent !important;
+ }
+
+ /*Useless blue border on tabs fix (DO NOT TOUCH UNLESS YOU DON'T WANT THOSE LITTLE PEKSY TABS COLORED OF BLUE ON BORDERS)*/
+ #TabsToolbar #firefox-view-button[open]>.toolbarbutton-icon:-moz-lwtheme,
+ .tab-background[selected]:-moz-lwtheme {
+     outline: none !important;
+ }
+
+ :root {
+     &[lwtheme] {
+         --tab-selected-outline-color: none !important;
+     }
+
+     panelview:not([extension]),
+     .panel-arrowcontent {
+         background-color: var(--toolbar-bgcolor) !important;
+         color: var(--toolbar-color) !important;
+     }
+
+     tab:not([selected]):hover .tab-background {
+         background-color: var(--toolbarbutton-hover-background) !important;
+     }
+
+     tab[visuallyselected] .tab-background {
+         box-shadow: 0px 3px 12px -5px black !important;
+     }}
+=======
  /* Change inactive tab favicon color */
  .tabbrowser-tab[pinned][fadein]:not([selected="true"]) .tab-icon-image {
      filter: grayscale(100%) opacity(50%) hue-rotate(180deg) saturate(50%) !important;
@@ -940,6 +992,7 @@ See the above repository for updates as well as full license text. */
      transition: filter 0.2s ease-in;
      opacity: 0.7 !important;
  }
+>>>>>>> dbe3769 (bigupdate)
 
  /* Blend Inactive tabs favicon */
  #TabsToolbar #tabbrowser-tabs .tabbrowser-tab[pending] .tab-content:not(:hover) .tab-icon-image {

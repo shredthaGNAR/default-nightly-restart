@@ -929,12 +929,12 @@ See the above repository for updates as well as full license text. */
      max-width: 300px;
  }
 
- /* Makes black favicons more visible on dark background, contrast will be lowered though */
+ /* Makes black favicons more visible on dark background, contrast will be lowered though *
  .tab-icon-image {
      filter: invert(40%) contrast(250%) saturate(250%) !important;
  }
 
- /* Blend Inactive tabs favicon */
+ /* Blend Inactive tabs favicon *
  :is(#TabsToolbar, #vertical-tabs) #tabbrowser-tabs .tabbrowser-tab[pending] .tab-content:not(:hover) .tab-icon-image {
      filter: grayscale(70%) !important;
      transition: filter 0.2s ease-in;
@@ -945,15 +945,5 @@ See the above repository for updates as well as full license text. */
  #TabsToolbar #tabbrowser-tabs .tabbrowser-tab[pending] .tab-content:not(:hover) .tab-icon-image {
      filter: grayscale(70%) !important;
      transition: filter 0.2s ease-in;
-     opacity: 0.7 !important;
- }
-
- .tabbrowser-tab:not([selected="true"]) .tab-icon-image {
-     opacity: 0.5 !important;
- }
-
- /* Set the opacity of unselected tab labels */
- .tab-label:not([selected]) {
-     opacity: 0.5 !important;
-     /* Adjust the value as needed */
+     opacity: 0.7;
  }
