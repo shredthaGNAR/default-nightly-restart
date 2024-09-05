@@ -6,7 +6,7 @@
 	"editor.bracketPairColorization.enabled": true,
 	"back-n-forth.withLastEditLocation": true,
 	"editor.formatOnType": true,
-	"editor.formatOnSave": false,
+	"editor.formatOnSave": true,
 	"editor.formatOnPaste": true,
 	"bookmarks.useWorkaroundForFormatters": true,
 	"[plaintext]": {
@@ -16,8 +16,8 @@
 	"checkpoints.showActiveFileOnly": false,
 	"localaipilot.standalone.ollamaCodeModel": "codellama:13b",
 	"workbench.colorCustomizations": {
-		"terminal.background": "#00000000",
-		"titleBar.activeBackground": "#4c4843dd",
-		"activityBar.background": "#403c37aa"
+		"terminal.background": "#000000",
+		"titleBar.activeBackground": "#45423e76",
+		"activityBar.background": "#3b3a3800"
 	}
 }
