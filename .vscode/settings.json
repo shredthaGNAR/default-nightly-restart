@@ -19,5 +19,6 @@
 		"terminal.background": "#000000",
 		"titleBar.activeBackground": "#45423e76",
 		"activityBar.background": "#3b3a3800"
-	}
+	},
+	"local-history.browser.descending": true
 }
