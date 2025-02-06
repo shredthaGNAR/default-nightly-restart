@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toggle Menubar Hotkey
-// @version        1.1.5
+// @version        1.2.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Adds a hotkey (Alt+M by default) that toggles the menubar on and off. Unlike just pressing the Alt key, this keeps it open permanently until closed again by the hotkey, toolbar context menu, or customize menu. Requires [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) — other script loaders will not work with this script.
@@ -18,26 +18,26 @@
     // key ID. don't change this.
     id: "key_toggleMenubar",
   };
-  let hotkeyRegistered = _ucUtils.registerHotkey(options, (win, key) => {
-    if (win === window) {
-      Services.obs.notifyObservers(
-        null,
-        "browser-set-toolbar-visibility",
-        JSON.stringify([
-          CustomizableUI.AREA_MENUBAR,
-          AutoHideMenubar._node.getAttribute("inactive"),
-        ])
-      );
-    }
-  });
+  let hotkeyRegistered = UC_API.Hotkeys.define({
+    ...options,
+    command: win => {
+      if (win === window) {
+        Services.obs.notifyObservers(
+          null,
+          "browser-set-toolbar-visibility",
+          JSON.stringify([
+            CustomizableUI.AREA_MENUBAR,
+            AutoHideMenubar._node.getAttribute("inactive"),
+          ])
+        );
+      }
+    },
+  }).attachToWindow(window, { suppressOriginalKey: true });
 
   function init() {
     if (!hotkeyRegistered) return;
     document.getElementById("toolbar-menubar").setAttribute("key", options.id);
-    if (
-      ToolbarContextMenu.onViewToolbarsPopupShowing.name ===
-      "onViewToolbarsPopupShowing"
-    ) {
+    if (!ToolbarContextMenu._modifiedByToggleMenubarHotkey) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
         CustomizableUI: "resource:///modules/CustomizableUI.sys.mjs",
@@ -45,16 +45,18 @@
       });
 
       eval(
-        `ToolbarContextMenu.onViewToolbarsPopupShowing = function uc_onViewToolbarsPopupShowing ${ToolbarContextMenu.onViewToolbarsPopupShowing
+        `ToolbarContextMenu.onViewToolbarsPopupShowing = function ${ToolbarContextMenu.onViewToolbarsPopupShowing
           .toSource()
           .replace(/^\(/, "")
           .replace(/\)$/, "")
-          .replace(/^onViewToolbarsPopupShowing/, "")
+          .replace(/^function /, "")
           .replace(
             /if \(popup\.id != \"toolbar-context-menu\"\)/,
             `if (toolbar.hasAttribute("key"))`
           )}`
       );
+
+      ToolbarContextMenu._modifiedByToggleMenubarHotkey = true;
     }
   }
 

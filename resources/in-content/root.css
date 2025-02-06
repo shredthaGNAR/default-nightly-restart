@@ -19,7 +19,7 @@ html|plaintext,
 html|listing,
 html|textarea,
 html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
-  font-family:SF Mono, -moz-fixed, monospace;
+  font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
   font-weight: 300;
 }
 
@@ -82,14 +82,14 @@ html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
 
 @-moz-document plain-text-document() {
   :root {
-    font-family: SF Pro, SF Mono, -moz-fixed, monospace;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
     font-weight: 300;
   }
 
   xmp,
   pre,
   plaintext {
-    font-family: SF Pro, SF Mono, -moz-fixed, monospace;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
     font-weight: 300;
   }
 }
@@ -117,5 +117,5 @@ html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
 }
 
 #texttracks {
-  font-family: SF Pro Text, SF Mono, Segoe UI, sans-serif !important;
+  font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
 }

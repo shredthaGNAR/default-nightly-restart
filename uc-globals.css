@@ -31,12 +31,12 @@ but other than that these variables should be available everywhere. */
   --ui-text-90: hsla(0, 0%, 100%, 0.9);
   --ui-text-100: #fff;
 
-  --uc-accent-color: hsl(268, 67%, 20%);
+  --uc-accent-color: hsl(233, 59%, 8%);
   --uc-frame-color: var(--uc-accent-color);
-  --uc-toolbar-bgcolor: hsl(296, 42%, 15%);
+  --uc-toolbar-bgcolor: hsl(233, 42%, 15%);
   --uc-toolbar-color: var(--ui-text-100);
   --uc-toolbar-field-color: hsl(240, 60%, 99%);
-  --uc-arrowpanel-background: hsl(291, 36%, 11%);
+  --uc-arrowpanel-background: hsl(233, 36%, 11%);
   --uc-arrowpanel-color: hsl(213, 43%, 89%);
   --uc-arrowpanel-very-faint: hsla(236, 100%, 83%, 0.05);
   --uc-arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
@@ -48,14 +48,14 @@ but other than that these variables should be available everywhere. */
   --uc-desaturate-dimmed: hsla(236, 60%, 83%, 0.17);
   --uc-desaturate-dimmed-further: hsla(234, 60%, 83%, 0.25);
   --uc-desaturate-dimmed-even-further: hsla(232, 60%, 85%, 0.3);
-  --uc-content-text-a50: hsla(271, 100%, 85%, 0.5);
-  --uc-content-text-a80: hsla(275, 50%, 85%, 0.8);
-  --uc-panel-button-solid: hsl(262, 24%, 35%);
-  --uc-panel-button-faint-solid: hsl(261, 26%, 23%);
-  --uc-panel-box-solid: hsl(286, 28%, 18%);
-  --button-solid-hover-background: hsl(268, 29%, 26%);
-  --button-solid-active-background: hsl(289, 25%, 30%);
-  --button-solid-checked-background: hsl(277, 32%, 23%);
+  --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
+  --uc-content-text-a80: hsla(236, 50%, 85%, 0.8);
+  --uc-panel-button-solid: hsl(234, 24%, 35%);
+  --uc-panel-button-faint-solid: hsl(234, 27%, 23%);
+  --uc-panel-box-solid: hsl(233, 29%, 18%);
+  --button-solid-hover-background: hsl(232, 29%, 26%);
+  --button-solid-active-background: hsl(234, 26%, 30%);
+  --button-solid-checked-background: hsl(232, 31%, 23%);
   --uc-toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13);
   --uc-toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17);
   --uc-toolbarbutton-active-background: hsla(234, 82%, 83%, 0.22);
@@ -64,8 +64,8 @@ but other than that these variables should be available everywhere. */
   --uc-panel-description-color: hsla(235, 48%, 89%, 70%);
   --uc-panel-shortcut-color: hsla(235, 27%, 73%, 70%);
   --uc-panel-shortcut-focus: hsla(235, 32%, 80%, 95%);
-  --uc-places-cell-focus-bgcolor: hsl(263, 30%, 19%);
-  --uc-places-cell-hover-bgcolor: hsl(269, 30%, 23%);
+  --uc-places-cell-focus-bgcolor: hsl(232, 30%, 19%);
+  --uc-places-cell-hover-bgcolor: hsl(232, 30%, 23%);
   --light-on-dark-button-text-color: #fff;
 
   --menupopup-inner-box-margin: 0px;
@@ -74,7 +74,7 @@ but other than that these variables should be available everywhere. */
   --uc-panel-shadow: none;
   --searchbar-popup-border: 1px solid var(--uc-menu-border-color);
   --searchbar-popup-border-radius: 0 0 4px 4px;
-  --searchbar-popup-box-shadow: 0 0 10px 3px hsla(0, 0%, 0%, 0.419);
+  --searchbar-popup-box-shadow: 0 0 10px 3px hsla(0, 0%, 0%, 0.15);
   /* if you increase the blur or spread values in the variable above, increase
   the variable below ⬇ commensurately */
   --searchbar-popup-box-shadow-size: 15px;
@@ -126,11 +126,11 @@ but other than that these variables should be available everywhere. */
   --uc-font-weight-semibold: 500;
   --uc-font-weight-thin: 400;
 
-  --popup-on-popup-contrast-bg: hsl(281, 33%, 17%);
+  --popup-on-popup-contrast-bg: hsl(233, 33%, 17%);
   --autocomplete-background: var(--popup-on-popup-contrast-bg);
-  --ui-secondary-bg: hsl(275, 37%, 10%);
+  --ui-secondary-bg: hsl(234, 39%, 10%);
   --ui-tertiary-bg: hsl(233, 39%, 8.5%);
-  --ui-quaternary-bg: hsl(280, 35%, 8%);
+  --ui-quaternary-bg: hsl(233, 34%, 8.5%);
   --global-focus-shadow-color: var(--purple-30-a50);
   --global-focus-outline-color: var(--purple-30);
   --global-focus-outline-width: 2px;
@@ -141,13 +141,13 @@ but other than that these variables should be available everywhere. */
 
   --acrylic-blur: blur(15px);
   --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
-  --acrylic-blue: hsla(270, 39%, 9%, 0.58);
-  --dialog-bgcolor: hsla(270, 6%, 7%, 0.85);
+  --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
+  --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.85);
   --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
   --dialog-box-bgcolor-dim: hsla(240, 100%, 70%, 3%);
-  --dialog-box-border-color: hsla(297, 100%, 85%, 0.2);
-  --dialog-box-border-hover: hsla(273, 100%, 85%, 0.3);
-  --blurred-dialog-border-color: hsla(293, 8%, 20%, 0.8);
+  --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
+  --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
+  --blurred-dialog-border-color: hsla(240, 7%, 20%, 0.8);
   --alertbox-bgcolor: var(--uc-content-box-background-dim);
   --notification-menu-color: var(--uc-parent-page-color);
   --ui-disabled-alpha: 0.5;
@@ -181,8 +181,8 @@ but other than that these variables should be available everywhere. */
   }
   */
   --default-search-identity-icon: url(chrome://userchrome/content/search-glass.svg);
-  --identity-box-solid-bg: hsl(297, 34%, 22%);
-  --identity-box-focus-bg: hsl(290, 34%, 23%);
+  --identity-box-solid-bg: hsl(233, 34%, 22%);
+  --identity-box-focus-bg: hsl(234, 34%, 23%);
   --secure-color: hsl(119, 80%, 60%);
   --secure-text-color: hsl(129, 100%, 70%);
   --warning-color: hsl(355, 100%, 66%);
@@ -241,7 +241,7 @@ but other than that these variables should be available everywhere. */
   --uc-tab-pinned-hover: hsl(231, 49%, 11%);
   --uc-tab-focused-highlight: hsl(231, 36%, 22%);
   --uc-tab-focused-hover: linear-gradient(color-mix(in srgb, var(--uc-tab-focused-highlight) 50%, var(--uc-toolbar-bgcolor)), var(--uc-toolbar-bgcolor));
-  --multiselected-color: hsl(29, 50%, 51%);
+  --multiselected-color: hsl(241, 50%, 51%);
 
   /* width of the spacer between the tabs and the window control buttons. this
   is basically the only drag space left, so treat it conservatively. I design
@@ -250,46 +250,46 @@ but other than that these variables should be available everywhere. */
   prefer a larger spacer width. override this in custom-chrome.css. */
   --titlebar-spacer-width: 32px;
   /* subtle gradient drawn behind the window control buttons. */
-  --titlebar-gradient: radial-gradient(circle at 100% 0%, hsl(278, 45%, 13%), var(--uc-accent-color) 140px);
-  --titlebar-gradient-left: radial-gradient(circle at 0% 0%, hsl(278, 45%, 13%), var(--uc-accent-color) 140px);
+  --titlebar-gradient: radial-gradient(circle at 100% 0%, hsl(231, 45%, 13%), var(--uc-accent-color) 140px);
+  --titlebar-gradient-left: radial-gradient(circle at 0% 0%, hsl(231, 45%, 13%), var(--uc-accent-color) 140px);
   --titlebar-background: var(--lwt-accent-color) var(--titlebar-gradient);
 
-  --search-box-color: hsl(277, 32%, 23%);
-  --search-box-focus: hsl(253, 27%, 27%);
-  --search-box-null: hsl(284, 29%, 20%);
+  --search-box-color: hsl(229, 32%, 23%);
+  --search-box-focus: hsl(229, 27%, 27%);
+  --search-box-null: hsl(230, 30%, 20%);
   --search-box-focus-outline-color: var(--global-focus-outline-color);
   --textbox-button-hidden: hsla(240, 100%, 89%, 0);
   --confirmation-hint-color: var(--ui-text-100);
-  --confirmation-hint-bgcolor: hsl(279, 60%, 59%);
-  --confirmation-hint-border-color: hsl(270, 60%, 59%);
-  --picture-in-picture-toggle-bgcolor: hsl(262, 100%, 63%);
+  --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
+  --confirmation-hint-border-color: hsl(240, 60%, 59%);
+  --picture-in-picture-toggle-bgcolor: hsl(244, 100%, 63%);
 
-  --ui-textbox-bgcolor: hsl(266, 24%, 28%);
-  --ui-textbox-focus-bgcolor: hsl(272, 22%, 34%);
-  --ebp-menulist-background-color: hsl(258, 24%, 32%);
-  --ebp-menulist-menuitem-hover-background-color: hsl(269, 21%, 40%);
-  --ebp-menulist-separator-color: hsl(252, 21%, 43%);
+  --ui-textbox-bgcolor: hsl(233, 24%, 28%);
+  --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%);
+  --ebp-menulist-background-color: hsl(232, 24%, 32%);
+  --ebp-menulist-menuitem-hover-background-color: hsl(232, 21%, 40%);
+  --ebp-menulist-separator-color: hsl(232, 21%, 43%);
   --ebp-favicon-background-color: var(--dialog-bgcolor);
-  --ebmp-hover-bgcolor: hsl(252, 24%, 33%);
-  --ebmp-focus-bgcolor: hsl(260, 24%, 38%);
-  --ebmp-double-focus-bgcolor: hsl(268, 22%, 43%);
+  --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
+  --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
+  --ebmp-double-focus-bgcolor: hsl(233, 22%, 43%);
 
   --urlbar-base-font-weight: 400;
   --urlbar-result-strong-font-weight: 400;
   --urlbar-results-bgcolor: var(--ui-secondary-bg);
   /* the width of a search one-off button in the urlbar */
   --urlbar-one-offs-engine-width: 28px;
-  --loading-throbber-fill: hsl(284, 100%, 46%);
-  --busy-throbber-fill: hsl(283, 90%, 85%);
+  --loading-throbber-fill: hsl(225, 100%, 75%);
+  --busy-throbber-fill: hsl(218, 90%, 85%);
   --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
-  --menu-separator-color: hsl(267, 25%, 23%);
-  --uc-toolbar-field-bgcolor: hsl(277, 28%, 25%);
-  --uc-toolbar-field-bgcolor-brighter: hsl(272, 26%, 27%);
-  --uc-toolbar-field-bgcolor-disabled: hsl(271, 31%, 21%);
+  --menu-separator-color: hsl(233, 25%, 23%);
+  --uc-toolbar-field-bgcolor: hsl(233, 28%, 25%);
+  --uc-toolbar-field-bgcolor-brighter: hsl(233, 26%, 27%);
+  --uc-toolbar-field-bgcolor-disabled: hsl(233, 30%, 21%);
   --urlbar-input-bgcolor: var(--uc-toolbar-field-bgcolor);
   --urlbar-input-bgcolor-brighter: var(--uc-toolbar-field-bgcolor-brighter);
   --urlbar-input-bgcolor-disabled: var(--uc-toolbar-field-bgcolor-disabled);
-  --urlbar-dim-button-bgcolor: hsla(0, 0%, 0%, 0.219);
+  --urlbar-dim-button-bgcolor: hsla(0, 0%, 0%, 0.09);
   --uc-urlbar-container-height: 38px;
   --uc-menubar-searchbar-width: 256px;
   --uc-tab-min-height: 35px;
@@ -324,23 +324,27 @@ but other than that these variables should be available everywhere. */
   --download-button-hover-bg: var(--button-hover-bgcolor);
   --download-button-active-bg: var(--button-active-bgcolor);
   /* if you prefer the old downloads panel highlight/hover gradient effect, uncomment this: */
-  --download-button-hue: 236.86;
-  --download-button-hover-bg: linear-gradient(to right,
-      hsla(var(--download-button-hue), 100%, 81%, 0.15) 7.1%,
-      hsla(var(--download-button-hue), 94%, 80%, 0.13) 20.9%,
-      hsla(var(--download-button-hue), 94%, 80%, 0.1) 34.1%,
-      hsla(var(--download-button-hue), 97%, 78.94%, 0.07) 47.1%,
-      hsla(var(--download-button-hue), 96%, 78.94%, 0.04) 60%,
-      hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 80%,
-      hsla(var(--download-button-hue), 90%, 73.94%, 0.005) 96.3%);
-  --download-button-active-bg: linear-gradient(to right,
-      hsla(var(--download-button-hue), 100%, 84%, 0.18) 7.1%,
-      hsla(var(--download-button-hue), 94%, 83%, 0.16) 20.9%,
-      hsla(var(--download-button-hue), 94%, 83%, 0.13) 34.1%,
-      hsla(var(--download-button-hue), 97%, 81.94%, 0.1) 47.1%,
-      hsla(var(--download-button-hue), 96%, 81.94%, 0.07) 60%,
-      hsla(var(--download-button-hue), 95%, 79.94%, 0.05) 80%,
-      hsla(var(--download-button-hue), 90%, 76.94%, 0.01) 96.3%);
+  /* --download-button-hue: 236.86;
+  --download-button-hover-bg: linear-gradient(
+    to right,
+    hsla(var(--download-button-hue), 100%, 81%, 0.15) 7.1%,
+    hsla(var(--download-button-hue), 94%, 80%, 0.13) 20.9%,
+    hsla(var(--download-button-hue), 94%, 80%, 0.1) 34.1%,
+    hsla(var(--download-button-hue), 97%, 78.94%, 0.07) 47.1%,
+    hsla(var(--download-button-hue), 96%, 78.94%, 0.04) 60%,
+    hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 80%,
+    hsla(var(--download-button-hue), 90%, 73.94%, 0.005) 96.3%
+  );
+  --download-button-active-bg: linear-gradient(
+    to right,
+    hsla(var(--download-button-hue), 100%, 84%, 0.18) 7.1%,
+    hsla(var(--download-button-hue), 94%, 83%, 0.16) 20.9%,
+    hsla(var(--download-button-hue), 94%, 83%, 0.13) 34.1%,
+    hsla(var(--download-button-hue), 97%, 81.94%, 0.1) 47.1%,
+    hsla(var(--download-button-hue), 96%, 81.94%, 0.07) 60%,
+    hsla(var(--download-button-hue), 95%, 79.94%, 0.05) 80%,
+    hsla(var(--download-button-hue), 90%, 76.94%, 0.01) 96.3%
+  ); */
 
   --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5);
   --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8);
@@ -350,7 +354,7 @@ but other than that these variables should be available everywhere. */
 
   --indigo-30: hsl(230, 87%, 70%);
   --indigo-40: hsl(232, 82%, 60%);
-  --indigo-45: hsl(273, 72%, 55%);
+  --indigo-45: hsl(233, 72%, 55%);
   --indigo-50: hsl(234, 62%, 50%);
 
   --purple-20: hsl(240, 100%, 80%);
@@ -448,9 +452,9 @@ toolbar panel,
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
 @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
   :root {
-    --uc-font-weight-extrabold: 800;
-    --uc-font-weight-bold: 600;
-    --uc-font-weight-semibold: 500;
+    --uc-font-weight-extrabold: 600;
+    --uc-font-weight-bold: 500;
+    --uc-font-weight-semibold: 400;
     --uc-font-weight-thin: 300;
   }
 }

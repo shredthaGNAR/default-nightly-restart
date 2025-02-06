@@ -11,7 +11,7 @@ skin userstyles classic/1.0 ../CSS/
 content userchrome ../resources/
 
 # Override the built-in styles for arrowscrollboxes, mainly to replace scrollbuttons with scrollbars.
-#override chrome://global/skin/arrowscrollbox.css ../resources/layout/arrowscrollbox.css
+override chrome://global/skin/arrowscrollbox.css ../resources/layout/arrowscrollbox.css
 
 # Override the tab element to restore the tab sound button and move the close button, among other things.
 override chrome://browser/content/tabbrowser/tab.js ../resources/script-override/tabMods.uc.js

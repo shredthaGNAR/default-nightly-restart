@@ -15,19 +15,15 @@
     static options = {
       // whether to show the effect if the tab is selected. this doesn't look
       // good with my theme so I set it to false.
-      showOnSelectedTab: false,
+      showOnSelectedTab: true,
 
       // whether to show the effect on pinned tabs. likewise, doesn't look good
       // with my theme but may work with yours.
-      showOnPinnedTab: false,
+      showOnPinnedTab: true,
 
       // the color of the gradient. default is sort of a faint baby blue.
       // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
-<<<<<<< HEAD
-      lightColor: "hsla(0, 0%, 100%, 0.25)",
-=======
-      lightColor: "hsla(224, 100%, 80%, 0.05)",
->>>>>>> dbe3769 (bigupdate)
+      lightColor: "hsla(224, 100%, 80%, 0.35)",
 
       // how wide the radial gradient is. 50px looks best with my theme, but
       // default proton tabs are larger so you may want to try 60 or even 70.
@@ -37,7 +33,7 @@
       // recommend this since it doesn't play nicely with dragging & dropping if
       // you release while your mouse is outside the tab box. I can probably fix
       // this issue but I don't think it's a great fit for tabs anyway.
-      clickEffect: false,
+      clickEffect: true,
     };
 
     /**
@@ -46,16 +42,16 @@
      * @returns a promise resolved after the passed number of milliseconds
      */
     static sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     // instantiate the handler for a given window
     constructor() {
       this._options = FluentRevealEffect.options;
-      gBrowser.tabContainer.addEventListener("TabOpen", (e) =>
+      gBrowser.tabContainer.addEventListener("TabOpen", e =>
         this.applyEffect(e.target.querySelector(".tab-content"), true)
       );
-      gBrowser.tabs.forEach((tab) =>
+      gBrowser.tabs.forEach(tab =>
         this.applyEffect(tab.querySelector(".tab-content"), true)
       );
     }

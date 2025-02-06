@@ -1,4 +1,4 @@
-/* Restart item script for Firefox 89+ by Aris
+/* Restart item script for Firefox 13X+ by Aris
 
   - left-click on restart item: normal restart
   - middle-click on restart item: restart + clear caches
@@ -12,7 +12,6 @@
   - invalidate caches from Session Saver add-on
 */
 
-var appversion = parseInt(Services.appinfo.version);
 var menuicon = false;
 var appmenuicon = false;
 
@@ -29,8 +28,10 @@ var RestartMenuFileAppItems = {
 	  restartitem_filemenu.setAttribute("accesskey", "R");
 	  restartitem_filemenu.setAttribute("acceltext", "R");
 	  restartitem_filemenu.setAttribute("insertbefore", "menu_FileQuitItem");
-	  restartitem_filemenu.setAttribute("onclick", "if (event.button == 0) {RestartMenuFileAppItems.restartApp(false);} else if (event.button == 1) {RestartMenuFileAppItems.restartApp(true)};");
-	  restartitem_filemenu.setAttribute("oncommand", "RestartMenuFileAppItems.restartApp(false);");
+	  //restartitem_filemenu.setAttribute("onclick", "if (event.button == 0) {RestartMenuFileAppItems.restartApp(false);} else if (event.button == 1) {RestartMenuFileAppItems.restartApp(true)};");
+	  restartitem_filemenu.addEventListener("click", () => {if (event.button == 0) {RestartMenuFileAppItems.restartApp(false);} else if (event.button == 1) {RestartMenuFileAppItems.restartApp(true)};} );
+	  //restartitem_filemenu.setAttribute("oncommand", "RestartMenuFileAppItems.restartApp(false);");
+	  restartitem_filemenu.addEventListener("command", () => {RestartMenuFileAppItems.restartApp(false);} );
 
 	  if(document.getElementById("menu_FileQuitItem").previousSibling.id != "fileMenu-restart-item" )
 		document.getElementById("menu_FileQuitItem").parentNode.insertBefore(restartitem_filemenu,document.getElementById("menu_FileQuitItem"));
@@ -45,9 +46,10 @@ var RestartMenuFileAppItems = {
 	  restartitem_appmenu.setAttribute("accesskey", "R");
 	  restartitem_appmenu.setAttribute("shortcut", "Alt+R");
 	  restartitem_appmenu.setAttribute("insertbefore", "appMenu-quit-button2");
-	  restartitem_appmenu.setAttribute("onclick", "if (event.button == 0) {RestartMenuFileAppItems.restartApp(false);} else if (event.button == 1) {RestartMenuFileAppItems.restartApp(true)};");
-	  restartitem_appmenu.setAttribute("oncommand", "RestartMenuFileAppItems.restartApp(false);");  
-	  
+	  //restartitem_appmenu.setAttribute("onclick", "if (event.button == 0) {RestartMenuFileAppItems.restartApp(false);} else if (event.button == 1) {RestartMenuFileAppItems.restartApp(true)};");
+	  restartitem_appmenu.addEventListener("click", () => {if (event.button == 0) {RestartMenuFileAppItems.restartApp(false);} else if (event.button == 1) {RestartMenuFileAppItems.restartApp(true)};} );
+	  //restartitem_appmenu.setAttribute("oncommand", "RestartMenuFileAppItems.restartApp(false);");  
+	  restartitem_appmenu.addEventListener("command", () => {RestartMenuFileAppItems.restartApp(false);} );
 	  
 	  var AMObserver = new MutationObserver(function(mutations) {
 	    mutations.forEach(function(mutation) {
@@ -64,8 +66,6 @@ var RestartMenuFileAppItems = {
 	
 	var icon = "chrome://global/skin/icons/reload.svg";
   
-	if(appversion < 92) icon = "chrome://browser/skin/reload.svg";
-	
 	var menu_item_code = "";
 	
 	if(menuicon)
