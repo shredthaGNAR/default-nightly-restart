@@ -30,7 +30,8 @@ panelview {
 }
 
 /* allow panel height to flex and animate */
-@media (-moz-bool-pref: "userChrome.panels.allow-height-flex") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.panels.allow-height-flex") {
   panelview {
     min-height: revert !important;
     max-height: revert !important;
@@ -199,7 +200,8 @@ no longer necessary after modern flexbox emulation. */
 }
 
 /* protect the arrowpanel animations from future updates */
-@media (-moz-bool-pref: "xul.panel-animations.enabled") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("xul.panel-animations.enabled") {
   @media (prefers-reduced-motion: no-preference) {
     @media (-moz-platform: macos) {
       panel[type="arrow"],
@@ -298,7 +300,6 @@ no longer necessary after modern flexbox emulation. */
   background-color: transparent;
   -moz-context-properties: fill, fill-opacity !important;
   fill-opacity: 0.6;
-  border-radius: var(--arrowpanel-menuitem-border-radius) !important;
   padding: var(--arrowpanel-menuitem-padding) !important;
   min-height: revert !important;
   border-radius: var(--arrowpanel-menuitem-border-radius) !important;
@@ -385,7 +386,7 @@ no longer necessary after modern flexbox emulation. */
 }
 
 #protections-popup-category-list {
-  margin-top: 0px !important;
+  margin-top: 0 !important;
 }
 
 #protections-popup-blocking-section-header,
@@ -571,7 +572,6 @@ popupnotificationcontent {
   margin-block: 6px 0 !important;
 }
 
-.popup-notification-body input,
 #protections-popup-sendReportView-collection-comments,
 #protections-popup-sendReportView-collection-url {
   padding: 5.5px !important;
@@ -983,6 +983,11 @@ panel :is(a, .text-link) {
 
 #protections-popup[toast] #protections-popup-mainView-panel-header {
   min-height: 30px !important;
+}
+
+#protections-popup-toast-panel-tp-on-desc,
+#protections-popup-toast-panel-tp-off-desc {
+	appearance: revert !important;
 }
 
 #protections-popup-mainView-panel-header-span {
@@ -1763,15 +1768,16 @@ ul.webext-perm-domains-list {
   color: var(--purple-30) !important;
 }
 
-#screenshotsPagePanel screenshots-buttons {
-  padding: 4px !important;
-  padding-top: 12px !important;
-  box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
-  inset-inline: 1.5em auto !important;
+#screenshotsPagePanel {
+  screenshots-buttons {
+    padding: 4px !important;
+    box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
+    inset-inline: auto 1em !important;
+    top: 1em !important;
+  }
 }
 
 .footer-button.screenshot-button {
-  background-color: var(--button-bgcolor, color-mix(in srgb, currentColor 13%, transparent)) !important;
   color: var(--uc-content-page-color) !important;
   background-color: transparent !important;
   margin: 0 !important;

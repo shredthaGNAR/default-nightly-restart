@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.4.2
+// @version        1.4.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -119,9 +119,6 @@ class FindbarMods {
       case "popuphiding":
         this.onPopupHiding(e);
         break;
-      case "command":
-        this.onCommand(e);
-        break;
     }
   }
   // we want to use firefox's built-in localized strings wherever possible
@@ -160,7 +157,6 @@ class FindbarMods {
     );
     this.contextMenu.addEventListener("popupshowing", this);
     this.contextMenu.addEventListener("popuphiding", this);
-    this.contextMenu.addEventListener("command", this);
 
     this.contextMenu._menuitemHighlightAll = this.contextMenu.appendChild(
       this.create(document, "menuitem", {
@@ -168,6 +164,10 @@ class FindbarMods {
         type: "checkbox",
         label: this.fluentStrings.highlight.label,
         accesskey: this.fluentStrings.highlight.accesskey,
+        oncommand: `let node = this.parentElement.triggerNode;
+                    if (!node) return;
+                    let findbar = node.tagName === "findbar" ? node : node.closest("findbar");
+                    if (findbar) findbar.toggleHighlight(!findbar._highlightAll);`,
       })
     );
     this.contextMenu._menuitemEntireWord = this.contextMenu.appendChild(
@@ -176,6 +176,10 @@ class FindbarMods {
         type: "checkbox",
         label: this.fluentStrings.entireWord.label,
         accesskey: this.fluentStrings.entireWord.accesskey,
+        oncommand: `let node = this.parentElement.triggerNode;
+                    if (!node) return;
+                    let findbar = node.tagName === "findbar" ? node : node.closest("findbar");
+                    if (findbar) findbar.toggleEntireWord(!findbar.browser.finder._entireWord);`,
       })
     );
 
@@ -200,7 +204,7 @@ class FindbarMods {
         type: "radio",
         label: l10n.caseInsensitive.label,
         accesskey: l10n.caseInsensitive.accesskey,
-        "data-index": 0,
+        oncommand: `Services.prefs.setIntPref("accessibility.typeaheadfind.casesensitive", 0);`,
       })
     );
     this.contextMenu._menuitemCaseSensitive = matchCasePopup.appendChild(
@@ -209,7 +213,7 @@ class FindbarMods {
         type: "radio",
         label: l10n.caseSensitive.label,
         accesskey: l10n.caseSensitive.accesskey,
-        "data-index": 1,
+        oncommand: `Services.prefs.setIntPref("accessibility.typeaheadfind.casesensitive", 1);`,
       })
     );
     this.contextMenu._menuitemCaseAuto = matchCasePopup.appendChild(
@@ -218,7 +222,7 @@ class FindbarMods {
         type: "radio",
         label: l10n.auto.label,
         accesskey: l10n.auto.accesskey,
-        "data-index": 2,
+        oncommand: `Services.prefs.setIntPref("accessibility.typeaheadfind.casesensitive", 2);`,
       })
     );
 
@@ -241,7 +245,7 @@ class FindbarMods {
         type: "radio",
         label: l10n.matchAllDiacritics.label,
         accesskey: l10n.matchAllDiacritics.accesskey,
-        "data-index": 0,
+        oncommand: `Services.prefs.setIntPref("findbar.matchdiacritics", 0);`,
       })
     );
     this.contextMenu._menuitemExclusiveMatching = diacriticsPopup.appendChild(
@@ -250,7 +254,7 @@ class FindbarMods {
         type: "radio",
         label: l10n.exclusiveMatch.label,
         accesskey: l10n.exclusiveMatch.accesskey,
-        "data-index": 1,
+        oncommand: `Services.prefs.setIntPref("findbar.matchdiacritics", 1);`,
       })
     );
     this.contextMenu._menuitemSmartMatching = diacriticsPopup.appendChild(
@@ -259,7 +263,7 @@ class FindbarMods {
         type: "radio",
         label: l10n.smartMatch.label,
         accesskey: l10n.smartMatch.accesskey,
-        "data-index": 2,
+        oncommand: `Services.prefs.setIntPref("findbar.matchdiacritics", 2);`,
       })
     );
   }
@@ -345,44 +349,6 @@ class FindbarMods {
       }
       document.l10n.setAttributes(this._foundMatches, l10nId, result);
     };
-  }
-  onCommand(e) {
-    let { target } = e;
-    let node = this.contextMenu.triggerNode;
-    switch (target) {
-      case this.contextMenu._menuitemHighlightAll: {
-        if (!node) return;
-        let findbar =
-          node.tagName === "findbar" ? node : node.closest("findbar");
-        findbar?.toggleHighlight(!findbar._highlightAll);
-        break;
-      }
-      case this.contextMenu._menuitemEntireWord: {
-        if (!node) return;
-        let findbar =
-          node.tagName === "findbar" ? node : node.closest("findbar");
-        findbar?.toggleEntireWord(!findbar.browser.finder._entireWord);
-        break;
-      }
-      case this.contextMenu._menuitemCaseInsensitive:
-      case this.contextMenu._menuitemCaseSensitive:
-      case this.contextMenu._menuitemCaseAuto: {
-        Services.prefs.setIntPref(
-          "accessibility.typeaheadfind.casesensitive",
-          target.dataset.index
-        );
-        break;
-      }
-      case this.contextMenu._menuitemMatchAllDiacritics:
-      case this.contextMenu._menuitemExclusiveMatching:
-      case this.contextMenu._menuitemSmartMatching: {
-        Services.prefs.setIntPref(
-          "findbar.matchdiacritics",
-          target.dataset.index
-        );
-        break;
-      }
-    }
   }
   // when the context menu opens, ensure the menuitems are checked/unchecked appropriately.
   onPopupShowing(e) {

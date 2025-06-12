@@ -17,7 +17,7 @@
       includeBookmarks: true,
 
       // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
-      lightColor: "hsla(224, 100%, 80%, 0.35)",
+      lightColor: "hsla(224, 100%, 80%, 0.15)",
 
       // how wide the radial gradient is.
       gradientSize: 50,

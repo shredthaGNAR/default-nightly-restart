@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.5.3
+// @version        1.5.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -133,27 +133,6 @@ This doesn't change anything about the layout so you may want to tweak some thin
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
-    const lazy = {};
-    ChromeUtils.defineESModuleGetters(lazy, {
-      SearchUtils: "resource://gre/modules/SearchUtils.sys.mjs",
-    });
-    function getBuiltInEngineIcon(engine) {
-      let preferredWidth = 16;
-      if (!engine._iconMapObj) {
-        return undefined;
-      }
-      let availableWidths = Object.keys(engine._iconMapObj).map(k =>
-        parseInt(k)
-      );
-      if (!availableWidths.length) {
-        return undefined;
-      }
-      let bestWidth = lazy.SearchUtils.chooseIconSize(
-        preferredWidth,
-        availableWidths
-      );
-      return engine._iconMapObj[bestWidth];
-    }
     function handleDefaultEngine() {
       if (
         config[
@@ -161,7 +140,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
         ]
       ) {
         function findLocalEngineIcon(name) {
-          const files = UC_API.FileSystem.getEntry("engines");
+          const files = _ucUtils.fs.getEntry("engines");
           if (!files?.isDirectory()) return false;
           let nameParts = name
             .toLowerCase()
@@ -199,16 +178,16 @@ This doesn't change anything about the layout so you may want to tweak some thin
           let localIcon = findLocalEngineIcon(name);
           if (localIcon) return localIcon;
           let engine = Services.search.getEngineByName(name);
-          let installedIcon = getBuiltInEngineIcon(engine);
+          let installedIcon = engine?.iconURI?.spec;
           return installedIcon ? `url("${installedIcon}")` : false;
         }
         eval(
-          `gURLBar._setPlaceholder = function ${gURLBar._setPlaceholder
+          `BrowserSearch._setURLBarPlaceholder = function ${BrowserSearch._setURLBarPlaceholder
             .toSource()
-            .replace(/^_setPlaceholder/, "")
+            .replace(/^_setURLBarPlaceholder/, "")
             .replace(
               /\}$/,
-              `  let icon = findEngineIcon(name);\n    if (icon) this.document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else this.document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
+              `  let icon = findEngineIcon(name);\n    if (icon) document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
             )}`
         );
       }
@@ -219,11 +198,11 @@ This doesn't change anything about the layout so you may want to tweak some thin
       if (config["Engine name word limit"] > 0) {
         placeholderString += ` && engineName.split(" ").length <= config["Engine name word limit"]`;
       }
-      if (gURLBar._updatePlaceholder.name) {
+      if (BrowserSearch._updateURLBarPlaceholder.name) {
         eval(
-          `gURLBar._updatePlaceholder = function ${gURLBar._updatePlaceholder
+          `BrowserSearch._updateURLBarPlaceholder = function ${BrowserSearch._updateURLBarPlaceholder
             .toSource()
-            .replace(/^_updatePlaceholder/, "")
+            .replace(/^_updateURLBarPlaceholder/, "")
             .replace(/engine\.isAppProvided/, placeholderString)}`
         );
       }
@@ -238,7 +217,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
             )}`
         );
       }
-      gURLBar.initPlaceHolder();
+      BrowserSearch.initPlaceHolder();
     }
     async function searchModeCallback(mus, _observer) {
       for (let mu of mus) {
@@ -319,7 +298,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
                   engine._name === searchModeIndicatorFocused.textContent;
             let engine = engines.find(filterFn);
             // use the default icon if there is still no engine.
-            url = (engine && getBuiltInEngineIcon(engine)) || defaultIcon;
+            url = (engine && engine._iconURI?.spec) || defaultIcon;
           }
           // set a CSS property instead of setting icon directly so user can
           // modify it with userChrome.css

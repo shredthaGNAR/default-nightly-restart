@@ -105,38 +105,38 @@ class PrivateTabManager {
 
   async exec() {
     if (PrivateBrowsingUtils.isWindowPrivate(window)) return;
-    let openAll = document.getElementById(
-      "placesContext_openBookmarkContainer:tabs"
-    );
-    let openAllPrivate = UC_API.Utils.createElement(document, "menuitem", {
-      id: "openAllPrivate",
-      label: "Open All in Private Tabs",
-      accesskey: "v",
-      "selection-type": "single|none",
-      "node-type": "folder|query_tag",
-      class: this.menuClass,
-    });
-    openAll.after(openAllPrivate);
-    openAllPrivate.addEventListener("command", e => {
-      e.userContextId = this.container.userContextId;
-      PlacesUIUtils.openSelectionInTabs(e);
-    });
+    // let openAll = document.getElementById(
+    //   "placesContext_openBookmarkContainer:tabs"
+    // );
+    // let openAllPrivate = UC_API.Utils.createElement(document, "menuitem", {
+    //   id: "openAllPrivate",
+    //   label: "Open All in Private Tabs",
+    //   accesskey: "v",
+    //   "selection-type": "single|none",
+    //   "node-type": "folder|query_tag",
+    //   class: this.menuClass,
+    // });
+    // openAll.after(openAllPrivate);
+    // openAllPrivate.addEventListener("command", (e) => {
+    //   e.userContextId = this.container.userContextId;
+    //   PlacesUIUtils.openSelectionInTabs(e);
+    // });
 
-    let openAllLinks = document.getElementById("placesContext_openLinks:tabs");
-    let openAllLinksPrivate = UC_API.Utils.createElement(document, "menuitem", {
-      id: "openAllLinksPrivate",
-      label: "Open All in Private Tabs",
-      accesskey: "v",
-      class: this.menuClass,
-      "selection-type": "multiple",
-      "node-type": "link",
-      "hide-if-node-type": "link_bookmark",
-    });
-    openAllLinks.after(openAllLinksPrivate);
-    openAllLinksPrivate.addEventListener("command", e => {
-      e.userContextId = this.container.userContextId;
-      PlacesUIUtils.openSelectionInTabs(e);
-    });
+    // let openAllLinks = document.getElementById("placesContext_openLinks:tabs");
+    // let openAllLinksPrivate = UC_API.Utils.createElement(document, "menuitem", {
+    //   id: "openAllLinksPrivate",
+    //   label: "Open All in Private Tabs",
+    //   accesskey: "v",
+    //   class: this.menuClass,
+    //   "selection-type": "multiple",
+    //   "node-type": "link",
+    //   "hide-if-node-type": "link_bookmark",
+    // });
+    // openAllLinks.after(openAllLinksPrivate);
+    // openAllLinksPrivate.addEventListener("command", (e) => {
+    //   e.userContextId = this.container.userContextId;
+    //   PlacesUIUtils.openSelectionInTabs(e);
+    // });
 
     let openTab = document.getElementById("placesContext_open:newtab");
     let openPrivate = UC_API.Utils.createElement(document, "menuitem", {
@@ -148,7 +148,7 @@ class PrivateTabManager {
       "node-type": "link",
     });
     openTab.after(openPrivate);
-    openPrivate.addEventListener("command", e => {
+    openPrivate.addEventListener("command", (e) => {
       let view = e.target.parentElement._view;
       PlacesUIUtils._openNodeIn(
         view.selectedNode,
@@ -169,7 +169,7 @@ class PrivateTabManager {
       modifiers: this.config.toggleModifiers,
       key: this.config.toggleHotkey,
       id: "togglePrivateTab-key",
-      command: win => {
+      command: (win) => {
         if (win === window) {
           win.privateTab.togglePrivate();
         }
@@ -180,7 +180,7 @@ class PrivateTabManager {
       modifiers: this.config.newTabModifiers,
       key: this.config.newTabHotkey,
       id: "newPrivateTab-key",
-      command: win => {
+      command: (win) => {
         if (win === window) {
           win.privateTab.BrowserOpenTabPrivate();
         }
@@ -190,17 +190,17 @@ class PrivateTabManager {
     let toggleKey = document.getElementById("togglePrivateTab-key");
     let newPrivateTabKey = document.getElementById("newPrivateTab-key");
 
-    let menuOpenLink = UC_API.Utils.createElement(document, "menuitem", {
-      id: "menu_newPrivateTab",
-      label: "New Private Tab",
-      accesskey: "v",
-      acceltext: ShortcutUtils.prettifyShortcut(newPrivateTabKey),
-      class: this.menuClass,
-    });
-    document.getElementById("menu_newNavigatorTab").after(menuOpenLink);
-    menuOpenLink.addEventListener("command", e =>
-      e.target.ownerGlobal.privateTab.BrowserOpenTabPrivate()
-    );
+    // let menuOpenLink = UC_API.Utils.createElement(document, "menuitem", {
+    //   id: "menu_newPrivateTab",
+    //   label: "New Private Tab",
+    //   accesskey: "v",
+    //   acceltext: ShortcutUtils.prettifyShortcut(newPrivateTabKey),
+    //   class: this.menuClass,
+    // });
+    // document.getElementById("menu_newNavigatorTab").after(menuOpenLink);
+    // menuOpenLink.addEventListener("command", (e) =>
+    //   e.target.ownerGlobal.privateTab.BrowserOpenTabPrivate()
+    // );
 
     let openLink = UC_API.Utils.createElement(document, "menuitem", {
       id: "openLinkInPrivateTab",
@@ -209,7 +209,7 @@ class PrivateTabManager {
       class: this.menuClass,
       hidden: true,
     });
-    openLink.addEventListener("command", e => {
+    openLink.addEventListener("command", (e) => {
       let win = e.target.ownerGlobal;
       win.openLinkIn(
         win.gContextMenu.linkURL,
@@ -237,7 +237,7 @@ class PrivateTabManager {
       acceltext: ShortcutUtils.prettifyShortcut(toggleKey),
     });
     document.getElementById("context_pinTab").after(toggleTab);
-    toggleTab.addEventListener("command", e => {
+    toggleTab.addEventListener("command", (e) => {
       let win = e.target.ownerGlobal;
       win.privateTab.togglePrivate(win.TabContextMenu.contextTab);
     });
@@ -251,18 +251,18 @@ class PrivateTabManager {
     );
     privateMask.classList.add("private-mask");
 
-    let btn2 = UC_API.Utils.createElement(document, "toolbarbutton", {
-      id: this.BTN2_ID,
-      label: "New Private Tab",
-      tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(
-        newPrivateTabKey
-      )})`,
-      class: "toolbarbutton-1 chromeclass-toolbar-additional",
-    });
+    // let btn2 = UC_API.Utils.createElement(document, "toolbarbutton", {
+    //   id: this.BTN2_ID,
+    //   label: "New Private Tab",
+    //   tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(
+    //     newPrivateTabKey
+    //   )})`,
+    //   class: "toolbarbutton-1 chromeclass-toolbar-additional",
+    // });
 
-    btn2.addEventListener("click", this);
+    // btn2.addEventListener("click", this);
 
-    document.getElementById("tabs-newtab-button").after(btn2);
+    // document.getElementById("tabs-newtab-button").after(btn2);
 
     gBrowser.tabContainer.addEventListener("TabSelect", this);
 
@@ -285,9 +285,9 @@ class PrivateTabManager {
 
     customElements.get("tabbrowser-tabs").prototype._updateNewTabVisibility =
       function () {
-        let wrap = n =>
+        let wrap = (n) =>
           n.parentNode.localName == "toolbarpaletteitem" ? n.parentNode : n;
-        let unwrap = n =>
+        let unwrap = (n) =>
           n && n.localName == "toolbarpaletteitem" ? n.firstElementChild : n;
 
         let newTabFirst = false;
@@ -340,27 +340,27 @@ class PrivateTabManager {
       };
     gBrowser.tabContainer._updateNewTabVisibility();
     if (!Services.ppmm.sharedData.get("uc_privateTabs")) {
-      CustomizableUI.createWidget({
-        id: this.BTN_ID,
-        type: "custom",
-        defaultArea: CustomizableUI.AREA_NAVBAR,
-        showInPrivateBrowsing: false,
-        onBuild: doc => {
-          let btn = UC_API.Utils.createElement(doc, "toolbarbutton", {
-            id: this.BTN_ID,
-            label: "New Private Tab",
-            tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(
-              newPrivateTabKey
-            )})`,
-            class: "toolbarbutton-1 chromeclass-toolbar-additional",
-          });
-          btn.addEventListener("command", e =>
-            e.target.ownerGlobal.privateTab.BrowserOpenTabPrivate()
-          );
+      // CustomizableUI.createWidget({
+      //   id: this.BTN_ID,
+      //   type: "custom",
+      //   defaultArea: CustomizableUI.AREA_NAVBAR,
+      //   showInPrivateBrowsing: false,
+      //   onBuild: (doc) => {
+      //     let btn = UC_API.Utils.createElement(doc, "toolbarbutton", {
+      //       id: this.BTN_ID,
+      //       label: "New Private Tab",
+      //       tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(
+      //         newPrivateTabKey
+      //       )})`,
+      //       class: "toolbarbutton-1 chromeclass-toolbar-additional",
+      //     });
+      //     btn.addEventListener("command", (e) =>
+      //       e.target.ownerGlobal.privateTab.BrowserOpenTabPrivate()
+      //     );
 
-          return btn;
-        },
-      });
+      //     return btn;
+      //   },
+      // });
       Services.ppmm.sharedData.set("uc_privateTabs", true);
     }
   }
@@ -368,12 +368,12 @@ class PrivateTabManager {
   init() {
     this.ContextualIdentityService.ensureDataReady();
     this.container = this.ContextualIdentityService._identities.find(
-      container => container.name == "Private"
+      (container) => container.name == "Private"
     );
     if (!this.container) {
       this.ContextualIdentityService.create("Private", "fingerprint", "purple");
       this.container = this.ContextualIdentityService._identities.find(
-        container => container.name == "Private"
+        (container) => container.name == "Private"
       );
     } else if (!this.config.neverClearData) {
       this.clearData();
@@ -422,19 +422,19 @@ class PrivateTabManager {
       );
     }
 
-    const { WebExtensionPolicy } = Cu.getGlobalForObject(Services);
-    let TST_ID = "treestyletab@piro.sakura.ne.jp";
-    this.setTstStyle(WebExtensionPolicy.getByID(TST_ID)?.getURL());
-    if (location.href === "chrome://browser/content/browser.xhtml") {
-      this.Management.on("ready", (_ev, extension) => {
-        if (extension.id === TST_ID) this.setTstStyle(extension.getURL());
-      });
-      this.Management.on("uninstall", (_ev, extension) => {
-        if (extension.id === TST_ID && this.TST_STYLE) {
-          this.sss.unregisterSheet(this.TST_STYLE.uri, this.TST_STYLE.type);
-        }
-      });
-    }
+    // const { WebExtensionPolicy } = Cu.getGlobalForObject(Services);
+    // let TST_ID = "treestyletab@piro.sakura.ne.jp";
+    // this.setTstStyle(WebExtensionPolicy.getByID(TST_ID)?.getURL());
+    // if (location.href === "chrome://browser/content/browser.xhtml") {
+    //   this.Management.on("ready", (_ev, extension) => {
+    //     if (extension.id === TST_ID) this.setTstStyle(extension.getURL());
+    //   });
+    //   this.Management.on("uninstall", (_ev, extension) => {
+    //     if (extension.id === TST_ID && this.TST_STYLE) {
+    //       this.sss.unregisterSheet(this.TST_STYLE.uri, this.TST_STYLE.type);
+    //     }
+    //   });
+    // }
 
     if (!this.config.neverClearData) {
       Services.obs.addObserver(this, "quit-application-granted");
@@ -717,20 +717,20 @@ class PrivateTabManager {
     );
   }
 
-  setTstStyle(baseURL) {
-    if (!baseURL) return;
-    this.TST_STYLE = {
-      uri: Services.io.newURI(
-        `data:text/css;charset=UTF-8,${encodeURIComponent(
-          `@-moz-document url-prefix(${baseURL}sidebar/sidebar.html) { .tab.contextual-identity-firefox-container-${this.container.userContextId} .label-content { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tab.contextual-identity-firefox-container-${this.container.userContextId} tab-favicon { border-bottom: 1px dashed -moz-nativehyperlinktext !important;}}`
-        )}`
-      ),
-      type: this.sss.USER_SHEET,
-    };
-    if (!this.sss.sheetRegistered(this.TST_STYLE.uri, this.TST_STYLE.type)) {
-      this.sss.loadAndRegisterSheet(this.TST_STYLE.uri, this.TST_STYLE.type);
-    }
-  }
+  //   setTstStyle(baseURL) {
+  //     if (!baseURL) return;
+  //     this.TST_STYLE = {
+  //       uri: Services.io.newURI(
+  //         `data:text/css;charset=UTF-8,${encodeURIComponent(
+  //           `@-moz-document url-prefix(${baseURL}sidebar/sidebar.html) { .tab.contextual-identity-firefox-container-${this.container.userContextId} .label-content { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tab.contextual-identity-firefox-container-${this.container.userContextId} tab-favicon { border-bottom: 1px dashed -moz-nativehyperlinktext !important;}}`
+  //         )}`
+  //       ),
+  //       type: this.sss.USER_SHEET,
+  //     };
+  //     if (!this.sss.sheetRegistered(this.TST_STYLE.uri, this.TST_STYLE.type)) {
+  //       this.sss.loadAndRegisterSheet(this.TST_STYLE.uri, this.TST_STYLE.type);
+  //     }
+  //   }
 }
 
 window.privateTab = new PrivateTabManager();
